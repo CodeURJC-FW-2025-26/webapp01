@@ -23,13 +23,14 @@
     -   `developer`
     -   `cover_image`
     -   `pegi_rating`
-    -   `average_rating`
+    -   `average_rating`: from 0 to 100
 
 #### Secondary Entity
 
 -   **Entity Name**: Review
 -   **Description**: Represents user's rating and written opinion about a videogame.
 -   **Attributes**:
+    -   `author`      
     -   `rating`
     -   `comment`
     -   `created_at`
@@ -41,6 +42,6 @@
 ### Search and Filtering
 
 -   **Search**: Users can search Videogames by name.
--   **Filtering**: The application allows filtering Videogames based on `genre`, `platform`, `release_year`, `developer`, `pegi_rating` and `average_rating`.
+-   **Filtering**: The application allows filtering Videogames based on `genre`, `platform`, `release_year`, `developer`, `pegi_rating` and `average_rating` (within an interval).
 
 ---
