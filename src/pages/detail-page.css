@@ -1,0 +1,24 @@
+.detail{
+    text-align: center;
+    padding: 0%;
+    background-color: aliceblue; /* For example, it is the first option that gives you */
+    width: 100px;
+}
+.detail img {
+    background: grey;
+    min-height: 30px;
+    min-width: 30px;
+    border: 1px solid black;
+    text-align: center;
+
+}
+
+.detail button{
+    background-color: bisque;
+    padding: 0%;
+}
+.detail a {
+ text-decoration: none;
+ color: #3D59AB;
+ font-family: Verdana, sans-serif;
+}
