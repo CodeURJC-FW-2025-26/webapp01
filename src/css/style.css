@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #D0DB97 !important; /*Without important bootstrap puts it's own style*/
+    border: none;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: medium;
+    line-height: normal;
+    color: #181D27;
+    background-color: #D0DB97;
+}
