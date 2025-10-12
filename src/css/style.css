@@ -1,130 +1,91 @@
-.navbar {
-    background-color: #D0DB97 !important; /*Without important bootstrap puts it's own style*/
-    border: none;
+:root {
+	--color-primary: #0eca62;
+	--color-secondary: #656176;
+	--color-accent: #decdf5;
+	--color-light: #f8f1ff;
+	--color-dark: #656176;
 }
 
-body {
-    font-family: cursive;
-    font-size: medium;
-    line-height: normal;
-    color: #181D27; /*This is "black"*/
-    background-color: #D0DB97;
-}
-
-h1, h2, h3, h4 {
-    color:#254D32;
-    font-family: cursive;
-}
-
-p, span, li {
-    color: #D0DB97; /*I am unsure...maybe just white¿?*/
-}
-
-a {
-    color: #254D32;
-    font-family: cursive;
-}
-
-/*Buttons--------------------------*/
 .btn-primary {
-    background-color: #69B578;
-    border-color: #3A7D44;
-    color: #D0DB97;
+	--bs-btn-bg: var(--color-primary);
+	--bs-btn-border-color: var(--color-primary);
+	--bs-btn-color: #fff;
+	--bs-btn-hover-bg: color-mix(in srgb, var(--color-primary) 85%, black 15%);
+	--bs-btn-hover-border-color: color-mix(
+		in srgb,
+		var(--color-primary) 85%,
+		black 15%
+	);
+	--bs-btn-active-bg: color-mix(in srgb, var(--color-primary) 75%, black 25%);
+	--bs-btn-active-border-color: color-mix(
+		in srgb,
+		var(--color-primary) 75%,
+		black 25%
+	);
 }
 
-.btn-primary:hover {
-    background-color: #3A7D44;
-    border-color: #254D32;
-}
-
-.btn-success {
-    background-color: #3A7D44;
-    color: #D0DB97;
-}
-
-.btn-success:hover {
-    background-color: #254D32;
+.btn-secondary {
+	--bs-btn-bg: var(--color-secondary);
+	--bs-btn-border-color: var(--color-secondary);
+	--bs-btn-color: #fff;
+	--bs-btn-hover-bg: color-mix(
+		in srgb,
+		var(--color-secondary) 85%,
+		black 15%
+	);
+	--bs-btn-hover-border-color: color-mix(
+		in srgb,
+		var(--color-secondary) 85%,
+		black 15%
+	);
+	--bs-btn-active-bg: color-mix(
+		in srgb,
+		var(--color-secondary) 75%,
+		black 25%
+	);
+	--bs-btn-active-border-color: color-mix(
+		in srgb,
+		var(--color-secondary) 75%,
+		black 25%
+	);
 }
 
 .btn-warning {
-    background-color: #69B578; 
-    color: #D0DB97;
+	--bs-btn-bg: var(--color-accent);
+	--bs-btn-border-color: var(--color-accent);
+	--bs-btn-color: var(--color-dark);
+	--bs-btn-hover-bg: color-mix(in srgb, var(--color-accent) 85%, black 15%);
+	--bs-btn-hover-border-color: color-mix(
+		in srgb,
+		var(--color-accent) 85%,
+		black 15%
+	);
+	--bs-btn-active-bg: color-mix(in srgb, var(--color-accent) 75%, black 25%);
+	--bs-btn-active-border-color: color-mix(
+		in srgb,
+		var(--color-accent) 75%,
+		black 25%
+	);
 }
-
-
 
 .btn-danger {
-    background-color: #3A7D44;
-    color: #D0DB97;
+	--bs-btn-bg: #dc3545;
+	--bs-btn-border-color: #dc3545;
+	--bs-btn-color: #fff;
+	--bs-btn-hover-bg: color-mix(in srgb, #dc3545 85%, black 15%);
+	--bs-btn-hover-border-color: color-mix(in srgb, #dc3545 85%, black 15%);
+	--bs-btn-active-bg: color-mix(in srgb, #dc3545 75%, black 25%);
+	--bs-btn-active-border-color: color-mix(in srgb, #dc3545 75%, black 25%);
 }
 
-
-.btn-secondary {
-    background-color: #254D32;
-    border-color: #181D27;
-    color: #D0DB97;
-}
-/*End of buttons------------------------*/
-
-/*Aside style---------------------------*/
-aside {
-    background-color: #D0DB97; 
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: color 0.2s, text-decoration 0.2s;
 }
 
-aside hr {
-    background-color: #3A7D44;
+a:hover,
+a:focus {
+	color: color-mix(in srgb, var(--color-primary) 85%, black 15%);
+	text-decoration: underline;
 }
-
-.accordion-body {
-    background-color: #D0DB97;
-    color: #181D27;
-}
-
-aside .accordion-button {
-    background-color: #69B578;
-    color: #D0DB97;
-}
- 
-.accordion-button:not(.collapsed) {
-    background-color: #3A7D44; 
-    color: #D0DB97;
-}
-
-.list-group-item {
-    background-color: #69B578;
-    color: #D0DB97;
-}
-
-aside input.form-control {
-    background-color:#69B578;
-    color: #181D27;
-}
-
-aside label {
-    color: #181D27;
-}
-
-/*End of Aside style---------------------------*/
-
-/*Section style---------------------------*/
-section {
-    background-color: #69B578; 
-    color: #D0DB97;            
-}
-
-section input.form-control {
-    background-color: #D0DB97; 
-    color: #254D32;           
-}
-/*TODO: when you touch the bar it changes its color to white
-Probably solved the same as accordeon stuff
-*/
-
-.bg-primary {
-    background-color: #69B578 !important; 
-    color: #D0DB97 !important; 
-}
-
-/*End of Section style--------------------*/
-
-
