@@ -6,20 +6,6 @@
 -   **Daniel Bonachela Martínez** – [d.bonachela.2022@alumnos.urjc.es](mailto:d.bonachela.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/fuihfuefuiewn)
 -   **Marcelo Atanasio Domínguez Mateo** – [ma.dominguez.2022@alumnos.urjc.es](mailto:ma.dominguez.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/sa4dus)
 -   **Alejandro Garcia Prada** – [a.garciap.2022@alumnos.urjc.es](mailto:a.garciap.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/AlexGarciaPrada)
-### [Daniel Bonachela Martínez]
-He hecho section de la página principal, encontrado y colocado las fotos y resuelto los detalles sueltos en form.html y en detail.html 
-Commits principales:
-- [grid restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bbf10a57991b5e1dd8b0bb4e04417413e844b29c)
-- [Restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/3261865dba38872cf3962ac6aacb7869a52fed2f)
-- [Routes](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/d60dfee13398eb2004280f603d4337832fd78748)
-- [Add page layouts using bootstrap grid system](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/94cd7e63484ae796cde7ac7cf783c41c0e22340a)
-- [Details](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/91f50ea4283619c4b9b23c7bf99a866ad20aabcf)
-
-Archivos modificados:
-- [index.html](src/pages/index.html)
-- [detail.html](src/pages/index.html)
-- [form.html](src/pages/form.html)
-
 
 ## Functionality
 
@@ -57,7 +43,9 @@ Archivos modificados:
 ### Search and Filtering
 -   **Search**: Users can search Videogames by name.
 -   **Filtering**: The application allows filtering Videogames based on `genre`, `platform`, `release_year`, `developer`, `pegi_rating` and `average_rating` (within an interval).
-# Captures of the website
+
+# Práctica 1
+## Captures of the website
 ![main_page_capture](img/main_page_capture.png)
 *main page capture*
 ![detail_page_capture_1](img/detail_page_capture_1.png)
@@ -71,6 +59,7 @@ Archivos modificados:
 ![form_page_capture_2](img/form_page_capture_2.png)
 *form page capture 2*
 ---
+## Member participation
 
 ### Marcelo Atanasio Domínguez Mateo
 
@@ -90,3 +79,37 @@ I implemented the display of the main entity data, the filter sidebar, and the f
 -   `src/css/style.css`
 -   `src/pages/form.html`
 -   `src/pages/index.html`
+### Alejandro García Prada
+
+I implemented the forms for adding video games (main entity) and reviews (secundary entity), along with the header and reviews display.
+
+**Main commits:**
+
+-   [Form for new reviews added](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/36cdd0f)
+-   [Creation of form.html](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/e8703da)
+-   [Reviews added to detail page](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/7781357)
+-   [Nav bar addded to the pages](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/e821bf2)
+-   [navs added](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/8bf5a5c)
+
+**Modified files:**
+
+-   `src/pages/form.html`
+-   `src/pages/index.html`
+-   `src/pages/detail.html`
+  
+### Daniel Bonachela Martínez
+
+I created the main page section, found and added the images, and fixed minor issues in form.html and detail.html.
+
+**Main commits:**
+- [grid restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bbf10a5)
+- [Restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/3261865)
+- [Routes](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/d60dfee)
+- [Add page layouts using bootstrap grid system](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/94cd7e6)
+- [Details](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/91f50ea)
+
+**Modified files:**
+
+-   `src/pages/form.html`
+-   `src/pages/index.html`
+-   `src/pages/detail.html`
