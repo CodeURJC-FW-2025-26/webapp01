@@ -2,40 +2,43 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>New Videogame</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gueim: New Videogame</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="container-fluid min-vh-100 d-flex flex-column">
-	<header>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="./index.html"><img src="..\img\GUEIMlogo.png" class="img-fluid w-25"></a>
-			</div>
+<body class="container d-flex flex-column min-vh-100">
+	<header class="row">
+		<nav class="navbar">
+			<a class="navbar-brand" href="./index.html">
+				<img src="../img/GUEIMlogo.png" alt="Gueim logo" class="img-fluid w-25">
+			</a>
 		</nav>
 	</header>
 
-	<main class="row flex-grow-1">
-		<section class="col-12 col-md-12 bg-primary text-white p-3">
-			<h1 class="text-center">Add new Videogame</h1>
-			<!-- flex box with bootstrap -->
-			<form class="d-flex flex-column row-gap-3 w-50 mx-auto">
+	<main class="row flex-fill">
+		<section class="col-12 p-3">
+			<h1 class="text-center mb-4">Add New Videogame</h1>
+
+			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" novalidate>
 				<div>
 					<label for="inputTitle" class="form-label">Title</label>
-					<input type="text" class="form-control" id="inputTitle" placeholder="Title" required />
+					<input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong"
+						required>
+					<div class="invalid-feedback">Please enter a title.</div>
 				</div>
 
 				<div>
 					<label for="inputDescription" class="form-label">Description</label>
-					<textarea class="form-control" id="inputDescription" placeholder="Description" rows="3"
-						required></textarea>
+					<textarea class="form-control" id="inputDescription" placeholder="Briefly describe the videogame..."
+						rows="4" required></textarea>
+					<div class="invalid-feedback">Please add a description.</div>
 				</div>
 
-				<!-- This need to be filled with actual values -->
 				<div>
 					<label for="genreSelect">Genres</label>
 					<div id="genreSelect">
@@ -72,7 +75,6 @@
 					</div>
 				</div>
 
-				<!-- This need to be filled with actual values -->
 				<div>
 					<label for="platformSelect">Platforms</label>
 					<div id="genreSelect">
@@ -110,59 +112,42 @@
 				</div>
 
 				<div>
-					<label for="inputDate">Release Date</label>
-					<input type="date" class="form-control" id="inputDate" required />
-				</div>
-
-				<div>
-					<label for="inputDeveloper" class="form-label">Developer</label>
-					<input type="text" class="form-control" id="inputDeveloper" placeholder="Developer" required />
-				</div>
-
-				<div>
-					<label for="PEGISelector">PEGI Rating</label>
-					<select class="form-select" aria-label="PEGISelector" required>
+					<label for="PEGISelector" class="form-label">PEGI Rating</label>
+					<select class="form-select" id="PEGISelector" required>
+						<option value="" disabled selected>Select a rating</option>
 						<option value="3">PEGI 3</option>
 						<option value="7">PEGI 7</option>
 						<option value="12">PEGI 12</option>
 						<option value="16">PEGI 16</option>
 						<option value="18">PEGI 18</option>
 					</select>
+					<div class="invalid-feedback">Please choose a valid PEGI rating.</div>
 				</div>
 
 				<div>
 					<label for="inputImage" class="form-label">Upload Cover Image</label>
-					<!-- accept="image/*" is the convention for accepting the correct images format -->
-					<input class="form-control" type="file" id="inputImage" name="image" accept="image/*" required />
+					<input class="form-control" type="file" id="inputImage" name="image" accept="image/*" required>
+					<div class="form-text">Accepted formats: JPG, PNG, WEBP, etc.</div>
+					<div class="invalid-feedback">Please select a cover image.</div>
 				</div>
 
-				<button type="submit" class="btn btn-primary">Save</button>
-				<!-- the type="button" avoids the required -->
-				<a href="index.html" 
-				class="btn btn-primary" 
-				role="button">Return
-				</a>
-
+				<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+					<button type="submit" class="btn btn-primary">Save</button>
+					<a href="index.html" class="btn btn-secondary" role="button">Cancel</a>
+				</div>
 			</form>
 		</section>
 	</main>
 
-	<footer class="row bg-dark text-white text-center p-3 mt-auto">
+	<footer class="row text-center p-3 mt-auto glass">
 		<div class="container py-4">
 			<div class="mb-3">
-				<a href="https://instagram.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-instagram fs-4"></i></a>
-				<a href="https://twitter.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-twitter fs-4"></i></a>
-				<a href="https://facebook.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-facebook fs-4"></i></a>
-				<a href="https://linkedin.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-linkedin fs-4"></i>
-				</a>
+				<a href="https://instagram.com" target="_blank" class="mx-2"><i class="bi bi-instagram fs-4"></i></a>
+				<a href="https://twitter.com" target="_blank" class="mx-2"><i class="bi bi-twitter fs-4"></i></a>
+				<a href="https://facebook.com" target="_blank" class="mx-2"><i class="bi bi-facebook fs-4"></i></a>
+				<a href="https://linkedin.com" target="_blank" class="mx-2"><i class="bi bi-linkedin fs-4"></i></a>
 			</div>
-			<div class="text-center">
-				<small>&copy; 2025 GUEIM. All rights reserved.</small>
-			</div>
+			<small>&copy; 2025 GUEIM. All rights reserved.</small>
 		</div>
 	</footer>
 

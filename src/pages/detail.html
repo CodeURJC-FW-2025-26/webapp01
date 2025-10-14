@@ -2,49 +2,46 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Gueim: detail page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gueim: Game Details</title>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="container-fluid min-vh-100 d-flex flex-column">
-	<header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="./index.html"><img src="..\img\GUEIMlogo.png" class="img-fluid w-25"></a>
-		</div>
-	</nav>
+<body class="container d-flex flex-column min-vh-100">
+	<header class="row">
+		<nav class="navbar">
+			<a class="navbar-brand" href="./index.html">
+				<img src="../img/GUEIMlogo.png" alt="Gueim logo" class="img-fluid w-25">
+			</a>
+		</nav>
 	</header>
 
-	<main class="row flex-grow-1">
-		<section class="col-12 col-md-12 bg-primary text-white p-3">
+	<main class="row flex-fill">
+		<section id="game-detail" class="col-12 p-3">
 			<div class="container my-4">
 				<div class="row align-items-center">
 					<div class="col-md-4 col-12 mb-3 mb-md-0">
-						<img src="../img/silksong_cover.webp" alt="Cover image of Hollow Knight: Silksong"
-							class="img-fluid rounded shadow" />
+						<img src="../img/silksong_cover.webp" alt="Cover of Hollow Knight: Silksong"
+							class="img-fluid rounded shadow">
 					</div>
 
 					<div class="col-md-8 col-12">
 						<h1 class="mb-3">Hollow Knight: Silksong</h1>
 						<p>
-							Hollow Knight: Silksong is the epic sequel to
-							Hollow Knight, the epic action-adventure of bugs
-							and heroes. As the lethal hunter Hornet, journey
-							to all-new lands, discover new powers, battle
-							vast hordes of bugs and beasts and uncover
-							ancient secrets tied to your nature and your
-							past.
+							<strong>Description:</strong> Hollow Knight: Silksong is the epic sequel to Hollow Knight,
+							the
+							action-adventure of insects and heroes.
+							As Hornet, the lethal hunter, travel through new lands, discover new powers, fight hordes of
+							creatures, and uncover ancient secrets about your past.
 						</p>
 
 						<p>
 							<strong>Genres:</strong>
-							<!-- When handling arbitraty tags, just add a basic hash-like
-						function to assign buckets to each tag. -->
-							<span class="badge bg-primary me-1">Platform</span>
+							<span class="badge bg-primary me-1">Platformer</span>
 							<span class="badge bg-success me-1">Adventure</span>
 							<span class="badge bg-warning text-dark">Indie</span>
 						</p>
@@ -52,8 +49,7 @@
 						<div class="d-flex gap-3 my-3 flex-wrap">
 							<div class="alert alert-info p-2 flex-fill text-center mb-2">
 								<i class="bi bi-calendar-event-fill"></i>
-								<strong>Release Date:</strong> Thu Sep 04
-								2025
+								<strong>Release Date:</strong> September 4, 2025
 							</div>
 							<div class="alert alert-success p-2 flex-fill text-center mb-2">
 								<i class="bi bi-star-fill"></i>
@@ -64,10 +60,8 @@
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item list-group-item-action">
 								<i class="bi bi-pc-display"></i>
-								<strong>Platform:</strong> Xbox Series X|S,
-								PlayStation 4, Linux, Nintendo Switch 2, PC
-								(Microsoft Windows), PlayStation 5, Mac,
-								Xbox One, Nintendo Switch
+								<strong>Platforms:</strong> Xbox Series X|S, PlayStation 4, Linux, Nintendo Switch 2,
+								PC, PlayStation 5, Mac, Xbox One, Nintendo Switch
 							</li>
 							<li class="list-group-item list-group-item-action">
 								<i class="bi bi-person-fill"></i>
@@ -78,115 +72,102 @@
 								<strong>PEGI Rating:</strong> PEGI 7
 							</li>
 						</ul>
-						<div class="d-flex justify-content-center gap-3 my-4">
-								<button type="button" class="btn btn-warning">Edit</button>
-								<button type="button" class="btn btn-danger">Delete</button>
-								<a href="index.html" class="btn btn-secondary" role="button">Return</a>
+
+						<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+							<button type="button" class="btn btn-warning"
+								aria-label="Edit game information">Edit</button>
+							<button type="button" class="btn btn-danger" aria-label="Delete this game">Delete</button>
+							<a href="index.html" class="btn btn-secondary" role="button">Return</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="col-12 col-md-12 bg-primary text-white p-3">
+		<section id="reviews" class="col-12 p-3">
 			<div class="container my-4">
-				<div class="row align-items-center">
-					<h1>Reviews</h1>
-					<div class="my-3">
-						<h3>
-							Paco2077
-						</h3>
-						<p class="fs-5 mb-2"> 14/07/2024</p>
-						<div class="border rounded p-3 bg-light text-dark">
-							Hollow Knight: Silksong exceeded my expectations. The world feels alive, the movement is
-							incredibly smooth, and the soundtrack is breathtaking. Every boss fight feels challenging
-							but
-							fair — definitely one of the best Metroidvania experiences I’ve played in years.
-						</div>
-						<div class="alert alert-success p-2 flex-fill text-center mb-2">
-							<strong>Rating:</strong> 92/100
-						</div>
-						<div>
-							<button class="btn btn-primary">Edit</button>
-							<button class="btn btn-primary">Delete</button>
-						</div>
+				<h1>Reviews</h1>
+				<div class="my-3">
+					<h3>Paco2077</h3>
+					<div class="border rounded p-3 bg-light text-dark">
+						Hollow Knight: Silksong exceeded my expectations. The world feels alive, the movement is
+						incredibly smooth, and the soundtrack is breathtaking.
+						Each boss represents a fair challenge — definitely one of the best Metroidvania games I’ve
+						played in
+						years.
 					</div>
-					<div class="my-3">
-						<h3>
-							GamerEterno
-						</h3>
-						<p class="fs-5 mb-2"> 14/03/2025</p>
-						<div class="border rounded p-3 bg-light text-dark">
-							It was just a good game, enjoy the music!!
-						</div>
-						<div class="alert alert-success p-2 flex-fill text-center mb-2">
-							<strong>Rating:</strong> 80/100
-						</div>
-						<div>
-							<button class="btn btn-primary">Edit</button>
-							<button class="btn btn-primary">Delete</button>
-						</div>
+					<div class="alert alert-success p-2 flex-fill text-center mb-2">
+						<strong>Rating:</strong> 92/100
+					</div>
+					<div>
+						<button class="btn btn-primary" aria-label="Edit review by Paco2077">Edit</button>
+						<button class="btn btn-danger" aria-label="Delete review by Paco2077">Delete</button>
+					</div>
+				</div>
+
+				<div class="my-3">
+					<h3>GamerEterno</h3>
+					<div class="border rounded p-3 bg-light text-dark">
+						It's a great game — I love the music!
+					</div>
+					<div class="alert alert-success p-2 flex-fill text-center mb-2">
+						<strong>Rating:</strong> 80/100
+					</div>
+					<div>
+						<button class="btn btn-primary" aria-label="Edit review by GamerEterno">Edit</button>
+						<button class="btn btn-danger" aria-label="Delete review by GamerEterno">Delete</button>
 					</div>
 				</div>
 			</div>
-
-
-
 		</section>
-		<section class="col-12 col-md-12 bg-primary text-white p-3">
 
+		<section id="add-review" class="col-12 p-3">
 			<div class="container my-4">
-				<h1>Add new Review</h1>
-				<form class="d-flex flex-column">
+				<h2 class="mb-4">Add a New Review</h2>
+				<fieldset>
+					<legend class="h2 mb-4">Review Details</legend>
+					<form class="d-flex flex-column needs-validation" novalidate>
+						<div class="row align-items-center gap-3">
+							<div>
+								<label for="inputAuthor" class="form-label">Author</label>
+								<input type="text" class="form-control" id="inputAuthor" placeholder="Your name"
+									required>
+								<div class="invalid-feedback">Please enter your name.</div>
+							</div>
 
-					<div class="row align-items-center gap-3">
+							<div>
+								<label for="inputDescription" class="form-label">Comment</label>
+								<textarea class="form-control" id="inputDescription" placeholder="Write your review..."
+									rows="5" required></textarea>
+								<div class="invalid-feedback">Please write your review.</div>
+							</div>
 
-						<div>
-							<label for="inputAuthor" class="form-label">
-								Author
-							</label>
-							<input type="text" class="form-control" id="inputAuthor" placeholder="Author" required />
+							<div>
+								<label for="inputRating" class="form-label">Rating (0–100)</label>
+								<input type="number" class="form-control" id="inputRating" placeholder="e.g. 85" min="0"
+									max="100" required>
+								<div class="invalid-feedback">Please enter a valid rating between 0 and 100.</div>
+							</div>
+
+							<div>
+								<button type="submit" class="btn btn-primary">Submit Review</button>
+							</div>
 						</div>
-
-						<div>
-							<label for="inputDescription" class="form-label">Comment</label>
-							<textarea class="form-control" id="inputDescription" placeholder="Comment" rows="5"
-								required></textarea>
-						</div>
-
-						<div>
-							<label for="inputRating" class="form-label">
-								Rating (Out of 100)
-							</label>
-							<input type="number" class="form-control" id="inputRating" placeholder="Rating" min="0"
-								max="100" required />
-						</div>
-						<div>
-							<button type="submit" class="btn btn-primary">Create</button>
-						</div>
-					</div>
-
-				</form>
+					</form>
+				</fieldset>
 			</div>
 		</section>
 	</main>
 
-	<footer class="row bg-dark text-white text-center p-3 mt-auto">
+	<footer class="row text-center p-3 mt-auto glass">
 		<div class="container py-4">
 			<div class="mb-3">
-				<a href="https://instagram.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-instagram fs-4"></i></a>
-				<a href="https://twitter.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-twitter fs-4"></i></a>
-				<a href="https://facebook.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-facebook fs-4"></i></a>
-				<a href="https://linkedin.com" target="_blank" class="text-white mx-2">
-					<i class="bi bi-linkedin fs-4"></i>
-				</a>
+				<a href="https://instagram.com" target="_blank" class="mx-2"><i class="bi bi-instagram fs-4"></i></a>
+				<a href="https://twitter.com" target="_blank" class="mx-2"><i class="bi bi-twitter fs-4"></i></a>
+				<a href="https://facebook.com" target="_blank" class="mx-2"><i class="bi bi-facebook fs-4"></i></a>
+				<a href="https://linkedin.com" target="_blank" class="mx-2"><i class="bi bi-linkedin fs-4"></i></a>
 			</div>
-			<div class="text-center">
-				<small>&copy; 2025 GUEIM. All rights reserved.</small>
-			</div>
+			<small>&copy; 2025 GUEIM. All rights reserved.</small>
 		</div>
 	</footer>
 
