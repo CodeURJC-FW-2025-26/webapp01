@@ -1,4 +1,4 @@
-/* ----------------------------- VARIABLES GLOBALES ----------------------------- */
+/* --------------------------------- GLOBALS -------------------------------- */
 :root {
 	--color-primary: #0eca62;
 	--color-secondary: #656176;
@@ -11,7 +11,7 @@
 	--transition: 0.25s ease-in-out;
 }
 
-/* ---------------------------------- BASE ---------------------------------- */
+/* ---------------------------------- RESET --------------------------------- */
 body {
 	font-family: "Inter", "Poppins", "Segoe UI", Roboto, Helvetica, Arial,
 		sans-serif;
@@ -20,7 +20,6 @@ body {
 	line-height: 1.6;
 	min-height: 100vh;
 
-	/* Fondo animado */
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
 	background-repeat: repeat;
 	background-size: 50px 50px;
@@ -59,7 +58,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-/* --------------------------------- BOTONES -------------------------------- */
+/* --------------------------------- BUTTONS -------------------------------- */
 .btn {
 	padding: 0.6rem 1.3rem;
 	font-weight: 500;
@@ -166,7 +165,7 @@ select:focus {
 	border-color: var(--color-primary);
 }
 
-/* ---------------------------------- LISTAS --------------------------------- */
+/* ---------------------------------- MISC ---------------------------------- */
 .list-group-item {
 	border: none;
 	border-bottom: 1px solid #eee;
@@ -175,12 +174,11 @@ select:focus {
 	background-color: var(--color-accent);
 }
 
-/* ---------------------------------- ALERTAS -------------------------------- */
 .alert {
 	border-radius: var(--radius);
 }
 
-/* ---------------------------------- SECCIONES ------------------------------ */
+/* -------------------------------- SECTIONS -------------------------------- */
 section h1 {
 	border-left: 5px solid var(--color-primary);
 	padding-left: 10px;
