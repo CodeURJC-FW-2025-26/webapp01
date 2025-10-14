@@ -6,6 +6,20 @@
 -   **Daniel Bonachela Martínez** – [d.bonachela.2022@alumnos.urjc.es](mailto:d.bonachela.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/fuihfuefuiewn)
 -   **Marcelo Atanasio Domínguez Mateo** – [ma.dominguez.2022@alumnos.urjc.es](mailto:ma.dominguez.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/sa4dus)
 -   **Alejandro Garcia Prada** – [a.garciap.2022@alumnos.urjc.es](mailto:a.garciap.2022@alumnos.urjc.es) – [GitHub Profile](https://github.com/AlexGarciaPrada)
+### [Daniel Bonachela Martínez]
+He hecho section de la página principal, encontrado y colocado las fotos y resuelto los detalles sueltos en form.html y en detail.html 
+Commits principales:
+- [grid restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bbf10a57991b5e1dd8b0bb4e04417413e844b29c)
+- [Restored](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/3261865dba38872cf3962ac6aacb7869a52fed2f)
+- [Routes](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/d60dfee13398eb2004280f603d4337832fd78748)
+- [Add page layouts using bootstrap grid system](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/94cd7e63484ae796cde7ac7cf783c41c0e22340a)
+- [Details](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/91f50ea4283619c4b9b23c7bf99a866ad20aabcf)
+
+Archivos modificados:
+- [index.html](src/pages/index.html)
+- [detail.html](src/pages/index.html)
+- [form.html](src/pages/form.html)
+
 
 ## Functionality
 
