@@ -1,22 +1,17 @@
-/* -------------------------------- GLOBALS ------------------------------- */
+/* ----------------------------- VARIABLES GLOBALES ----------------------------- */
 :root {
 	--color-primary: #0eca62;
 	--color-secondary: #656176;
 	--color-accent: #decdf5;
 	--color-light: #f8f1ff;
 	--color-dark: #2a2638;
-	--color-bg: #f2eef9;
-
-	--glass-bg: rgba(255, 255, 255, 0.15);
-	--glass-border: rgba(255, 255, 255, 0.25);
 	--glass-blur: 3px;
-	--shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
 
 	--radius: 0.75rem;
 	--transition: 0.25s ease-in-out;
 }
 
-/* -------------------------------- CSS RESET ------------------------------- */
+/* ---------------------------------- BASE ---------------------------------- */
 body {
 	font-family: "Inter", "Poppins", "Segoe UI", Roboto, Helvetica, Arial,
 		sans-serif;
@@ -24,6 +19,18 @@ body {
 	color: var(--color-dark);
 	line-height: 1.6;
 	min-height: 100vh;
+
+	/* Fondo animado */
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
+	background-repeat: repeat;
+	background-size: 50px 50px;
+	animation: bg-scroll 0.92s linear infinite;
+}
+
+@keyframes bg-scroll {
+	100% {
+		background-position: 50px 50px;
+	}
 }
 
 h1,
@@ -41,24 +48,7 @@ p {
 	color: var(--color-dark);
 }
 
-/* ------------------------------- BACKGROUND ------------------------------- */
-/* -------------------------------- ANIMATED BACKGROUND ------------------------------- */
-
-body {
-	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
-	background-repeat: repeat;
-	background-size: 50px 50px;
-
-	animation: bg-scrolling-reverse 0.92s linear infinite;
-}
-
-@keyframes bg-scrolling-reverse {
-	100% {
-		background-position: 50px 50px;
-	}
-}
-
-/* ---------------------------------- LINKS --------------------------------- */
+/* ---------------------------------- LINKS ---------------------------------- */
 a {
 	color: var(--color-primary);
 	text-decoration: none;
@@ -69,7 +59,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-/* --------------------------------- BUTTONS -------------------------------- */
+/* --------------------------------- BOTONES -------------------------------- */
 .btn {
 	padding: 0.6rem 1.3rem;
 	font-weight: 500;
@@ -85,6 +75,7 @@ a:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .btn:active {
 	transform: translateY(0);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -106,28 +97,14 @@ a:hover {
 .btn-primary:hover {
 	background: color-mix(in srgb, var(--color-primary) 95%, black 5%);
 }
-
-.btn-primary:active {
-	background: color-mix(in srgb, var(--color-primary) 90%, black 10%);
-}
-
 .btn-secondary:hover {
 	background: color-mix(in srgb, var(--color-secondary) 95%, black 5%);
 }
-
-.btn-secondary:active {
-	background: color-mix(in srgb, var(--color-secondary) 90%, black 10%);
-}
-
 .btn-warning:hover {
 	background: color-mix(in srgb, var(--color-accent) 95%, black 5%);
 }
 
-.btn-warning:active {
-	background: color-mix(in srgb, var(--color-accent) 90%, black 10%);
-}
-
-/* ---------------------------------- CARDS --------------------------------- */
+/* ---------------------------------- CARDS ---------------------------------- */
 .card {
 	padding: 1.5rem;
 	transition: all 0.3s ease;
@@ -145,13 +122,15 @@ a:hover {
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ---------------------------------- FORM ---------------------------------- */
+/* ---------------------------------- FORM ----------------------------------- */
 form {
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.5);
 	padding: 2rem;
 	border-radius: var(--radius);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	backdrop-filter: blur(var(--glass-blur));
 }
+
 .form-control,
 textarea.form-control,
 select.form-select {
@@ -162,8 +141,8 @@ select.form-select {
 	border-radius: var(--radius);
 	transition: all var(--transition);
 }
+
 .form-control:focus,
-input:focus,
 textarea:focus,
 select:focus {
 	border-color: var(--color-primary);
@@ -171,7 +150,7 @@ select:focus {
 	background: rgba(255, 255, 255, 0.25);
 }
 
-/* --------------------------------- SIDEBAR -------------------------------- */
+/* -------------------------------- SIDEBAR / ACCORDION ---------------------- */
 .accordion-button {
 	background-color: var(--color-light);
 	color: var(--color-dark);
@@ -187,7 +166,7 @@ select:focus {
 	border-color: var(--color-primary);
 }
 
-/* ---------------------------------- LISTS --------------------------------- */
+/* ---------------------------------- LISTAS --------------------------------- */
 .list-group-item {
 	border: none;
 	border-bottom: 1px solid #eee;
@@ -195,20 +174,19 @@ select:focus {
 .list-group-item-action:hover {
 	background-color: var(--color-accent);
 }
+
+/* ---------------------------------- ALERTAS -------------------------------- */
 .alert {
 	border-radius: var(--radius);
 }
 
-/* --------------------------------- REVIEWS -------------------------------- */
-.border.rounded.p-3 {
-	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-}
+/* ---------------------------------- SECCIONES ------------------------------ */
 section h1 {
 	border-left: 5px solid var(--color-primary);
 	padding-left: 10px;
 }
 
-/* --------------------------------- FOOTER --------------------------------- */
+/* ---------------------------------- FOOTER --------------------------------- */
 footer {
 	padding: 2rem 1.5rem;
 	text-align: center;
@@ -219,7 +197,6 @@ footer a {
 	transition: var(--transition);
 	text-decoration: none;
 }
-
 footer a:hover {
 	color: color-mix(in srgb, var(--color-primary) 90%, var(--color-dark) 10%);
 }
@@ -229,7 +206,6 @@ footer i {
 	margin: 0 0.5rem;
 	transition: var(--transition);
 }
-
 footer i:hover {
 	color: color-mix(in srgb, var(--color-primary) 80%, var(--color-light) 20%);
 }
