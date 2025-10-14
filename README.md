@@ -71,3 +71,22 @@ Archivos modificados:
 ![form_page_capture_2](img/form_page_capture_2.png)
 *form page capture 2*
 ---
+
+### Marcelo Atanasio Domínguez Mateo
+
+I implemented the display of the main entity data, the filter sidebar, and the footer, along with some style adjustments.
+
+**Main commits:**
+
+-   [Set details page layout](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/16104a6)
+-   [First version of sidebar](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/7cd538d)
+-   [Prior version of footer](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bea8db7)
+-   [Add footer to detail and form pages](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/2453d01)
+-   [Add page layouts using bootstrap grid system](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/94cd7e6)
+
+**Modified files:**
+
+-   `src/pages/detail.html`
+-   `src/css/style.css`
+-   `src/pages/form.html`
+-   `src/pages/index.html`
