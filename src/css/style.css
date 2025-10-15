@@ -41,6 +41,13 @@ h5 {
 	font-weight: 600;
 }
 
+legend{
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
 p {
 	margin-top: 0.5rem;
 	font-weight: 500;

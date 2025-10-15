@@ -24,7 +24,7 @@
 		<section class="col-12 p-3">
 			<h1 class="text-center mb-4">Add New Videogame</h1>
 
-			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" novalidate>
+			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation">
 				<div>
 					<label for="inputTitle" class="form-label">Title</label>
 					<input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong"
@@ -40,7 +40,7 @@
 				</div>
 
 				<div>
-					<label for="genreSelect">Genres</label>
+					<legend>Genres</legend>
 					<div id="genreSelect">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" value="" id="Genre1">
@@ -76,8 +76,8 @@
 				</div>
 
 				<div>
-					<label for="platformSelect">Platforms</label>
-					<div id="genreSelect">
+					<legend>Platforms</legend>
+					<div id="platformSelect">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" value="" id="Platform1">
 							<label class="form-check-label" for="Platform1">
@@ -109,6 +109,12 @@
 							</label>
 						</div>
 					</div>
+				</div>
+
+				<div>
+					<label for="inputDeveloper" class="form-label">Developer</label>
+					<input type="text" class="form-control" id="inputDeveloper" placeholder="e.g. Team Cherry" required>
+					<div class="invalid-feedback">Please enter a developer.</div>
 				</div>
 
 				<div>
