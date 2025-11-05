@@ -402,167 +402,25 @@
 					</div>
 
 					<div class="row g-3">
+						{{#games}}
 						<div class="col-12 col-sm-6 col-lg-4 text-center">
 							<a
-								href="detail"
+								href="/detail/{{_id}}"
 								class="text-decoration-none d-block p-2"
 							>
 								<div
 									class="ratio ratio-1x1 rounded shadow overflow-hidden"
 								>
 									<img
-										src="../img/silksong_cover.webp"
-										alt="Hollow Knight: Silksong"
+										src="{{cover_image}}"
+										alt="{{title}}"
 										class="w-100 h-100 object-fit-cover"
 									/>
 								</div>
-								<p>Silksong</p>
+								<p>{{title}}</p>
 							</a>
 						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/God_of_War_Ragnarok_cover.jpeg"
-										alt="God of War: Ragnarok"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>GoW Ragnarok</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/minecraft_cover.jpeg"
-										alt="Minecraft"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Minecraft</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/cyberpunk.jpeg"
-										alt="Cyberpunk 2077"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Cyberpunk 2077</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/elden_ring_cover.jpg"
-										alt="Elden Ring"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Elden Ring</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/super_mario_odyssey_cover.jpeg"
-										alt="Super Mario Odyssey"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Super Mario Odyssey</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/the_witcher_iii_cover.jpeg"
-										alt="The Witcher III: Wild Hunt"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>The Witcher III: Wild Hunt</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/rdr2_cover.jpeg"
-										alt="Red Dead Redemption II"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Red Dead Redemption II</p>
-							</a>
-						</div>
-
-						<div class="col-12 col-sm-6 col-lg-4 text-center">
-							<a
-								href="detail"
-								class="text-decoration-none d-block p-2"
-							>
-								<div
-									class="ratio ratio-1x1 rounded shadow overflow-hidden"
-								>
-									<img
-										src="../img/jijijija_cover.jpg"
-										alt="Clash Royale"
-										class="w-100 h-100 object-fit-cover"
-									/>
-								</div>
-								<p>Clash Royale</p>
-							</a>
-						</div>
+						{{/games}}
 					</div>
 				</div>
 			</section>
