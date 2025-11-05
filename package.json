@@ -1,0 +1,31 @@
+{
+	"name": "webapp01",
+	"version": "1.0.0",
+	"description": "## Team Members",
+	"main": "src/app.js",
+	"type": "module",
+	"scripts": {
+		"start": "node src/app.js",
+		"dev": "nodemon src/app.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CodeURJC-FW-2025-26/webapp01.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/CodeURJC-FW-2025-26/webapp01/issues"
+	},
+	"homepage": "https://github.com/CodeURJC-FW-2025-26/webapp01#readme",
+	"dependencies": {
+		"express": "^5.1.0",
+		"mongo": "^0.1.0",
+		"multer": "^2.0.2",
+		"mustache-express": "^1.3.2"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.10"
+	}
+}

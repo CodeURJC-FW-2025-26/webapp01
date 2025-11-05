@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Gueim: main page</title>
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body class="container">
+		<header class="row">
+			<nav class="navbar">
+				<a class="navbar-brand" href="./index.html">
+					<img
+						src="../img/GUEIMlogo.png"
+						class="img-fluid w-25"
+						alt="GUEIM Logo"
+					/>
+				</a>
+			</nav>
+		</header>
+
+		<main class="row g-1">
+			<aside class="col-12 col-md-3">
+				<h1>Filters</h1>
+				<hr />
+
+				<div class="accordion" id="filterAccordion">
+					<div class="accordion-item mb-2">
+						<h2 class="accordion-header" id="headingGenres">
+							<button
+								class="accordion-button"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseGenres"
+								aria-expanded="true"
+								aria-controls="collapseGenres"
+							>
+								Genres
+							</button>
+						</h2>
+						<div
+							id="collapseGenres"
+							class="accordion-collapse collapse show"
+							aria-labelledby="headingGenres"
+						>
+							<div class="accordion-body p-2">
+								<input
+									type="text"
+									class="form-control mb-2"
+									placeholder="Search genres..."
+								/>
+								<div class="overflow-auto">
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="action"
+										/><label
+											class="form-check-label"
+											for="action"
+											>Action / Fighting</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="shooter"
+										/><label
+											class="form-check-label"
+											for="shooter"
+											>Shooter</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="platform"
+										/><label
+											class="form-check-label"
+											for="platform"
+											>Platform</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="adventure"
+										/><label
+											class="form-check-label"
+											for="adventure"
+											>Adventure</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="rpg"
+										/><label
+											class="form-check-label"
+											for="rpg"
+											>RPG</label
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item mb-2">
+						<h2 class="accordion-header" id="headingPlatforms">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapsePlatforms"
+								aria-expanded="false"
+								aria-controls="collapsePlatforms"
+							>
+								Platforms
+							</button>
+						</h2>
+						<div
+							id="collapsePlatforms"
+							class="accordion-collapse collapse"
+							aria-labelledby="headingPlatforms"
+						>
+							<div class="accordion-body p-2">
+								<input
+									type="text"
+									class="form-control mb-2"
+									placeholder="Search platforms..."
+								/>
+								<div class="overflow-auto">
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pc"
+										/><label
+											class="form-check-label"
+											for="pc"
+											>PC (Windows)</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="ps5"
+										/><label
+											class="form-check-label"
+											for="ps5"
+											>PlayStation 5</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="xboxseries"
+										/><label
+											class="form-check-label"
+											for="xboxseries"
+											>Xbox Series X|S</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="switch"
+										/><label
+											class="form-check-label"
+											for="switch"
+											>Nintendo Switch</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="android"
+										/><label
+											class="form-check-label"
+											for="android"
+											>Android</label
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item mb-2">
+						<h2 class="accordion-header" id="headingPEGI">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapsePEGI"
+								aria-expanded="false"
+								aria-controls="collapsePEGI"
+							>
+								PEGI Rating
+							</button>
+						</h2>
+						<div
+							id="collapsePEGI"
+							class="accordion-collapse collapse"
+							aria-labelledby="headingPEGI"
+						>
+							<div class="accordion-body p-2">
+								<div class="overflow-auto">
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pegi3"
+										/><label
+											class="form-check-label"
+											for="pegi3"
+											>PEGI 3</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pegi7"
+										/><label
+											class="form-check-label"
+											for="pegi7"
+											>PEGI 7</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pegi12"
+										/><label
+											class="form-check-label"
+											for="pegi12"
+											>PEGI 12</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pegi16"
+										/><label
+											class="form-check-label"
+											for="pegi16"
+											>PEGI 16</label
+										>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="checkbox"
+											id="pegi18"
+										/><label
+											class="form-check-label"
+											for="pegi18"
+											>PEGI 18</label
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item mb-2">
+						<h2 class="accordion-header" id="headingRelease">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseRelease"
+								aria-expanded="false"
+								aria-controls="collapseRelease"
+							>
+								Release Year
+							</button>
+						</h2>
+						<div
+							id="collapseRelease"
+							class="accordion-collapse collapse"
+							aria-labelledby="headingRelease"
+						>
+							<div class="accordion-body p-2">
+								<div class="mb-3">
+									<label
+										for="fromYear"
+										class="form-label fw-semibold"
+										>From:</label
+									>
+									<input
+										id="fromYear"
+										type="number"
+										class="form-control form-control-sm"
+										placeholder="e.g. 1990"
+									/>
+								</div>
+								<div class="mb-3">
+									<label
+										for="toYear"
+										class="form-label fw-semibold"
+										>To:</label
+									>
+									<input
+										id="toYear"
+										type="number"
+										class="form-control form-control-sm"
+										placeholder="e.g. 2025"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item mb-2">
+						<h2 class="accordion-header" id="headingRating">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseRating"
+								aria-expanded="false"
+								aria-controls="collapseRating"
+							>
+								Average Rating
+							</button>
+						</h2>
+						<div
+							id="collapseRating"
+							class="accordion-collapse collapse"
+							aria-labelledby="headingRating"
+						>
+							<div class="accordion-body p-2">
+								<div class="mb-3">
+									<label
+										for="fromRating"
+										class="form-label fw-semibold"
+										>From:</label
+									>
+									<input
+										id="fromRating"
+										type="number"
+										class="form-control form-control-sm"
+										placeholder="e.g. 4.0"
+									/>
+								</div>
+								<div class="mb-3">
+									<label
+										for="toRating"
+										class="form-label fw-semibold"
+										>To:</label
+									>
+									<input
+										id="toRating"
+										type="number"
+										class="form-control form-control-sm"
+										placeholder="e.g. 7.5"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button class="btn btn-primary w-100 mt-3">
+					Apply Filters
+				</button>
+			</aside>
+
+			<section class="col-12 col-md-9">
+				<h1 class="text-center mb-4">Welcome to GUEIM</h1>
+				<div class="p-4">
+					<div class="d-flex justify-content-end mb-3">
+						<input
+							type="text"
+							class="form-control me-2"
+							placeholder="Search..."
+						/>
+						<a href="form" class="btn btn-primary">New Game</a>
+					</div>
+
+					<div class="row g-3">
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/silksong_cover.webp"
+										alt="Hollow Knight: Silksong"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Silksong</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/God_of_War_Ragnarok_cover.jpeg"
+										alt="God of War: Ragnarok"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>GoW Ragnarok</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/minecraft_cover.jpeg"
+										alt="Minecraft"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Minecraft</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/cyberpunk.jpeg"
+										alt="Cyberpunk 2077"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Cyberpunk 2077</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/elden_ring_cover.jpg"
+										alt="Elden Ring"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Elden Ring</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/super_mario_odyssey_cover.jpeg"
+										alt="Super Mario Odyssey"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Super Mario Odyssey</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/the_witcher_iii_cover.jpeg"
+										alt="The Witcher III: Wild Hunt"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>The Witcher III: Wild Hunt</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/rdr2_cover.jpeg"
+										alt="Red Dead Redemption II"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Red Dead Redemption II</p>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-lg-4 text-center">
+							<a
+								href="detail"
+								class="text-decoration-none d-block p-2"
+							>
+								<div
+									class="ratio ratio-1x1 rounded shadow overflow-hidden"
+								>
+									<img
+										src="../img/jijijija_cover.jpg"
+										alt="Clash Royale"
+										class="w-100 h-100 object-fit-cover"
+									/>
+								</div>
+								<p>Clash Royale</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="row text-center p-3 mt-auto">
+			<div class="container py-4">
+				<div class="mb-3">
+					<a href="https://instagram.com" target="_blank" class="mx-2"
+						><i class="bi bi-instagram fs-4"></i
+					></a>
+					<a href="https://twitter.com" target="_blank" class="mx-2"
+						><i class="bi bi-twitter fs-4"></i
+					></a>
+					<a href="https://facebook.com" target="_blank" class="mx-2"
+						><i class="bi bi-facebook fs-4"></i
+					></a>
+					<a href="https://linkedin.com" target="_blank" class="mx-2"
+						><i class="bi bi-linkedin fs-4"></i
+					></a>
+				</div>
+				<small>&copy; 2025 GUEIM. All rights reserved.</small>
+			</div>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
