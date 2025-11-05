@@ -6,6 +6,7 @@ import * as board from "./service.js";
 const router = express.Router();
 export default router;
 
+// eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: board.UPLOADS_FOLDER });
 
 router.get("/", async (req, res) => {
