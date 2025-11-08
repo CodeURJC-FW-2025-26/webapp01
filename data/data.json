@@ -1,0 +1,242 @@
+[
+	{
+		"title": "The Legend of Zelda: Tears of the Kingdom",
+		"description": "Epic open-world adventure where Link goes sky-high and deep underground to save Hyrule again. More tools, more chaos, more fun.",
+		"genres": ["Adventure", "Action", "Open World"],
+		"platforms": ["Nintendo Switch"],
+		"release_year": 2023,
+		"developer": "Nintendo",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI12",
+		"reviews": [
+			{
+				"author": "GameSpot",
+				"rating": 10,
+				"comment": "Damn near perfect. Builds on BOTW in every way possible.",
+				"created_at": 1684195200
+			},
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "Creative freedom off the charts. Pure magic.",
+				"created_at": 1684281600
+			}
+		]
+	},
+	{
+		"title": "Elden Ring",
+		"description": "Huge open world full of monsters, rage, and glory. Die a hundred times, then feel like a god when you finally win.",
+		"genres": ["RPG", "Action", "Open World"],
+		"platforms": ["PlayStation 5", "Xbox Series X/S", "PC"],
+		"release_year": 2022,
+		"developer": "FromSoftware",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI16",
+		"reviews": [
+			{
+				"author": "Eurogamer",
+				"rating": 10,
+				"comment": "Brutal, beautiful, and massive. You'll love the pain.",
+				"created_at": 1645747200
+			},
+			{
+				"author": "Reddit User",
+				"rating": 9,
+				"comment": "I threw my controller and still had the time of my life.",
+				"created_at": 1645833600
+			}
+		]
+	},
+	{
+		"title": "Cyberpunk 2077",
+		"description": "Futuristic RPG in Night City where you shoot, hack, and hustle your way through chaos. It's finally fixed (mostly).",
+		"genres": ["RPG", "Shooter", "Sci-Fi"],
+		"platforms": ["PlayStation 5", "Xbox Series X/S", "PC"],
+		"release_year": 2020,
+		"developer": "CD Projekt Red",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "PC Gamer",
+				"rating": 8,
+				"comment": "Took a while, but now it's the game we were promised.",
+				"created_at": 1704067200
+			},
+			{
+				"author": "Steam User",
+				"rating": 9,
+				"comment": "Started buggy, ended badass. V rules.",
+				"created_at": 1704153600
+			}
+		]
+	},
+	{
+		"title": "Baldur's Gate 3",
+		"description": "Massive D&D-style RPG where every choice matters and every dice roll can ruin your day or make you a legend.",
+		"genres": ["RPG", "Adventure", "Fantasy"],
+		"platforms": ["PC", "PlayStation 5", "Mac"],
+		"release_year": 2023,
+		"developer": "Larian Studios",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "A masterpiece of storytelling and player freedom.",
+				"created_at": 1691452800
+			},
+			{
+				"author": "User_Valen",
+				"rating": 9,
+				"comment": "Too many dice, but still god-tier RPG.",
+				"created_at": 1691539200
+			}
+		]
+	},
+	{
+		"title": "Minecraft",
+		"description": "Build, mine, survive. Infinite worlds, infinite creativity, and creepers that ruin your day.",
+		"genres": ["Sandbox", "Survival", "Adventure"],
+		"platforms": ["PC", "PlayStation", "Xbox", "Switch", "Mobile"],
+		"release_year": 2011,
+		"developer": "Mojang Studios",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI7",
+		"reviews": [
+			{
+				"author": "PC Gamer",
+				"rating": 9,
+				"comment": "Endless creativity. Still unbeatable.",
+				"created_at": 1609459200
+			},
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "A timeless sandbox for all ages.",
+				"created_at": 1609545600
+			}
+		]
+	},
+	{
+		"title": "Grand Theft Auto V",
+		"description": "Chaos, heists, and explosions in Los Santos. Be a criminal mastermind or just blow stuff up for fun.",
+		"genres": ["Action", "Adventure", "Open World"],
+		"platforms": ["PC", "PlayStation 5", "Xbox Series X/S"],
+		"release_year": 2013,
+		"developer": "Rockstar Games",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "Game Informer",
+				"rating": 9,
+				"comment": "Still one of the best open-world sandboxes ever made.",
+				"created_at": 1383264000
+			},
+			{
+				"author": "PlayerOne",
+				"rating": 10,
+				"comment": "Online chaos never gets old.",
+				"created_at": 1383350400
+			}
+		]
+	},
+	{
+		"title": "God of War: Ragnarök",
+		"description": "Kratos and Atreus return for an emotional, brutal trip through Norse mythology. Dad vibes and axe throwing everywhere.",
+		"genres": ["Action", "Adventure"],
+		"platforms": ["PlayStation 5", "PlayStation 4"],
+		"release_year": 2022,
+		"developer": "Santa Monica Studio",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "Epic in every sense. Storytelling and combat perfection.",
+				"created_at": 1667952000
+			},
+			{
+				"author": "Reddit User",
+				"rating": 9,
+				"comment": "I cried, I screamed, I threw axes. Loved it.",
+				"created_at": 1668038400
+			}
+		]
+	},
+	{
+		"title": "Hollow Knight",
+		"description": "Dark, atmospheric metroidvania with tough fights and a haunting world. Cute bugs, deadly vibes.",
+		"genres": ["Action", "Adventure", "Platformer"],
+		"platforms": ["PC", "Switch", "PlayStation", "Xbox"],
+		"release_year": 2017,
+		"developer": "Team Cherry",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI7",
+		"reviews": [
+			{
+				"author": "GameSpot",
+				"rating": 9,
+				"comment": "Challenging and beautiful. The definition of indie greatness.",
+				"created_at": 1497916800
+			},
+			{
+				"author": "Steam User",
+				"rating": 10,
+				"comment": "I got lost for 30 hours and loved every second.",
+				"created_at": 1498003200
+			}
+		]
+	},
+	{
+		"title": "Red Dead Redemption 2",
+		"description": "Wild West open-world masterpiece. Ride horses, rob trains, and question your life choices as Arthur Morgan.",
+		"genres": ["Action", "Adventure", "Open World"],
+		"platforms": ["PC", "PlayStation 5", "Xbox Series X/S"],
+		"release_year": 2018,
+		"developer": "Rockstar Games",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "GameSpot",
+				"rating": 10,
+				"comment": "Unbelievable detail and storytelling. Peak Rockstar.",
+				"created_at": 1540684800
+			},
+			{
+				"author": "Player_X",
+				"rating": 9,
+				"comment": "So realistic it's scary. I brushed my horse more than myself.",
+				"created_at": 1540771200
+			}
+		]
+	},
+	{
+		"title": "Super Mario Odyssey",
+		"description": "Mario goes globe-trotting with his hat buddy Cappy. Creative, colorful, and pure joy all around.",
+		"genres": ["Platformer", "Adventure"],
+		"platforms": ["Nintendo Switch"],
+		"release_year": 2017,
+		"developer": "Nintendo",
+		"cover_image": "/cover.png",
+		"pegi_rating": "PEGI7",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "A joyful explosion of creativity. The best Mario since Galaxy.",
+				"created_at": 1509062400
+			},
+			{
+				"author": "Kotaku",
+				"rating": 9,
+				"comment": "It's impossible not to smile while playing.",
+				"created_at": 1509148800
+			}
+		]
+	}
+]
