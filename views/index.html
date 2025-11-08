@@ -423,6 +423,21 @@
 						{{/games}}
 					</div>
 				</div>
+				<div>
+					<!--Pagination-->
+					<nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center mt-3">
+							<!--Back button-->
+							<li class="page-item {{#isFirstPage}} disabled {{/isFirstPage}}">
+								<a class="page-link" href="/?page={{prevPage}}">Back</a>
+							</li>
+							<!--Next button-->
+							<li class="page-item {{#isLastPage}} disabled {{/isLastPage}}">
+								<a class="page-link" href="?page={{nextPage}}">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</section>
 		</main>
 

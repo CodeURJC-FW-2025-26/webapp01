@@ -24,7 +24,7 @@ export async function deleteGames() {
 }
 
 //mongo starts in 0 and the app in 1 (the -1)
-export async function getGames(page=1, gamesPerPage=9) {
+export async function getGames(page, gamesPerPage) {
 	return await games.find().skip((page-1)*gamesPerPage).limit(gamesPerPage).toArray();
 }
 
