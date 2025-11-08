@@ -84,7 +84,82 @@ function toObjectId(id) {
 	}
 }
 
-class QueryBuilder {}
+// eslint-disable-next-line no-unused-vars
+class QueryBuilder {
+	constructor(collection) {
+		this._collection = collection;
+		this._filter = {};
+		this._opts = {};
+		this._pipeline = null;
+		this._populate = [];
+	}
+
+	where(filter) {
+		Object.assign(this._filter, filter);
+		return this;
+	}
+
+	sort(sort) {
+		this._opts.sort = sort;
+		return this;
+	}
+
+	limit(n) {
+		this._opts.limit = n;
+		return this;
+	}
+
+	skip(n) {
+		this._opts.skip = n;
+		return this;
+	}
+
+	project(p) {
+		this._opts.projection = p;
+		return this;
+	}
+
+	hint(h) {
+		this._opts.hint = h;
+		return this;
+	}
+
+	aggregate(pipeline) {
+		this._pipeline = pipeline;
+		return this;
+	}
+
+	populate(field, options = {}) {
+		this._populate.push({ field, options });
+		return this;
+	}
+
+	async toArray() {
+		if (this._pipeline) {
+			return this._collection
+				.aggregate(this._pipeline, this._opts)
+				.toArray();
+		}
+		const docs = await this._collection
+			.find(this._filter, this._opts)
+			.toArray();
+		return docs;
+	}
+
+	async first() {
+		if (this._pipeline) {
+			const arr = await this._collection
+				.aggregate(this._pipeline, this._opts)
+				.limit(1)
+				.toArray();
+			return arr[0] || null;
+		}
+	}
+
+	async count() {
+		return this._collection.countDocuments(this._filter, this._opts);
+	}
+}
 
 class Model {}
 
