@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 	let totalPages = Math.ceil(totalGames / gamesPerPage); 
 	let pages=[];
 	for (let i=1; i<=totalPages;i++){
-		pages.push({number: i, isActualPage: (i===page)}) //true if i === page
+		pages.push({number: i, isActualPage: (i===page)}); //true if i === page
 	}
 
 	const isFirstPage = (page===1);
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
 	if (isLastPage){
 		nextPage=totalPages;
 	}else{
-		nextPage=page+1
+		nextPage=page+1;
 	}
 
 	res.render("index", { games, pages, page, isFirstPage, isLastPage, nextPage, prevPage });
