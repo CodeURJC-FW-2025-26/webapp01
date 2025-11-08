@@ -10,7 +10,6 @@ class Monkito {
 
 		// TODO(Sa4dUs): grab this settings from a proper config file
 		const client = new MongoClient(uri, {
-			useUnifiedTopology: true,
 			...clientOptions,
 		});
 
@@ -37,7 +36,7 @@ class Monkito {
 	}
 
 	static model(name, options = {}) {
-		if (Monkito.models.has(name)) return Monkito.model.get(name);
+		if (Monkito.models.has(name)) return Monkito.models.get(name);
 		const model = new Model(name, options);
 		Monkito.models.set(name, model);
 		return model;
@@ -61,19 +60,17 @@ class Monkito {
 			}, options);
 			await session.endSession();
 			return result;
-		} catch {
+		} catch (err) {
 			await session.endSession();
 			throw err;
 		}
 	}
 }
 
-// eslint-disable-next-line no-unused-vars
 function isObject(x) {
 	return x && typeof x === "object" && !Array.isArray(x);
 }
 
-// eslint-disable-next-line no-unused-vars
 function toObjectId(id) {
 	if (!id) return null;
 	if (id instanceof ObjectId) return id;
@@ -84,7 +81,6 @@ function toObjectId(id) {
 	}
 }
 
-// eslint-disable-next-line no-unused-vars
 class QueryBuilder {
 	constructor(collection) {
 		this._collection = collection;
@@ -186,7 +182,7 @@ class Model {
 	}
 
 	post(hook, fn) {
-		if (this.hooks.post[hook]) this.hooks.post[hook], push(fn);
+		if (this.hooks.post[hook]) this.hooks.post[hook].push(fn);
 		return this;
 	}
 
@@ -214,7 +210,7 @@ class Model {
 			const r = await this.validateFn(doc);
 			if (r === true) return { valid: true };
 			if (r && typeof r === "object" && r.valid === true)
-				return { vlaid: true };
+				return { valid: true };
 			return {
 				valid: false,
 				errors: r && r.errors ? r.errors : ["validation failed"],
@@ -270,7 +266,7 @@ class Model {
 	}
 
 	async findOne(filter = {}, opts = {}) {
-		if (this.softDelete) filter = { ...filter, delete: { $ne: true } };
+		if (this.softDelete) filter = { ...filter, deleted: { $ne: true } };
 		await this._runHooks("pre", "find", filter);
 		const doc = await this.collection().findOne(filter, opts);
 		await this._runHooks("post", "find", doc);
@@ -289,6 +285,11 @@ class Model {
 		const now = new Date();
 		if (this.timestamps) apply.$set.updatedAt = now;
 
+		if (update.$set) Object.assign(apply.$set, update.$set);
+		if (update.$inc) Object.assign(apply.$inc, update.$inc);
+		if (update.$unset) apply.$unset = update.$unset;
+		if (update.$push) apply.$push = update.$push;
+
 		if (
 			isObject(update) &&
 			!update.$set &&
@@ -296,27 +297,27 @@ class Model {
 			!update.$unset &&
 			!update.$push
 		) {
-			if (update.$set) Object.assign(apply.$set, update.$set);
-			if (update.$inc) Object.assign(apply.$inc, update.$inc);
-			if (update.$unset) apply.$unset = update.$unset;
-			if (update.$push) apply.$push = update.$push;
+			Object.assign(apply.$set, update);
 		}
 
 		const finalUpdate = {};
-		for (const k of Object.keys(apply))
+		for (const k of Object.keys(apply)) {
 			if (Object.keys(apply[k]).length) finalUpdate[k] = apply[k];
-
-		let res;
-		res = await this.collection().findOneAndUpdate(filter, finalUpdate, {
-			returnDocument: "after",
-			...opts,
-		});
+		}
+		const res = await this.collection().findOneAndUpdate(
+			filter,
+			finalUpdate,
+			{
+				returnDocument: "after",
+				...opts,
+			}
+		);
 		await this._runHooks("post", "update", {
 			filter,
 			update,
-			result: res.value,
+			result: res,
 		});
-		return res.value;
+		return res;
 	}
 
 	async updateMany(filter, update, opts = {}) {
@@ -327,8 +328,8 @@ class Model {
 				isObject(update) && !update.$set
 					? { $set: { ...update, updatedAt: now } }
 					: {
-							...update,
-							$set: { ...(update.$set || {}), updatedAt: now },
+						...update,
+						$set: { ...(update.$set || {}), updatedAt: now },
 					  };
 		}
 		const res = await this.collection().updateMany(filter, update, opts);
