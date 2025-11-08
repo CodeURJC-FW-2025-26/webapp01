@@ -8,7 +8,6 @@ class Monkito {
 	static async connect(uri, dbName, clientOptions = {}) {
 		if (Monkito._client) return Monkito._db;
 
-		// TODO(Sa4dUs): grab this settings from a proper config file
 		const client = new MongoClient(uri, {
 			...clientOptions,
 		});
@@ -205,19 +204,45 @@ class Model {
 	}
 
 	async _validate(doc) {
-		if (!this.validateFn) return { valid: true };
-		try {
-			const r = await this.validateFn(doc);
-			if (r === true) return { valid: true };
-			if (r && typeof r === "object" && r.valid === true)
-				return { valid: true };
-			return {
-				valid: false,
-				errors: r && r.errors ? r.errors : ["validation failed"],
-			};
-		} catch (err) {
-			return { valid: false, errors: [err.message || String(err)] };
+		if (!this.schema && !this.validateFn) return { valid: true };
+
+		const errors = [];
+
+		if (this.schema) {
+			for (const [key, def] of Object.entries(this.schema)) {
+				const val = doc[key];
+
+				if (def.required && (val === undefined || val === null)) {
+					errors.push(`${key} is required`);
+					continue;
+				}
+
+				if (val !== undefined && val !== null && def.type) {
+					const type = def.type.toLowerCase();
+					if (
+						(type === "number" && typeof val !== "number") ||
+						(type === "string" && typeof val !== "string") ||
+						(type === "boolean" && typeof val !== "boolean") ||
+						(type === "date" && !(val instanceof Date))
+					) {
+						errors.push(`${key} must be a ${type}`);
+					}
+				}
+			}
 		}
+
+		if (this.validateFn) {
+			try {
+				const r = await this.validateFn(doc);
+				if (r && r.valid === false && r.errors)
+					errors.push(...r.errors);
+			} catch (err) {
+				errors.push(err.message || String(err));
+			}
+		}
+
+		if (errors.length) return { valid: false, errors };
+		return { valid: true };
 	}
 
 	async create(doc, opts = {}) {

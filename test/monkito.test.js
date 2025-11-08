@@ -41,8 +41,8 @@ describe("Monkito ORM", () => {
 			timestamps: true,
 			softDelete: true,
 			validate: (doc) => {
-				if (!doc.name)
-					return { valid: false, errors: ["name required"] };
+				if (doc.age && doc.age < 0)
+					return { valid: false, errors: ["age must be positive"] };
 				return { valid: true };
 			},
 		});
@@ -153,5 +153,25 @@ describe("Monkito ORM", () => {
 			const count = await col.countDocuments({}, { session });
 			expect(count).toBe(1);
 		});
+	});
+
+	it("should apply validation function", async () => {
+		await expect(User.create({ name: "Bob", age: -1 })).rejects.toThrow(
+			/Validation failed: \["age must be positive"\]/
+		);
+	});
+
+	it("should enforce schema types automatically", async () => {
+		await expect(User.create({ age: 25 })).rejects.toThrow(
+			/Validation failed: \["name is required"\]/
+		);
+
+		await expect(
+			User.create({ name: "Alice", age: "not-a-number" })
+		).rejects.toThrow(/Validation failed: \["age must be a number"\]/);
+
+		const user = await User.create({ name: "Bob", age: 42 });
+		expect(user.name).toBe("Bob");
+		expect(user.age).toBe(42);
 	});
 });
