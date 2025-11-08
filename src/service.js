@@ -23,10 +23,16 @@ export async function deleteGames() {
 	return await games.deleteMany();
 }
 
-export async function getGames() {
-	return await games.find().toArray();
+//mongo starts in 0 and the app in 1 (the -1)
+export async function getGames(page=1, gamesPerPage=9) {
+	return await games.find().skip((page-1)*gamesPerPage).limit(gamesPerPage).toArray();
 }
 
 export async function getGame(id) {
 	return await games.findOne({ _id: new ObjectId(id) });
+}
+
+//this is going to be used to know if the "next page" button is available
+export async function howManyGames(){
+	return await games.countDocuments();
 }
