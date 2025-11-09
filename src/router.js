@@ -9,8 +9,6 @@ export default router;
 // eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: service.UPLOADS_FOLDER });
 
-
-//for main page
 router.get("/", async (req, res) => {
 	const page = Math.max(parseInt(req.query.page) || 1, 1);
 	const pageSize = 3;
