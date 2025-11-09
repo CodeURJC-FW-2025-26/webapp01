@@ -20,11 +20,11 @@ export async function deleteGames(filter={}) {
 }
 
 export async function getGames(filter = {}, options = {}) {
-  return Game.find(filter, options).toArray();
+	return Game.find(filter, options).toArray();
 }
 
 export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, options = {}) {
-  return Game.paginate(filter, { page, pageSize, ...options });
+	return Game.paginate(filter, { page, pageSize, ...options });
 }
 
 export async function getGame(id) {
