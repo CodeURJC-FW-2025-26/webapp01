@@ -17,8 +17,8 @@ router.get("/", async (req, res) => {
 
   	const {docs:games=[], totalPages=1} = await service.getGamesPaginated(page, pageSize); 
 
-  	const prevPage = Math.max(page-1,1);
-  	const nextPage = Math.min(page+1,totalPages);
+  	const prevPage = Math.max(page - 1, 1);
+  	const nextPage = Math.min(page + 1, totalPages);
 
   	const isFirstPage = page === 1;
   	const isLastPage = page === totalPages;
