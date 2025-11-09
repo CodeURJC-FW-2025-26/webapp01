@@ -19,8 +19,8 @@ router.get("/", async (req, res) => {
   	const games = pagination.docs || [];
   	const totalPages = pagination.totalPages || 1;
 
-  	const prevPage = (page > 1) ? page - 1 : 1;
-  	const nextPage = (page < totalPages) ? page + 1 : totalPages;
+  	const prevPage = Math.max(page-1,1);
+  	const nextPage = Math.min(page+1,totalPages);
 
   	const isFirstPage = page === 1;
   	const isLastPage = page === totalPages;
