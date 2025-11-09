@@ -7,6 +7,7 @@ import { Monkito } from "./lib/monkito.js";
 import { loadInitialData } from "./load_data.js";
 
 const app = express();
+
 await Monkito.connect("mongodb://localhost:27017", "store");
 await loadInitialData();
 

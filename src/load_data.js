@@ -8,8 +8,13 @@ export async function loadInitialData() {
 	let dataFile = "data.json";
 
 	const dataString = await fs.readFile(DATA_FOLDER + "/" + dataFile, "utf8");
-
-	const games = JSON.parse(dataString);
+	
+	//FIXME :) 
+	const games = JSON.parse(dataString).map(g => { 
+		return {
+			...g, release_date: new Date()
+		};
+	});
 
 	await service.deleteGames();
 	for (let post of games) {

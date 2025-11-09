@@ -1,4 +1,4 @@
 
-export const showForm = (req, res) => {
+export const getForm = (req, res) => {
 	res.render("form");
 };
