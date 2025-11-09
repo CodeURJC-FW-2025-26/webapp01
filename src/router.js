@@ -11,7 +11,8 @@ export const PAGE_SIZE = 6;
 const upload = multer({ dest: service.UPLOADS_FOLDER });
 
 router.get("/", async (req, res) => {
-	const page = Math.max(parseInt(req.query.page) || 1, 1);
+	const parsed = parseInt(req.query.page);
+	const page = Number.isNaN(parsed) ? 1 : Math.max(parseInt(req.query.page), 1);
 
   	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, PAGE_SIZE); 
 
