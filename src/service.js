@@ -1,38 +1,34 @@
 import express from "express";
 import { MongoClient, ObjectId } from "mongodb";
+import { Monkito } from "./lib/monkito";
 
 const router = express.Router();
 export default router;
-
-const client = new MongoClient("mongodb://localhost:27017");
-
-const db = client.db("store");
-const games = db.collection("games");
-
 export const UPLOADS_FOLDER = "./uploads";
+await Monkito.connect("mongodb://localhost:27017", "store"); //"store" just to mantain the same name 
+const Game = Monkito.model("Game", { collection: "games" });
 
 export async function addGame(post) {
-	return await games.insertOne(post);
+	return await Game.create(post);
 }
 
 export async function deleteGame(id) {
-	return await games.findOneAndDelete({ _id: new ObjectId(id) });
+	return await Game.findByIdAndDelete(id);
 }
 
 export async function deleteGames() {
-	return await games.deleteMany();
+	return await Game.deleteMany({});
 }
 
-//mongo starts in 0 and the app in 1 (the -1)
 export async function getGames(page, gamesPerPage) {
-	return await games.find().skip((page-1)*gamesPerPage).limit(gamesPerPage).toArray();
+	return await Game.paginate({}, {page:page, pageSize:gamesPerPage});
 }
 
 export async function getGame(id) {
-	return await games.findOne({ _id: new ObjectId(id) });
+	return await Game.findById(id);
 }
 
 //this is going to be used to know if the "next page" button is available
 export async function howManyGames(){
-	return await games.countDocuments();
+	return await Game.count();
 }
