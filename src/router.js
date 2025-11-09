@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
   	const isLastPage = page === totalPages;
 
 	res.render("index", {
-		games, //if you erase this, nothing is printed 
+		games, 
 		page,
 		prevPage,
 		nextPage,
