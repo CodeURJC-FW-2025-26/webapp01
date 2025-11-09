@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 	const page = Math.max(parseInt(req.query.page) || 1, 1);
 	const pageSize = 3;
 
-  	const {docs:games=[], totalPages=1} = await service.getGamesPaginated(page, pageSize); 
+  	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, pageSize); 
 
   	const prevPage = Math.max(page - 1, 1);
   	const nextPage = Math.min(page + 1, totalPages);
