@@ -1,5 +1,4 @@
 import express from "express";
-import { MongoClient, ObjectId } from "mongodb";
 import { Monkito } from "./lib/monkito";
 
 const router = express.Router();
