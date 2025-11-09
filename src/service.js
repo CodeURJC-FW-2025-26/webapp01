@@ -1,11 +1,20 @@
-import express from "express";
 import { Monkito } from "./lib/monkito.js";
+//the schema comes from data.JSON 
+const Game = Monkito.model("Game", {
+	collection: "games",
+	schema: {
+		title: { type: "string", required: true },         
+		description: { type: "string" },                 
+		genres: { type: "array" },                           
+		platforms: { type: "array" },                     
+		release_year: { type: "number" },                   
+		developer: { type: "string" },                      
+		cover_image: { type: "string" },                     
+		pegi_rating: { type: "string" },                    
+		reviews: { type: "array" },                         
+  	}
+});
 
-const router = express.Router();
-export default router;
-export const UPLOADS_FOLDER = "./uploads";
-await Monkito.connect("mongodb://localhost:27017", "store"); //"store" just to mantain the same name 
-const Game = Monkito.model("Game", { collection: "games" });
 
 export async function addGame(post) {
 	return await Game.create(post);
