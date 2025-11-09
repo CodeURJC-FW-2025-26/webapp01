@@ -5,41 +5,36 @@ import * as service from "./service.js";
 
 const router = express.Router();
 export default router;
-//luego se queja de esto macho -_-
+
 // eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: service.UPLOADS_FOLDER });
 
 
 //for main page
 router.get("/", async (req, res) => {
-	let page=parseInt(req.query.page)||1;
-	let gamesPerPage=parseInt(req.query.limit)||9;
-	let games = await service.getGames(page,gamesPerPage);
-	let totalGames = await service.howManyGames();
-	let totalPages = Math.ceil(totalGames / gamesPerPage); 
-	let pages=[];
-	for (let i=1; i<=totalPages;i++){
-		pages.push({number: i, isActualPage: (i===page)}); //true if i === page
-	}
+	const page = Math.max(parseInt(req.query.page) || 1, 1);
+	const pageSize = 3;
 
-	const isFirstPage = (page===1);
-	const isLastPage = (page===totalPages);
-	let prevPage;
-	let nextPage;
+  	const pagination = await service.getGamesPaginated(page, pageSize);
+  	const games = pagination.docs || [];
+  	const totalPages = pagination.totalPages || 1;
 
-	if (isFirstPage) {
-		prevPage=1;
-	}else{
-		prevPage=page-1;
-	}
-	if (isLastPage){
-		nextPage=totalPages;
-	}else{
-		nextPage=page+1;
-	}
+  	const prevPage = (page > 1) ? page - 1 : 1;
+  	const nextPage = (page < totalPages) ? page + 1 : totalPages;
 
-	res.render("index", { games, pages, page, isFirstPage, isLastPage, nextPage, prevPage });
+  	const isFirstPage = page === 1;
+  	const isLastPage = page === totalPages;
+
+	res.render("index", {
+		games, //if you erase this, nothing is printed 
+		page,
+		prevPage,
+		nextPage,
+		isFirstPage,
+		isLastPage,
+	});
 });
+
 
 
 //for detail page

@@ -1,5 +1,5 @@
 import express from "express";
-import { Monkito } from "./lib/monkito";
+import { Monkito } from "./lib/monkito.js";
 
 const router = express.Router();
 export default router;
@@ -15,12 +15,16 @@ export async function deleteGame(id) {
 	return await Game.findByIdAndDelete(id);
 }
 
-export async function deleteGames() {
-	return await Game.deleteMany({});
+export async function deleteGames(filter={}) {
+	return await Game.deleteMany(filter);
 }
 
-export async function getGames(page, gamesPerPage) {
-	return await Game.paginate({}, {page:page, pageSize:gamesPerPage});
+export async function getGames(filter = {}, options = {}) {
+  return Game.find(filter, options).toArray();
+}
+
+export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, options = {}) {
+  return Game.paginate(filter, { page, pageSize, ...options });
 }
 
 export async function getGame(id) {
