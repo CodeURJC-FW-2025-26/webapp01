@@ -19,4 +19,24 @@ router.get("/detail/:id", gameDetailHandler.getGameDetail);
 
 router.get("/form", formHandler.getForm);
 
+//TODO, make handler
+router.get("/form-error", (req, res) => {
+    const type = req.query.type || "unknown";
+    let errorMessage;
+
+    switch(type) {
+        case "duplicate":
+            errorMessage = "The title already exists. Please choose another.";
+            break;
+        case "empty":
+            errorMessage = "Some required fields are missing.";
+            break;
+        default:
+            errorMessage = "An unknown error occurred.";
+    }
+
+    res.render("form-error", { errorMessage });
+});
+
+
 export default router;
