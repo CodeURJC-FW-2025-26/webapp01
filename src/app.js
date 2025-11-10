@@ -1,11 +1,15 @@
 import express from "express";
 import mustacheExpress from "mustache-express";
 import bodyParser from "body-parser";
-
 import router from "./router.js";
 import "./load_data.js";
+import { Monkito } from "./lib/monkito.js";
+import { loadInitialData } from "./load_data.js";
 
 const app = express();
+
+await Monkito.connect("mongodb://localhost:27017", "store");
+await loadInitialData();
 
 app.use(express.static("./public"));
 app.use(express.static("./uploads"));

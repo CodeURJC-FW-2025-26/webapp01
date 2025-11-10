@@ -2,32 +2,21 @@ import express from "express";
 import multer from "multer";
 
 import * as service from "./service.js";
+import * as gameHandler from "./handlers/games.js";
+import * as gameDetailHandler from "./handlers/detail.js";
+import * as formHandler from "./handlers/form.js";
 
 const router = express.Router();
-export default router;
+export const PAGE_SIZE = 6;
 
 // eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: service.UPLOADS_FOLDER });
 
-router.get("/", async (req, res) => {
-	let games = await service.getGames();
-	res.render("index", { games });
-});
 
-router.get("/detail/:id", async (req, res) => {
-	const id = req.params.id ?? 0;
-	let game = await service.getGame(id);
-	game = {
-		...game,
-		average_rating:
-			game.reviews.reduce((acc, e) => e.rating + acc, 0) /
-			game.reviews.length,
-	};
+router.get("/", gameHandler.getPaginatedGames);
 
-	if (!game) res.status(404); // FIXME: show error page or smth
-	res.render("detail", game);
-});
+router.get("/detail/:id", gameDetailHandler.getGameDetail);
 
-router.get("/form", async (req, res) => {
-	res.render("form");
-});
+router.get("/form", formHandler.getForm);
+
+export default router;
