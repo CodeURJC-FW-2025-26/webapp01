@@ -27,7 +27,7 @@ export const getFormError = async (req, res) => {
 	]);
 
 	const errorMessage = errors.get(type) || "An unknown error occurred.";
-    const backUrl = req.get('Referer') || '/'; 
+	const backUrl = req.get("Referer") || "/"; 
 
 	res.render("error", { errorMessage,backUrl });
 };
