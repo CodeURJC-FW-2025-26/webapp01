@@ -4,7 +4,7 @@ import { PAGE_SIZE } from "../router.js";
 
 export const getPaginatedGames = async (req, res) => {
 	const search = req?.query?.search ?? "";
-	const filter = { title: { $regex: search, $options: "i" } }
+	const filter = { title: { $regex: search, $options: "i" } };
 
 	const parsed = parseInt(req.query.page);
 	const page = Number.isNaN(parsed) ? 1 : Math.max(parseInt(req.query.page), 1);
