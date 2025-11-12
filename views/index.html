@@ -25,7 +25,12 @@
 				<h1>Filters</h1>
 				<hr />
 
-				<div class="accordion" id="filterAccordion">
+				<form
+					class="nostyle accordion"
+					id="filterAccordion"
+					action="/"
+					method="get"
+				>
 					<div class="accordion-item mb-2">
 						<h2 class="accordion-header" id="headingGenres">
 							<button
@@ -45,17 +50,14 @@
 							aria-labelledby="headingGenres"
 						>
 							<div class="accordion-body p-2">
-								<input
-									type="text"
-									class="form-control mb-2"
-									placeholder="Search genres..."
-								/>
 								<div class="overflow-auto">
 									<div class="form-check">
 										<input
 											class="form-check-input"
 											type="checkbox"
 											id="action"
+											name="genres"
+											value="action"
 										/><label
 											class="form-check-label"
 											for="action"
@@ -67,6 +69,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="shooter"
+											name="genres"
+											value="shooter"
 										/><label
 											class="form-check-label"
 											for="shooter"
@@ -78,6 +82,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="platform"
+											name="genres"
+											value="platform"
 										/><label
 											class="form-check-label"
 											for="platform"
@@ -89,6 +95,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="adventure"
+											name="genres"
+											value="adventure"
 										/><label
 											class="form-check-label"
 											for="adventure"
@@ -100,6 +108,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="rpg"
+											name="genres"
+											value="rpg"
 										/><label
 											class="form-check-label"
 											for="rpg"
@@ -130,17 +140,14 @@
 							aria-labelledby="headingPlatforms"
 						>
 							<div class="accordion-body p-2">
-								<input
-									type="text"
-									class="form-control mb-2"
-									placeholder="Search platforms..."
-								/>
 								<div class="overflow-auto">
 									<div class="form-check">
 										<input
 											class="form-check-input"
 											type="checkbox"
 											id="pc"
+											name="platform"
+											value="pc"
 										/><label
 											class="form-check-label"
 											for="pc"
@@ -152,6 +159,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="ps5"
+											name="platform"
+											value="ps5"
 										/><label
 											class="form-check-label"
 											for="ps5"
@@ -163,6 +172,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="xboxseries"
+											name="platform"
+											value="xboxseries"
 										/><label
 											class="form-check-label"
 											for="xboxseries"
@@ -174,6 +185,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="switch"
+											name="platform"
+											value="switch"
 										/><label
 											class="form-check-label"
 											for="switch"
@@ -185,6 +198,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="android"
+											name="platform"
+											value="android"
 										/><label
 											class="form-check-label"
 											for="android"
@@ -221,6 +236,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="pegi3"
+											name="pegi"
+											value="pegi3"
 										/><label
 											class="form-check-label"
 											for="pegi3"
@@ -232,6 +249,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="pegi7"
+											name="pegi"
+											value="pegi7"
 										/><label
 											class="form-check-label"
 											for="pegi7"
@@ -243,6 +262,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="pegi12"
+											name="pegi"
+											value="pegi12"
 										/><label
 											class="form-check-label"
 											for="pegi12"
@@ -254,6 +275,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="pegi16"
+											name="pegi"
+											value="pegi16"
 										/><label
 											class="form-check-label"
 											for="pegi16"
@@ -265,6 +288,8 @@
 											class="form-check-input"
 											type="checkbox"
 											id="pegi18"
+											name="pegi"
+											value="pegi18"
 										/><label
 											class="form-check-label"
 											for="pegi18"
@@ -303,6 +328,7 @@
 									>
 									<input
 										id="fromYear"
+										name="fromYear"
 										type="number"
 										class="form-control form-control-sm"
 										placeholder="e.g. 1990"
@@ -316,6 +342,7 @@
 									>
 									<input
 										id="toYear"
+										name="toYear"
 										type="number"
 										class="form-control form-control-sm"
 										placeholder="e.g. 2025"
@@ -352,6 +379,7 @@
 									>
 									<input
 										id="fromRating"
+										name="fromRating"
 										type="number"
 										class="form-control form-control-sm"
 										placeholder="e.g. 4.0"
@@ -365,6 +393,7 @@
 									>
 									<input
 										id="toRating"
+										name="toRating"
 										type="number"
 										class="form-control form-control-sm"
 										placeholder="e.g. 7.5"
@@ -373,11 +402,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<button class="btn btn-primary w-100 mt-3">
-					Apply Filters
-				</button>
+					<button type="submit" class="btn btn-primary w-100 mt-3">
+						Apply Filters
+					</button>
+				</form>
 			</aside>
 
 			<section class="col-12 col-md-9">
