@@ -91,6 +91,16 @@ a:hover {
 	background: var(--color-primary);
 	color: #fff;
 }
+
+.btn-outline-primary {
+	color: var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+	background-color: var(--color-primary);
+}
+
+
 .btn-secondary {
 	background: var(--color-secondary);
 	color: #fff;
@@ -115,7 +125,7 @@ a:hover {
 }
 
 /* ---------------------------------- FORM ----------------------------------- */
-form {
+form::not(.nostyle) {
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 2rem;
 	border-radius: var(--radius);

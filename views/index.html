@@ -384,11 +384,17 @@
 				<h1 class="text-center mb-4">Welcome to GUEIM</h1>
 				<div class="p-4">
 					<div class="d-flex justify-content-end mb-3">
+						<form class="d-flex flex-grow-1 me-2" action="/" method="get">
 						<input
 							type="text"
-							class="form-control me-2"
+							name="search"
+							class="form-control me-2 flex-grow-1"
 							placeholder="Search..."
 						/>
+						<button type="submit" class="btn btn-outline-primary">
+							Search
+						</button>
+						</form>
 						<a href="new-game-form" class="btn btn-primary">New Game</a>
 					</div>
 
