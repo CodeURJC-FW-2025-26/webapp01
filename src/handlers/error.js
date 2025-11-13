@@ -1,7 +1,6 @@
 
 export const getError = async (req, res) => {
-
-	const errorMessage = errors.get(type) || "An unknown error occurred.";
- 
-	res.render("error", { errorMessage });
+	const errorMessage = req.query.type || "An unknown error occurred.";
+	const backUrl = req.query.back||"/";
+	res.render("error", { errorMessage, backUrl });
 };

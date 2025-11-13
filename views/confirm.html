@@ -4,22 +4,22 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Error</title>
+	<title>Confirmation</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 	{{>header}}
 	<div class="text-center p-4">
-		<h1 class="text-center mb-4">Oops! Something went wrong.</h1>
-			<p>{{errorMessage}}</p>
-		<a href="{{backUrl}}" class="btn btn-primary mt-3">Go Back</a>
+		<h1 class="text-center mb-4">Are you sure you want to continue?</h1>
+			<div class="d-flex justify-content-center gap-3">
+				<a href="{{urlOfDestination}}" class="btn btn-primary">Yes</a>
+				<a href="{{backUrl}}" class="btn btn-secondary">No, Go Back</a>
+			</div>
 	</div>
 	{{>footer}}
-
 </body>
-
 </html>
