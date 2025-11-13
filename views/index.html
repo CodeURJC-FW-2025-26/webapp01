@@ -420,11 +420,22 @@
 						<ul class="pagination justify-content-center mt-3">
 							<!--Back button-->
 							<li class="page-item {{#isFirstPage}} disabled {{/isFirstPage}}">
-								<a class="page-link" href="/?page={{prevPage}}">Back</a>
+								<a class="btn btn-secondary" href="/?page={{prevPage}}">
+									Back
+								</a>
+							</li>
+
+							<!-- Current page display -->
+							<li class="page-item mx-2 disabled">
+							<span class="btn btn-warning">
+								Page {{page}}
+							</span>
 							</li>
 							<!--Next button-->
 							<li class="page-item {{#isLastPage}} disabled {{/isLastPage}}">
-								<a class="page-link" href="?page={{nextPage}}">Next</a>
+								<a class="btn btn-secondary" href="?page={{nextPage}}">
+									Next
+								</a>
 							</li>
 						</ul>
 					</nav>

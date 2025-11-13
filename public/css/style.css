@@ -109,7 +109,10 @@ a:hover {
 .btn-warning:hover {
 	background: color-mix(in srgb, var(--color-accent) 95%, black 5%);
 }
-
+.pagination .page-item.disabled .btn {
+  opacity: 0.5;          
+  pointer-events: none;  
+}
 
 /* ---------------------------------- FORM ----------------------------------- */
 form {
