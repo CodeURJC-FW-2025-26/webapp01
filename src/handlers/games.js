@@ -1,18 +1,64 @@
 import * as service from "../service.js";
 import { PAGE_SIZE } from "../router.js";
+import { UniqueValues } from "../service.js";
 
-
-export const getPaginatedGames = async (req, res) => {
+export const handler = async (req, res) => {
 	const parsed = parseInt(req.query.page);
 	const page = Number.isNaN(parsed) ? 1 : Math.max(parseInt(req.query.page), 1);
+	
+	// Build filter
+	const { genres, platforms, pegi, fromYear, toYear, fromRating, toRating } = req.query;
 
-  	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, PAGE_SIZE); 
+	const filter = {
+		...(genres && { genres: { $in: Array.isArray(genres) ? genres : [genres] } }),
+		...(platforms && { platforms: { $in: Array.isArray(platforms) ? platforms : [platforms] } }),
+		...(pegi && { pegi_rating: { $in: Array.isArray(pegi) ? pegi : [pegi] } }),
+		...(fromYear || toYear
+			? {
+				release_date: {
+					...(fromYear && { $gte: parseInt(fromYear) }),
+					...(toYear && { $lte: parseInt(toYear) })
+				}
+			}
+			: {}),
+		...(fromRating || toRating
+			? {
+				reviews: { $exists: true, $ne: [] },
+				$expr: {
+					$let: {
+						vars: { avgRating: { $avg: "$reviews.rating" } },
+						in: {
+							$and: [
+								...(fromRating ? [{ $gte: ["$$avgRating", parseFloat(fromRating)] }] : []),
+								...(toRating ? [{ $lte: ["$$avgRating", parseFloat(toRating)] }] : [])
+							]
+						}
+					}
+				}
+			}
+			: {})
+	};
+
+	// Pagination
+	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, PAGE_SIZE, filter); 
 
   	const prevPage = Math.max(page - 1, 1);
   	const nextPage = Math.min(page + 1, totalPages);
 
   	const isFirstPage = page === 1;
   	const isLastPage = page === totalPages;
+
+	// Lazy load unique values for sidebar display
+	const ugenres = await UniqueValues.genres();
+	const uplatforms = await UniqueValues.platforms();
+	const upegi = await UniqueValues.pegi();
+
+	// Rebuild query string
+	const currentFilters = { ...req.query };
+	delete currentFilters.page;
+
+	const params = new URLSearchParams(currentFilters);
+	const baseQuery = params.toString();
 
 	res.render("index", {
 		games, 
@@ -21,5 +67,9 @@ export const getPaginatedGames = async (req, res) => {
 		nextPage,
 		isFirstPage,
 		isLastPage,
+		genres: ugenres,
+		platforms: uplatforms,
+		pegi: upegi,
+		base: baseQuery
 	});
 };
