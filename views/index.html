@@ -17,7 +17,6 @@
 	</head>
 
 	<body class="container">
-		
 		{{>header}}
 
 		<main class="row g-1">
@@ -51,71 +50,21 @@
 						>
 							<div class="accordion-body p-2">
 								<div class="overflow-auto">
+									{{#genres}}
 									<div class="form-check">
 										<input
-											class="form-check-input"
-											type="checkbox"
-											id="action"
-											name="genres"
-											value="action"
+										class="form-check-input"
+										type="checkbox"
+										id="{{.}}"
+										name="genres"
+										value="{{.}}"
 										/><label
-											class="form-check-label"
-											for="action"
-											>Action / Fighting</label
+										class="form-check-label"
+										for="{{.}}"
+										>{{.}}</label
 										>
 									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="shooter"
-											name="genres"
-											value="shooter"
-										/><label
-											class="form-check-label"
-											for="shooter"
-											>Shooter</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="platform"
-											name="genres"
-											value="platform"
-										/><label
-											class="form-check-label"
-											for="platform"
-											>Platform</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="adventure"
-											name="genres"
-											value="adventure"
-										/><label
-											class="form-check-label"
-											for="adventure"
-											>Adventure</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="rpg"
-											name="genres"
-											value="rpg"
-										/><label
-											class="form-check-label"
-											for="rpg"
-											>RPG</label
-										>
-									</div>
+									{{/genres}}
 								</div>
 							</div>
 						</div>
@@ -141,71 +90,21 @@
 						>
 							<div class="accordion-body p-2">
 								<div class="overflow-auto">
+									{{#platforms}}
 									<div class="form-check">
 										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pc"
-											name="platform"
-											value="pc"
+										class="form-check-input"
+										type="checkbox"
+										id="{{.}}"
+										name="platforms"
+										value="{{.}}"
 										/><label
-											class="form-check-label"
-											for="pc"
-											>PC (Windows)</label
+										class="form-check-label"
+										for="{{.}}"
+										>{{.}}</label
 										>
 									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="ps5"
-											name="platform"
-											value="ps5"
-										/><label
-											class="form-check-label"
-											for="ps5"
-											>PlayStation 5</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="xboxseries"
-											name="platform"
-											value="xboxseries"
-										/><label
-											class="form-check-label"
-											for="xboxseries"
-											>Xbox Series X|S</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="switch"
-											name="platform"
-											value="switch"
-										/><label
-											class="form-check-label"
-											for="switch"
-											>Nintendo Switch</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="android"
-											name="platform"
-											value="android"
-										/><label
-											class="form-check-label"
-											for="android"
-											>Android</label
-										>
-									</div>
+									{{/platforms}}
 								</div>
 							</div>
 						</div>
@@ -231,71 +130,21 @@
 						>
 							<div class="accordion-body p-2">
 								<div class="overflow-auto">
+									{{#pegi}}
 									<div class="form-check">
 										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pegi3"
-											name="pegi"
-											value="pegi3"
+										class="form-check-input"
+										type="checkbox"
+										id="{{.}}"
+										name="pegi"
+										value="{{.}}"
 										/><label
-											class="form-check-label"
-											for="pegi3"
-											>PEGI 3</label
+										class="form-check-label"
+										for="{{.}}"
+										>{{.}}</label
 										>
 									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pegi7"
-											name="pegi"
-											value="pegi7"
-										/><label
-											class="form-check-label"
-											for="pegi7"
-											>PEGI 7</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pegi12"
-											name="pegi"
-											value="pegi12"
-										/><label
-											class="form-check-label"
-											for="pegi12"
-											>PEGI 12</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pegi16"
-											name="pegi"
-											value="pegi16"
-										/><label
-											class="form-check-label"
-											for="pegi16"
-											>PEGI 16</label
-										>
-									</div>
-									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											id="pegi18"
-											name="pegi"
-											value="pegi18"
-										/><label
-											class="form-check-label"
-											for="pegi18"
-											>PEGI 18</label
-										>
-									</div>
+									{{/pegi}}
 								</div>
 							</div>
 						</div>
@@ -478,9 +327,8 @@
 			</section>
 		</main>
 
-	{{>footer}}
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+		{{>footer}}
 
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>
