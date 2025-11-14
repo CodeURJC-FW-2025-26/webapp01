@@ -15,7 +15,7 @@ export const PAGE_SIZE = 6;
 const upload = multer({ dest: service.UPLOADS_FOLDER });
 
 
-router.get("/", gameHandler.getPaginatedGames);
+router.get("/", gameHandler.handler);
 
 router.get("/detail/:id", gameDetailHandler.getGameDetail);
 

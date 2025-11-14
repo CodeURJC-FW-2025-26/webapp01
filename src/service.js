@@ -15,6 +15,45 @@ const Game = Monkito.model("Game", {
   	}
 });
 
+export const UniqueValues = {
+	_genres: null,
+	_platforms: null,
+	_pegi: null,
+
+	async genres() {
+		if (this._genres === null) {
+			this._genres = await getUnique(Game, "genres");
+		}
+		return this._genres;
+	},
+
+	async platforms() {
+		if (this._platforms === null) {
+			this._platforms = await getUnique(Game, "platforms");
+		}
+		return this._platforms;
+	},
+
+	async pegi() {
+		if (this._pegi === null) {
+			this._pegi = await getUnique(Game, "pegi_rating");
+		}
+		return this._pegi;
+	},
+};
+
+
+export async function getUnique(model, field) {
+	const docs = await model.find({}, { projection: { [field]: 1 } }).toArray();
+
+	const values = docs.flatMap((doc) => {
+		const val = doc[field];
+		return Array.isArray(val) ? val : [val];
+	});
+
+	return [...new Set(values)];
+}
+
 export async function addGame(post) {
 	return await Game.create(post);
 }
