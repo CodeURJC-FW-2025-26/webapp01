@@ -53,6 +53,13 @@ export const handler = async (req, res) => {
 	const uplatforms = await UniqueValues.platforms();
 	const upegi = await UniqueValues.pegi();
 
+	// Rebuild query string
+	const currentFilters = { ...req.query };
+	delete currentFilters.page;
+
+	const params = new URLSearchParams(currentFilters);
+	const baseQuery = params.toString();
+
 	res.render("index", {
 		games, 
 		page,
@@ -62,6 +69,7 @@ export const handler = async (req, res) => {
 		isLastPage,
 		genres: ugenres,
 		platforms: uplatforms,
-		pegi: upegi
+		pegi: upegi,
+		base: baseQuery
 	});
 };
