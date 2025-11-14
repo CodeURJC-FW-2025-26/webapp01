@@ -50,6 +50,13 @@ export const handler = async (req, res) => {
   	const isFirstPage = page === 1;
   	const isLastPage = page === totalPages;
 
+	// Rebuild query string
+	const currentFilters = { ...req.query };
+	delete currentFilters.page;
+
+	const params = new URLSearchParams(currentFilters);
+	const baseQuery = params.toString();
+
 	res.render("index", {
 		games, 
 		page,
@@ -59,6 +66,7 @@ export const handler = async (req, res) => {
 		isLastPage,
 		genres: GENRES,
 		platforms: PLATFORMS,
-		pegi: PEGI
+		pegi: PEGI,
+		base: baseQuery
 	});
 };
