@@ -5,7 +5,7 @@ const UPLOADS_FOLDER = "./uploads";
 const DATA_FOLDER = "./data";
 
 export async function loadInitialData() {
-	let dataFile = "data.json";
+	let dataFile = "/data.json";
 
 	const dataString = await fs.readFile(DATA_FOLDER + "/" + dataFile, "utf8");
 	
