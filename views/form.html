@@ -22,7 +22,7 @@
 			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" action="/submit-game-form" method="POST">
 				<div>
 					<label for="inputTitle" class="form-label">Title</label>
-					<input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong"
+					<input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong" name="title"
 						required>
 					<div class="invalid-feedback">Please enter a title.</div>
 				</div>
@@ -30,101 +30,65 @@
 				<div>
 					<label for="inputDescription" class="form-label">Description</label>
 					<textarea class="form-control" id="inputDescription" placeholder="Briefly describe the videogame..."
-						rows="4" required></textarea>
+						rows="4" name="description" ></textarea>
 					<div class="invalid-feedback">Please add a description.</div>
 				</div>
 
 				<div>
 					<legend>Genres</legend>
 					<div id="genreSelect">
+						{{#GENRES}}
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Genre1">
-							<label class="form-check-label" for="Genre1">
-								Action / Fighting
+							<input class="form-check-input" type="checkbox" value="{{.}}" id="Genre{{@index}}" name="genres">
+							<label class="form-check-label" for="Genre">
+								{{.}}
 							</label>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Genre2">
-							<label class="form-check-label" for="Genre2">
-								Shooter
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Genre3">
-							<label class="form-check-label" for="Genre3">
-								Platform
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Genre4">
-							<label class="form-check-label" for="Genre4">
-								Adventure
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Genre5">
-							<label class="form-check-label" for="Genre5">
-								RPG
-							</label>
-						</div>
+						{{/GENRES}}
 					</div>
 				</div>
 
 				<div>
 					<legend>Platforms</legend>
 					<div id="platformSelect">
+						{{#PLATFORMS}}
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Platform1">
-							<label class="form-check-label" for="Platform1">
-								PC (Windows)
+							<input class="form-check-input" type="checkbox" value="{{.}}" id="Platform{{@index}}" name="platforms">
+							<label class="form-check-label" for="Platform">
+								{{.}}
 							</label>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Platform2">
-							<label class="form-check-label" for="Platform2">
-								Playstation 5
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Platform3">
-							<label class="form-check-label" for="Platform3">
-								Xbox Series X|S
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Platform4">
-							<label class="form-check-label" for="Platform4">
-								Nintendo Switch
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="Platform5">
-							<label class="form-check-label" for="Platform5">
-								Android
-							</label>
-						</div>
+						{{/PLATFORMS}}
 					</div>
 				</div>
 
 				<div>
+					<label for="inputDate">Release Date</label>
+					<input type="date" class="form-control" id="inputDate" required name="release_date"/>
+				</div>
+
+				<div>
 					<label for="inputDeveloper" class="form-label">Developer</label>
-					<input type="text" class="form-control" id="inputDeveloper" placeholder="e.g. Team Cherry" required>
+					<input type="text" class="form-control" id="inputDeveloper" placeholder="e.g. Team Cherry" required name="developer">
 					<div class="invalid-feedback">Please enter a developer.</div>
 				</div>
 
 				<div>
 					<label for="PEGISelector" class="form-label">PEGI Rating</label>
-					<select class="form-select" id="PEGISelector" required>
-						<option value="" disabled selected>Select a rating</option>
-						<option value="3">PEGI 3</option>
-						<option value="7">PEGI 7</option>
-						<option value="12">PEGI 12</option>
-						<option value="16">PEGI 16</option>
-						<option value="18">PEGI 18</option>
+					<select class="form-select" id="PEGISelector" required name="pegi_rating">
+						<option value="{{.}}" disabled selected>Select a rating</option>
+						{{#PEGI}}
+						<option>{{.}}</option>
+						{{/PEGI}}
 					</select>
-					<div class="invalid-feedback">Please choose a valid PEGI rating.</div>
 				</div>
 
+				<div>
+					<label for="inputImage" class="form-label">Upload Cover Image</label>
+					<input class="form-control" type="file" id="inputImage" name="cover_image" accept="image/*" required>
+					<div class="form-text">Accepted formats: JPG, PNG, WEBP, etc.</div>
+					<div class="invalid-feedback">Please select a cover image.</div>
+				</div>
 
 				<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
 					<button type="submit" class="btn btn-primary">Save</button>
