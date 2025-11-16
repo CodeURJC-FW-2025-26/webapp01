@@ -5,10 +5,6 @@ class Monkito {
 	static _db = null;
 	static models = new Map();
 
-	static objectId(id) {
-		return toObjectId(id);
-	}
-
 	static async connect(uri, dbName, clientOptions = {}) {
 		if (Monkito._client) return Monkito._db;
 
@@ -74,7 +70,7 @@ function isObject(x) {
 	return x && typeof x === "object" && !Array.isArray(x);
 }
 
-function toObjectId(id) {
+export function toObjectId(id) {
 	if (!id) return null;
 	if (id instanceof ObjectId) return id;
 	try {

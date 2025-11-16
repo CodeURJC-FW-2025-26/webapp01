@@ -1,4 +1,4 @@
-import { Monkito } from "./lib/monkito.js";
+import { Monkito, toObjectId } from "./lib/monkito.js";
 //the schema comes from data.JSON
 const Game = Monkito.model("Game", {
 	collection: "games",
@@ -38,7 +38,7 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 
 export async function addReview(gameId, review) {
 	return await Game.updateOne(
-		{ _id: Monkito.objectId(gameId) }, //static, toObjectId no static
+		{ _id: toObjectId(gameId) },
 		{ $push: { reviews: review } }, //update
 		{ returnDocument: "after" }
 	);
