@@ -13,6 +13,8 @@ export const insertGame = async (req, res) => {
 		pegi_rating: req.body.pegi_rating
 	};
 
+	// FIXME(Sa4dUs): use Monkito's error handling instead
+	const msg = "Generic error";
 	for (let key in game) {
 		if (typeof game[key] === "string") {
 			game[key] = game[key].trim();
@@ -34,13 +36,13 @@ export const insertGame = async (req, res) => {
 
 	game.release_date = releaseDateObj;
 	game.reviews = [];
-	game.cover_image = req.file.filename;
+	game.cover_image = `/${req.file.filename}`;
 
 	try {
 		const gameObject = await addGame(game);
 		const msg= "The game has been succesfully created";
 		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
-	} catch (error) {
+	} catch {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };
@@ -88,8 +90,8 @@ export const getEditGameForm = async (req, res) => {
 	game = {
 		...game,
 		id: id,
+		release_date: game.release_date.toISOString().split("T")[0],
 	};
-	console.log(game);
 
 	res.render("edit-game-form", {
 		game,
