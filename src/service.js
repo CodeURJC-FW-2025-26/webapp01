@@ -37,6 +37,17 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 	return Game.paginate(filter, { page, pageSize, ...options });
 }
 
+export async function addReview(gameId, review) {
+	return await Game.updateOne(
+		{_id:gameId}, //filter 
+		{$push:{reviews: review}} //update
+	)
+}
+
+export async function updateOneGame(filter, update, opts={}){
+	return await Game.updateOne(filter, update, opts);
+}
+
 export async function getGame(id) {
 	return await Game.findById(id);
 }
