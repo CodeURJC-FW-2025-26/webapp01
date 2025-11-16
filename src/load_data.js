@@ -23,10 +23,10 @@ export async function loadInitialData() {
 
 	const dataString = await fs.readFile(DATA_FOLDER + "/" + dataFile, "utf8");
 
-	//FIXME :) 
-	const games = JSON.parse(dataString).map(g => {
+	const games = JSON.parse(dataString).map((g) => {
 		return {
-			...g, release_date: new Date()
+			...g,
+			release_date: new Date(g.release_date),
 		};
 	});
 

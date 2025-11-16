@@ -4,9 +4,9 @@
 		"description": "Epic open-world adventure where Link goes sky-high and deep underground to save Hyrule again. More tools, more chaos, more fun.",
 		"genres": ["Adventure", "Action", "Open World"],
 		"platforms": ["Nintendo Switch"],
-		"release_date": 2023,
+		"release_date": "2023-05-12",
 		"developer": "Nintendo",
-		"cover_image": "/cover.png",
+		"cover_image": "/18f9c7f19365a309a60d00d026e2abcd",
 		"pegi_rating": "PEGI12",
 		"reviews": [
 			{
@@ -28,9 +28,9 @@
 		"description": "Huge open world full of monsters, rage, and glory. Die a hundred times, then feel like a god when you finally win.",
 		"genres": ["RPG", "Action", "Open World"],
 		"platforms": ["PlayStation 5", "Xbox Series X/S", "PC"],
-		"release_date": 2022,
+		"release_date": "2022-02-25",
 		"developer": "FromSoftware",
-		"cover_image": "/cover.png",
+		"cover_image": "/35425458ee7a9f906fe143de76ad9453",
 		"pegi_rating": "PEGI16",
 		"reviews": [
 			{
@@ -52,9 +52,9 @@
 		"description": "Futuristic RPG in Night City where you shoot, hack, and hustle your way through chaos. It's finally fixed (mostly).",
 		"genres": ["RPG", "Shooter", "Sci-Fi"],
 		"platforms": ["PlayStation 5", "Xbox Series X/S", "PC"],
-		"release_date": 2020,
+		"release_date": "2020-12-10",
 		"developer": "CD Projekt Red",
-		"cover_image": "/cover.png",
+		"cover_image": "/a4fa9ed477c67e51417429916d663b90",
 		"pegi_rating": "PEGI18",
 		"reviews": [
 			{
@@ -76,9 +76,9 @@
 		"description": "Massive D&D-style RPG where every choice matters and every dice roll can ruin your day or make you a legend.",
 		"genres": ["RPG", "Adventure", "Fantasy"],
 		"platforms": ["PC", "PlayStation 5", "Mac"],
-		"release_date": 2023,
+		"release_date": "2023-08-03",
 		"developer": "Larian Studios",
-		"cover_image": "/cover.png",
+		"cover_image": "/06fc6dc3a86e34bc3fa50dc4177e4cb9",
 		"pegi_rating": "PEGI18",
 		"reviews": [
 			{
@@ -100,9 +100,9 @@
 		"description": "Build, mine, survive. Infinite worlds, infinite creativity, and creepers that ruin your day.",
 		"genres": ["Sandbox", "Survival", "Adventure"],
 		"platforms": ["PC", "PlayStation", "Xbox", "Switch", "Mobile"],
-		"release_date": 2011,
+		"release_date": "2011-11-18",
 		"developer": "Mojang Studios",
-		"cover_image": "/cover.png",
+		"cover_image": "/7cd58073a2d38b997d76f4deff3d1b5c",
 		"pegi_rating": "PEGI7",
 		"reviews": [
 			{
@@ -124,9 +124,9 @@
 		"description": "Chaos, heists, and explosions in Los Santos. Be a criminal mastermind or just blow stuff up for fun.",
 		"genres": ["Action", "Adventure", "Open World"],
 		"platforms": ["PC", "PlayStation 5", "Xbox Series X/S"],
-		"release_date": 2013,
+		"release_date": "2013-09-17",
 		"developer": "Rockstar Games",
-		"cover_image": "/cover.png",
+		"cover_image": "/007946bf5103b2ae176e2d52e2a4ad0a",
 		"pegi_rating": "PEGI18",
 		"reviews": [
 			{
@@ -148,9 +148,9 @@
 		"description": "Kratos and Atreus return for an emotional, brutal trip through Norse mythology. Dad vibes and axe throwing everywhere.",
 		"genres": ["Action", "Adventure"],
 		"platforms": ["PlayStation 5", "PlayStation 4"],
-		"release_date": 2022,
+		"release_date": "2022-11-09",
 		"developer": "Santa Monica Studio",
-		"cover_image": "/cover.png",
+		"cover_image": "/f02e894ec4cacda32df52644fbda6dfb",
 		"pegi_rating": "PEGI18",
 		"reviews": [
 			{
@@ -172,9 +172,9 @@
 		"description": "Dark, atmospheric metroidvania with tough fights and a haunting world. Cute bugs, deadly vibes.",
 		"genres": ["Action", "Adventure", "Platformer"],
 		"platforms": ["PC", "Switch", "PlayStation", "Xbox"],
-		"release_date": 2017,
+		"release_date": "2017-02-24",
 		"developer": "Team Cherry",
-		"cover_image": "/cover.png",
+		"cover_image": "/fd77acee4ee8fd2a8bcf1751c376848e",
 		"pegi_rating": "PEGI7",
 		"reviews": [
 			{
@@ -196,9 +196,9 @@
 		"description": "Wild West open-world masterpiece. Ride horses, rob trains, and question your life choices as Arthur Morgan.",
 		"genres": ["Action", "Adventure", "Open World"],
 		"platforms": ["PC", "PlayStation 5", "Xbox Series X/S"],
-		"release_date": 2018,
+		"release_date": "2018-10-26",
 		"developer": "Rockstar Games",
-		"cover_image": "/cover.png",
+		"cover_image": "/bfc1d233d092b8e709610b981ee34a99",
 		"pegi_rating": "PEGI18",
 		"reviews": [
 			{
@@ -220,9 +220,9 @@
 		"description": "Mario goes globe-trotting with his hat buddy Cappy. Creative, colorful, and pure joy all around.",
 		"genres": ["Platformer", "Adventure"],
 		"platforms": ["Nintendo Switch"],
-		"release_date": 2017,
+		"release_date": "2017-10-27",
 		"developer": "Nintendo",
-		"cover_image": "/cover.png",
+		"cover_image": "/78278ac8643daa827ac2fd50b8c748cd",
 		"pegi_rating": "PEGI7",
 		"reviews": [
 			{
