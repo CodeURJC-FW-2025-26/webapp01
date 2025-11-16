@@ -8,6 +8,7 @@ const Game = Monkito.model("Game", {
 		description: { type: "string", required: true },              
 		genres: { type: "array", required: true },                     
 		platforms: { type: "array", required: true },
+		//Handled in Monkito
 		release_date: { type: "date", required: true },
 		developer: { type: "string", required: true },                  
 		cover_image: { type: "string", required: true },              

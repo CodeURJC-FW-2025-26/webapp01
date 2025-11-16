@@ -1,7 +1,49 @@
 import { GENRES, PEGI, PLATFORMS } from "../load_data.js";
+import { addGame } from "../service.js";
 
+export const insertGame = async (req, res) => {
+	let game = {
+		title: req.body.title,
+		description: req.body.description,
+		genres: req.body.genres,
+		platforms: req.body.platforms,
+		release_date: req.body.release_date,
+		developer: req.body.developer,
+		pegi_rating: req.body.pegi_rating
+	};
+
+	for (let key in game) {
+		if (typeof game[key] === "string") {
+			game[key] = game[key].trim();
+		}
+
+		if (!game[key] || (Array.isArray(game[key]) && game[key].length === 0)) {
+			return res.redirect(`/error?type=${msg}&back=/form`);
+		}
+	}
+
+	if (!req.file) {
+		return res.redirect(`/error?type=${msg}&back=/form`);
+	}
+
+	const releaseDateObj = new Date(req.body.release_date);
+	if (isNaN(releaseDateObj)) {
+		return res.redirect(`/error?type=${msg}&back=/form`);
+	}
+
+	game.release_date = releaseDateObj;
+	game.reviews = [];
+	game.cover_image = req.file.filename;
+
+	try {
+		const gameObject = await addGame(game);
+		return res.redirect(`/confirm?id=${gameObject._id}`);
+	} catch (error) {
+		return res.redirect(`/error?type=${msg}&back=/form`);
+	}
+};
 export const getForm = (req, res) => {
-	res.render("form",{
+	res.render("form", {
 		GENRES,
 		PLATFORMS,
 		PEGI
