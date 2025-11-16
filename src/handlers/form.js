@@ -13,6 +13,8 @@ export const insertGame = async (req, res) => {
 		pegi_rating: req.body.pegi_rating
 	};
 
+	// FIXME(Sa4dUs): use Monkito's error handling instead
+	const msg = "Generic error";
 	for (let key in game) {
 		if (typeof game[key] === "string") {
 			game[key] = game[key].trim();
@@ -34,7 +36,7 @@ export const insertGame = async (req, res) => {
 
 	game.release_date = releaseDateObj;
 	game.reviews = [];
-	game.cover_image = req.file.filename;
+	game.cover_image = `/${req.file.filename}`;
 
 	try {
 		const gameObject = await addGame(game);
