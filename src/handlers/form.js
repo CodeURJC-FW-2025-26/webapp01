@@ -42,7 +42,7 @@ export const insertGame = async (req, res) => {
 		const gameObject = await addGame(game);
 		const msg= "The game has been succesfully created";
 		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
-	} catch (error) {
+	} catch {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };

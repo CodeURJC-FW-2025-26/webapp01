@@ -1,5 +1,4 @@
 import * as service from "../service.js";
-import { deleteGame } from "../service.js";
 
 export const getGameDetail = async (req, res) => {
 	const id = req.params.id ?? 0;
@@ -22,7 +21,7 @@ export const deleteDetailGame= async(req,res) =>{
 		const msg= "The game has been succesfully deleted";
 		return res.redirect(`/confirm?msg=${msg}`);
 	}
-	catch(error){
+	catch {
 		return res.redirect(`/error?type=CantDelete&back=/detail/${id}`);
 	}
 
