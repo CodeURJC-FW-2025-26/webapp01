@@ -37,14 +37,15 @@ export const insertGame = async (req, res) => {
 
 	try {
 		const gameObject = await addGame(game);
-		return res.redirect(`/confirm?id=${gameObject._id}`);
+		const msg= "The game has been succesfully created"
+		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
 	} catch (error) {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };
 
-export const getForm = (req, res) => {
-	res.render("form", {
+export const getNewGameForm = (req, res) => {
+	res.render("new-game-form", {
 		GENRES,
 		PLATFORMS,
 		PEGI

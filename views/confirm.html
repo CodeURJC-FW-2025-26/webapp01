@@ -14,9 +14,16 @@
 <body class="d-flex flex-column min-vh-100">
 	{{>header}}
 	<div class="text-center p-4">
-		The Game has been successfully created
+		{{msg}}
 	</div>
-	<a href="detail/{{id}}">Ir a la página de detalle</a>
+	{{#id}}
+	<a href="detail/{{id}}">Go to detail page</a>
+	{{/id}}
+
+	{{^id}}
+	<a href="/">Go Home</a>
+	{{/id}}
+
 	{{>footer}}
 </body>
 

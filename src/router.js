@@ -21,7 +21,7 @@ router.get("/", gameHandler.getPaginatedGames);
 
 router.get("/detail/:id", gameDetailHandler.getGameDetail);
 
-router.get("/form", formHandler.getForm);
+router.get("/new-game-form", formHandler.getNewGameForm);
 
 router.get("/error", errorHandler.getError);
 
