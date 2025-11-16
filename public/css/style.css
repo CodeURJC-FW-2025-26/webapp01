@@ -125,7 +125,7 @@ a:hover {
 }
 
 /* ---------------------------------- FORM ----------------------------------- */
-form::not(.nostyle) {
+form:not(.nostyle) {
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 2rem;
 	border-radius: var(--radius);
