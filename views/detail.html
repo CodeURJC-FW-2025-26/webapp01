@@ -87,13 +87,16 @@
 							<div
 								class="d-flex justify-content-center gap-3 my-4 flex-wrap"
 							>
+							<form action = "/edit-game-form" method="post">
+								<input type ="hidden" value="{{id}}" name="id">
 								<button
-									type="button"
+									type="submit"
 									class="btn btn-warning"
 									aria-label="Edit game information"
 								>
 									Edit
 								</button>
+							</form>
 								<form action="/delete-game" method="post">
 								<input type ="hidden" value="{{id}}" name="id">
 								<button

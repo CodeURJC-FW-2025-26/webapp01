@@ -19,7 +19,7 @@ export const getGameDetail = async (req, res) => {
 export const deleteDetailGame= async(req,res) =>{
 	try{
 		service.deleteGame(req.body.id);
-		const msg= "The game has been succesfully deleted"
+		const msg= "The game has been succesfully deleted";
 		return res.redirect(`/confirm?msg=${msg}`);
 	}
 	catch(error){
@@ -27,7 +27,3 @@ export const deleteDetailGame= async(req,res) =>{
 	}
 
 };
-
-export const editGame = async(req,res)=>{
-
-}

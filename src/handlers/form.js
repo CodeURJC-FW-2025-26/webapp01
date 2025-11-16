@@ -1,5 +1,6 @@
 import { GENRES, PEGI, PLATFORMS } from "../load_data.js";
-import { addGame } from "../service.js";
+import { addGame, getGame } from "../service.js";
+
 
 export const insertGame = async (req, res) => {
 	let game = {
@@ -37,17 +38,63 @@ export const insertGame = async (req, res) => {
 
 	try {
 		const gameObject = await addGame(game);
-		const msg= "The game has been succesfully created"
+		const msg= "The game has been succesfully created";
 		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
 	} catch (error) {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };
 
+export const editGame = async (req, res) =>{
+	const id = req.body.id;
+	console.log(id);
+	res.redirect("/");
+	//I need a method in the 
+};
+
+const formatOptions = (allOptions, selectedOptions = []) => {
+	return allOptions.map(option => ({
+		name: option,
+		checked: selectedOptions.includes(option)
+	}));
+};
+
+
 export const getNewGameForm = (req, res) => {
+	    const emptyGame = {
+		title: "",
+		description: "",
+		genres:[],
+		platforms:[],
+		release_date: "",
+		developer: "",
+		pegi_rating: "",
+		cover_image: ""
+	};
+
 	res.render("new-game-form", {
-		GENRES,
-		PLATFORMS,
+		game:emptyGame,
+		action : "/game",
+		GENRES: formatOptions(GENRES, emptyGame.genres),
+		PLATFORMS: formatOptions(PLATFORMS, emptyGame.platforms),
+		PEGI
+	});
+};
+
+export const getEditGameForm = async (req, res) => {
+	const id = req.body.id ?? 0;
+	let game = await getGame(id);
+
+	game = {
+		...game,
+		id: id,
+	};
+	console.log(game);
+
+	res.render("edit-game-form", {
+		game,
+		GENRES: formatOptions(GENRES, game.genres),
+		PLATFORMS: formatOptions(PLATFORMS, game.platforms),
 		PEGI
 	});
 };

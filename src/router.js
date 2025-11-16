@@ -13,7 +13,7 @@ import * as confirmHandler from "./handlers/confirm.js";
 const router = express.Router();
 export const PAGE_SIZE = 6;
 
-// eslint-disable-next-line no-unused-vars
+ 
 const upload = multer({ dest: "uploads/" });
 
 
@@ -27,8 +27,12 @@ router.get("/error", errorHandler.getError);
 
 router.get("/confirm", confirmHandler.getConfirmation);
 
+router.post("/edit-game-form",formHandler.getEditGameForm);
+
 router.post("/game", upload.single("cover_image"), formHandler.insertGame);
 
 router.post("/delete-game",gameDetailHandler.deleteDetailGame);
+
+router.post("/edit-game",formHandler.editGame);
 
 export default router;
