@@ -15,8 +15,8 @@ const Game = Monkito.model("Game", {
   	}
 });
 
-export async function addGame(post) {
-	return await Game.create(post);
+export async function addGame(game) {
+	return await Game.create(game);
 }
 
 export async function deleteGame(id) {
@@ -37,4 +37,9 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 
 export async function getGame(id) {
 	return await Game.findById(id);
+}
+
+export async function addReview(id, review){
+	const game = Game.getGame(id)
+	game.reviews.push(review)
 }
