@@ -1,18 +1,11 @@
-
-import { addGame } from "../service.js";
-import router from "../router.js"
-
-
-
 export const getConfirmation = async (req, res) => {
-	
-	//This is not best way but the scalability isn't important here
-	console.log(req.type)
-	const isGame = (req.type) && (req.type === "game");
-	console.log(isGame)
-	const formData = req.data
-	console.log(formData)
-	res.render("confirm", { isGame,data:formData });
+  const isGame = req.type && req.type === "game";
+  const formData = req.data;
 
+  const keyValues = Object.keys(formData).map(key => ({
+    key,
+    value: formData[key]
+  }));
+
+  res.render("confirm", { isGame, keyValues });
 };
-

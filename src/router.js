@@ -29,43 +29,50 @@ router.get("/error", errorHandler.getError);
 
 router.post("/confirm", confirmHandler.getConfirmation);
 
-router.post('/submit-game-form',(req, res) => {
+router.post('/submit-game-form', (req, res) => {
 	//To check that there are not empty/invalid fields
-	for (let key in req.body){
+	for (let key in req.body) {
 
 		if (typeof req.body[key] === "string")
 			req.body[key] = req.body[key].trim();
 
-		if (!req.body[key])
-		{
-			return getError({type:"An empty or invalid field was sent", back:"form"},res)
+		if (!req.body[key]) {
+			return getError({ type: "An empty or invalid field was sent", back: "form" }, res)
 		}
 	}
 	const formData = req.body
-	return getConfirmation({type:"game",data:formData},res)
+	return getConfirmation({ type: "game", data: formData }, res)
 
 });
 
 
-router.post('/submit-game-confirmation',(req, res) => {
+router.post('/submit-game-confirmation', (req, res) => {
+	console.log(req.body);
 	//Idk if this comprobation is strictly required but it not so harmful
-	for (let key in req.body.data){
-	
-			if (typeof req.body[key] === "string")
-				req.body.data[key] = req.body.data.trim();
-	
-			if (!req.body.data[key])
-			{
-				return getError({type:"An empty or invalid field was sent", back:"form"},res)
-			}
+	for (let key in req.body) {
+
+		if (typeof req.body[key] === "string")
+			req.body[key] = req.body[key].trim();
+
+		if (!req.body[key]) {
+			return getError({ type: "An empty or invalid field was sent", back: "form" }, res)
 		}
+	}
+	const releaseDateObj = new Date(req.body.release_date);
+	if (isNaN(releaseDateObj)) {
+		return getError({ type: "Invalid release date", back: "form" }, res);
+	}
+	req.body.release_date = releaseDateObj;
+	req.body.reviews = [];
+
+	addGame(req.body);
 	//After adding a game we return to home
-	return res.render("/")
-	
-	
+	return gameHandler.getPaginatedGames(req,res);
+
+
 });
 
-router.post('/cancel-game-confirmation',(req,res)=>{
+router.post('/cancel-game-confirmation', (req, res) => {
 	return res.render("form")
 })
 
