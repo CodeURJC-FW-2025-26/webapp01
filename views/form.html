@@ -19,7 +19,7 @@
 		<section class="col-12 p-3">
 			<h1 class="text-center mb-4">Add New Videogame</h1>
 
-			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" action="/submit-game-form" method="POST">
+			<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" action="/submit-game-form" method="POST" enctype="multipart/form-data">
 				<div>
 					<label for="inputTitle" class="form-label">Title</label>
 					<input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong" name="title"

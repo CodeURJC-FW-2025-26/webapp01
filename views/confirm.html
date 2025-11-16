@@ -14,26 +14,9 @@
 <body class="d-flex flex-column min-vh-100">
 	{{>header}}
 	<div class="text-center p-4">
-		<h1 class="text-center mb-4">Are you sure you want to continue?</h1>
-		<div class="d-flex justify-content-center gap-3">
-			{{#isGame}}
-			<form action="/submit-game-confirmation" method="post">
-				{{#keyValues}}
-				<input type="hidden" name="{{key}}" value="{{value}}">
-				{{/keyValues}}
-				<input type="submit" value="Yes" class="btn btn-primary">
-				<a href="form" class="btn btn-secondary" role="button">No</a>
-			</form>
-			{{/isGame}}
-
-			{{^isGame}}
-			<form action="/submit-review-confirmation" method="post">
-				<input type="submit" value="Yes">
-				<a href="/" class="btn btn-secondary" role="button">No</a>
-			</form>
-			{{/isGame}}
-		</div>
+		The Game has been successfully created
 	</div>
+	<a href="detail/{{id}}">Ir a la página de detalle</a>
 	{{>footer}}
 </body>
 

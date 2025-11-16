@@ -1,5 +1,6 @@
 import { Monkito } from "./lib/monkito.js";
 //the schema comes from data.JSON
+
 const Game = Monkito.model("Game", {
 	collection: "games",
 	schema: {
@@ -37,9 +38,4 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 
 export async function getGame(id) {
 	return await Game.findById(id);
-}
-
-export async function addReview(id, review){
-	const game = Game.getGame(id)
-	game.reviews.push(review)
 }
