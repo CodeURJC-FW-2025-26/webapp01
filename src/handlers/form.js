@@ -42,6 +42,7 @@ export const insertGame = async (req, res) => {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };
+
 export const getForm = (req, res) => {
 	res.render("form", {
 		GENRES,

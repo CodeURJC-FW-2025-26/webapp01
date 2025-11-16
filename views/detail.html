@@ -94,13 +94,15 @@
 								>
 									Edit
 								</button>
+								<form action="/delete-game" method="post">
+								<input type ="hidden" value="{{id}}" name="id">
 								<button
-									type="button"
+									type="submit"
 									class="btn btn-danger"
 									aria-label="Delete this game"
-								>
-									Delete
+								> Delete 
 								</button>
+								</form>
 								<a
 									href="/"
 									class="btn btn-secondary"
