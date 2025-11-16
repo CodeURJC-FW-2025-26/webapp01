@@ -18,8 +18,8 @@ export const handler = async (req, res) => {
 		...(fromYear || toYear
 			? {
 				release_date: {
-					...(fromYear && { $gte: parseInt(fromYear) }),
-					...(toYear && { $lte: parseInt(toYear) })
+					...(fromYear && { $gte: new Date(`${fromYear}-01-01T00:00:00.000Z`) }),
+					...(toYear && { $lte: new Date(`${toYear}-12-31T23:59:59.999Z`) })
 				}
 			}
 			: {}),
@@ -57,6 +57,9 @@ export const handler = async (req, res) => {
 	const params = new URLSearchParams(currentFilters);
 	const baseQuery = params.toString();
 
+	const generateCheckedMap = (all, query = []) =>
+		all.map((e) => new Object({ label: e, selected: query.includes(e) }));
+
 	res.render("index", {
 		games, 
 		page,
@@ -64,9 +67,13 @@ export const handler = async (req, res) => {
 		nextPage,
 		isFirstPage,
 		isLastPage,
-		genres: GENRES,
-		platforms: PLATFORMS,
-		pegi: PEGI,
+		genres: generateCheckedMap(GENRES, genres),
+		platforms: generateCheckedMap(PLATFORMS, platforms),
+		pegi: generateCheckedMap(PEGI, pegi),
+		fromYear,
+		toYear,
+		fromRating,
+		toRating,
 		base: baseQuery
 	});
 };

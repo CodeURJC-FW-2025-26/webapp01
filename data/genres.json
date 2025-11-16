@@ -1,3 +1,14 @@
 {
-    "genres":["Action/Fighting","Shooter","Platform","Adventure","RPG"]
+	"genres": [
+		"Action",
+		"Adventure",
+		"Open World",
+		"RPG",
+		"Shooter",
+		"Sci-Fi",
+		"Fantasy",
+		"Sandbox",
+		"Survival",
+		"Platformer"
+	]
 }

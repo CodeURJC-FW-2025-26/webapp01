@@ -1,3 +1,14 @@
 {
-    "platforms":["PC (Windows)","PlayStation 5","Xbox Series X|S", "Nintendo Switch","Android"]
+	"platforms": [
+		"Nintendo Switch",
+		"PlayStation 5",
+		"Xbox Series X/S",
+		"PC",
+		"Mac",
+		"PlayStation 4",
+		"PlayStation",
+		"Xbox",
+		"Switch",
+		"Mobile"
+	]
 }
