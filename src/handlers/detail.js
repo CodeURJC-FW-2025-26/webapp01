@@ -19,11 +19,11 @@ export const getGameDetail = async (req, res) => {
 export const deleteDetailGame= async(req,res) =>{
 	try{
 		console.log(req.body.id);
-		service.deleteGame(req.body.id)
-		return res.redirect("/")
+		service.deleteGame(req.body.id);
+		return res.redirect("/");
 	}
 	catch(error){
 		return res.redirect(`/error?type=CantDelete&back=/detail/${id}`);
 	}
 
-}
+};

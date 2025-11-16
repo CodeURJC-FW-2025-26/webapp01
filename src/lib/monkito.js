@@ -381,7 +381,7 @@ class Model {
 
 	async findByIdAndDelete(id, opts = {}) {
 		const _id = toObjectId(id);
-		return this.deleteOne({ _id }, opts);
+		return this.collection().deleteOne({ _id }, opts);
 	}
 
 	async aggregate(pipeline = [], opts = {}) {

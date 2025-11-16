@@ -29,6 +29,6 @@ router.get("/confirm", confirmHandler.getConfirmation);
 
 router.post("/game", upload.single("cover_image"), formHandler.insertGame);
 
-router.post("/delete-game",gameDetailHandler.deleteDetailGame)
+router.post("/delete-game",gameDetailHandler.deleteDetailGame);
 
 export default router;
