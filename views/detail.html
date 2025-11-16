@@ -26,7 +26,7 @@
 					<div class="row align-items-center">
 						<div class="col-md-4 col-12 mb-3 mb-md-0">
 							<img
-								src="{{cover_image}}"
+								src="/{{cover_image}}"
 								alt="Cover of {{title}}"
 								class="img-fluid rounded shadow"
 							/>
@@ -87,20 +87,25 @@
 							<div
 								class="d-flex justify-content-center gap-3 my-4 flex-wrap"
 							>
+							<form action = "/edit-game-form" method="post">
+								<input type ="hidden" value="{{id}}" name="id">
 								<button
-									type="button"
+									type="submit"
 									class="btn btn-warning"
 									aria-label="Edit game information"
 								>
 									Edit
 								</button>
+							</form>
+								<form action="/delete-game" method="post">
+								<input type ="hidden" value="{{id}}" name="id">
 								<button
-									type="button"
+									type="submit"
 									class="btn btn-danger"
 									aria-label="Delete this game"
-								>
-									Delete
+								> Delete 
 								</button>
+								</form>
 								<a
 									href="/"
 									class="btn btn-secondary"

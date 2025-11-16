@@ -1,5 +1,6 @@
 import { Monkito } from "./lib/monkito.js";
 //the schema comes from data.JSON
+
 const Game = Monkito.model("Game", {
 	collection: "games",
 	schema: {
@@ -7,6 +8,7 @@ const Game = Monkito.model("Game", {
 		description: { type: "string", required: true },              
 		genres: { type: "array", required: true },                     
 		platforms: { type: "array", required: true },
+		//Handled in Monkito
 		release_date: { type: "date", required: true },
 		developer: { type: "string", required: true },                  
 		cover_image: { type: "string", required: true },              
@@ -15,8 +17,8 @@ const Game = Monkito.model("Game", {
   	}
 });
 
-export async function addGame(post) {
-	return await Game.create(post);
+export async function addGame(game) {
+	return await Game.create(game);
 }
 
 export async function deleteGame(id) {
