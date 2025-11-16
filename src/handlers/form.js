@@ -88,8 +88,8 @@ export const getEditGameForm = async (req, res) => {
 	game = {
 		...game,
 		id: id,
+		release_date: game.release_date.toISOString().split("T")[0],
 	};
-	console.log(game);
 
 	res.render("edit-game-form", {
 		game,
