@@ -34,4 +34,6 @@ router.post("/delete-game",gameDetailHandler.deleteDetailGame);
 
 router.post("/edit-game",formHandler.editGame);
 
+router.post("/detail/:id/reviews", gameDetailHandler.addReviewHandler);
+
 export default router;

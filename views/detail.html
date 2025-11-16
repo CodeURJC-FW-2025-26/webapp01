@@ -156,7 +156,10 @@
 					<h2 class="mb-4">Add a New Review</h2>
 					<fieldset>
 						<legend class="h2 mb-4">Review Details</legend>
-						<form class="d-flex flex-column needs-validation">
+						<form class="d-flex flex-column needs-validation"
+							action="/detail/{{id}}/reviews" 
+							method="POST"
+						>
 							<div class="row align-items-center gap-3">
 								<div>
 									<label for="inputAuthor" class="form-label"
@@ -166,24 +169,17 @@
 										type="text"
 										class="form-control"
 										id="inputAuthor"
-										placeholder="Your name"
+										name="author"
 										required
 									/>
-									<div class="invalid-feedback">
-										Please enter your name.
-									</div>
 								</div>
 
 								<div>
-									<label
-										for="inputDescription"
-										class="form-label"
-										>Comment</label
-									>
+									<label for="inputDescription" class="form-label">Comment</label>
 									<textarea
 										class="form-control"
 										id="inputDescription"
-										placeholder="Write your review..."
+										name="comment"
 										rows="5"
 										required
 									></textarea>
@@ -200,7 +196,7 @@
 										type="number"
 										class="form-control"
 										id="inputRating"
-										placeholder="e.g. 85"
+										name="rating"
 										min="0"
 										max="100"
 										required

@@ -11,7 +11,7 @@ export const getGameDetail = async (req, res) => {
 		id: id,
 	};
 
-	if (!game) res.status(404); // FIXME: show error page or smth
+	if (!game) res.status(404); //I`LL DO IT TOMORROW MORNING
 	res.render("detail", game);
 };
 
@@ -24,5 +24,23 @@ export const deleteDetailGame= async(req,res) =>{
 	catch {
 		return res.redirect(`/error?type=CantDelete&back=/detail/${id}`);
 	}
+};
+/*--REVIEWS--*/
+export const addReviewHandler = async (req,res) => {
+	try {
+		const gameId = req.params.id;
+		const { author, comment, rating } = req.body;
+		const review = {
+			author,
+			comment,
+			rating: Number(rating),
+			createdAt: new Date(),
+		};
 
+		await service.addReview(gameId, review);
+		res.redirect(`/detail/${gameId}`);
+	} catch (err) {
+		console.error("Error updating review:", err); //I`LL DO IT TOMORROW MORNING
+		res.status(500).send("Error updating review");//I`LL DO IT TOMORROW MORNING
+	}
 };

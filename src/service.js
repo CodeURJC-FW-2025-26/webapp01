@@ -1,6 +1,5 @@
 import { Monkito } from "./lib/monkito.js";
 //the schema comes from data.JSON
-
 const Game = Monkito.model("Game", {
 	collection: "games",
 	schema: {
@@ -39,9 +38,18 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 
 export async function addReview(gameId, review) {
 	return await Game.updateOne(
-		{_id:gameId}, //filter 
-		{$push:{reviews: review}} //update
-	)
+		{ _id: Monkito.objectId(gameId) }, //static, toObjectId no static
+		{ $push: { reviews: review } }, //update
+		{ returnDocument: "after" }
+	);
+}
+
+export async function deleteReview(gameId, reviewId) {
+	return await Game.updateOne(
+		{ _id: gameId }, //filter
+		{ $pull: { reviews: { _id: reviewId } } }, //update
+		{ returnDocument: "after" } 
+	);
 }
 
 export async function updateOneGame(filter, update, opts={}){

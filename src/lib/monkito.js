@@ -5,6 +5,10 @@ class Monkito {
 	static _db = null;
 	static models = new Map();
 
+	static objectId(id) {
+		return toObjectId(id);
+	}
+
 	static async connect(uri, dbName, clientOptions = {}) {
 		if (Monkito._client) return Monkito._db;
 
