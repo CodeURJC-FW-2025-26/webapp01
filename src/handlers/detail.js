@@ -12,7 +12,7 @@ export const getGameDetail = async (req, res) => {
 		id: id,
 	};
 
-	if (!game) res.status(404); //I`LL DO IT TOMORROW MORNING
+	if (!game) return res.redirect(`/error?type=Error404&back=/detail/${id}`); 
 	res.render("detail", game);
 };
 
@@ -42,8 +42,7 @@ export const addReviewHandler = async (req,res) => {
 		await service.addReview(gameId, review);
 		res.redirect(`/detail/${gameId}`);
 	} catch (err) {
-		console.error("Error updating review:", err); //I`LL DO IT TOMORROW MORNING
-		res.status(500).send("Error updating review");//I`LL DO IT TOMORROW MORNING
+		res.redirect(`/error?type=500:ErrorUpdatingReviews&back=/detail/${id}`);
 	}
 };
 
@@ -65,18 +64,17 @@ export const postEditReview = async (req, res) => {
 		await service.updateReview(gameId, reviewId, { author, comment, rating });
 		res.redirect(`/detail/${gameId}`);
 	} catch (err) {
-		console.error(err);
-		res.status(500).send("Error updating review");
+		res.redirect(`/error?type=500:ErrorPostingReviews&back=/detail/${id}`);
 	}
 };
 
 export const deleteReview = async (req, res) => {
-    const { gameId, reviewId } = req.params;
-    try {
-        await service.deleteReview(gameId, reviewId);
-        res.redirect(`/detail/${gameId}?msg=Review deleted successfully`);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error deleting review");
-    }
+	const { gameId, reviewId } = req.params;
+	try {
+		await service.deleteReview(gameId, reviewId);
+		res.redirect(`/detail/${gameId}?msg=Review deleted successfully`);//use confirm
+	} catch (err) {
+		console.error(err);
+		res.redirect(`/error?type=500:ErrorDeletingReviews&back=/detail/${id}`);
+	}
 };
