@@ -1,4 +1,5 @@
 import * as service from "../service.js";
+import { ObjectId } from "mongodb";
 
 export const getGameDetail = async (req, res) => {
 	const id = req.params.id ?? 0;
@@ -31,6 +32,7 @@ export const addReviewHandler = async (req,res) => {
 		const gameId = req.params.id;
 		const { author, comment, rating } = req.body;
 		const review = {
+			_id: new ObjectId(),
 			author,
 			comment,
 			rating: Number(rating),
@@ -42,5 +44,28 @@ export const addReviewHandler = async (req,res) => {
 	} catch (err) {
 		console.error("Error updating review:", err); //I`LL DO IT TOMORROW MORNING
 		res.status(500).send("Error updating review");//I`LL DO IT TOMORROW MORNING
+	}
+};
+
+export const getEditReviewForm = async (req, res) => {
+	const { gameId, reviewId } = req.params;
+	const game = await service.getGame(gameId);
+	const review = game.reviews.find(r => String(r._id) === reviewId); //find the review id in the array of reviews
+
+	if (!review) return res.status(404).send("Review not found");
+
+	res.render("edit-review", { gameId, review });
+};
+
+export const postEditReview = async (req, res) => {
+	const { gameId, reviewId } = req.params;
+	const { author, comment, rating } = req.body;
+
+	try {
+		await service.updateReview(gameId, reviewId, { author, comment, rating });
+		res.redirect(`/detail/${gameId}`);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Error updating review");
 	}
 };

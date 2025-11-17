@@ -47,8 +47,22 @@ export async function addReview(gameId, review) {
 export async function deleteReview(gameId, reviewId) {
 	return await Game.updateOne(
 		{ _id: gameId }, //filter
-		{ $pull: { reviews: { _id: reviewId } } }, //update
+		{ $pull: { reviews: { _id: toObjectId(reviewId) } } }, //update
 		{ returnDocument: "after" } 
+	);
+}
+
+export async function updateReview(gameId, reviewId, updatedData) {
+	return await Game.updateOne(
+		{ _id: toObjectId(gameId), "reviews._id": toObjectId(reviewId) },
+		{
+			$set: {
+				"reviews.$.author": updatedData.author,
+				"reviews.$.comment": updatedData.comment,
+				"reviews.$.rating": Number(updatedData.rating),
+				"reviews.$.updatedAt": new Date()
+			}
+		}
 	);
 }
 

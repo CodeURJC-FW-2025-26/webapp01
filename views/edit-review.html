@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Review</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="container d-flex flex-column min-vh-100">
+    {{>header}}
+
+    <main class="row flex-fill">
+        <section class="col-12 p-3">
+            <div class="container my-4">
+                <h1 class="mb-4 text-center">Edit Review</h1>
+
+                <form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation"
+                      action="/detail/{{gameId}}/reviews/{{review._id}}/edit" method="POST" novalidate>
+
+                    <div>
+                        <label for="inputAuthor" class="form-label">Author</label>
+                        <input type="text" class="form-control" id="inputAuthor" name="author"
+                               value="{{review.author}}" required>
+                        <div class="invalid-feedback">Please enter the author name.</div>
+                    </div>
+
+                    <div>
+                        <label for="inputComment" class="form-label">Comment</label>
+                        <textarea class="form-control" id="inputComment" name="comment" rows="4" required>{{review.comment}}</textarea>
+                        <div class="invalid-feedback">Please write your comment.</div>
+                    </div>
+
+                    <div>
+                        <label for="inputRating" class="form-label">Rating (0-100)</label>
+                        <input type="number" class="form-control" id="inputRating" name="rating"
+                               value="{{review.rating}}" min="0" max="100" required>
+                        <div class="invalid-feedback">Please enter a valid rating between 0 and 100.</div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="/detail/{{gameId}}" class="btn btn-secondary" role="button">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    {{>footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

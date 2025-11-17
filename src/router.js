@@ -36,4 +36,8 @@ router.post("/edit-game",formHandler.editGame);
 
 router.post("/detail/:id/reviews", gameDetailHandler.addReviewHandler);
 
+router.get("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.getEditReviewForm);
+
+router.post("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.postEditReview);
+
 export default router;
