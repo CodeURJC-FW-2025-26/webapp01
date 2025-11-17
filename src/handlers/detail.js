@@ -40,8 +40,9 @@ export const addReviewHandler = async (req,res) => {
 		};
 
 		await service.addReview(gameId, review);
-		res.redirect(`/detail/${gameId}`);
+		res.redirect(`/confirm?msg=${"Review added successfully"}&id=${gameId}`);
 	} catch (err) {
+		console.error(err);
 		res.redirect(`/error?type=500:ErrorUpdatingReviews&back=/detail/${id}`);
 	}
 };
@@ -51,8 +52,7 @@ export const getEditReviewForm = async (req, res) => {
 	const game = await service.getGame(gameId);
 	const review = game.reviews.find(r => String(r._id) === reviewId); //find the review id in the array of reviews
 
-	if (!review) return res.status(404).send("Review not found");
-
+	if (!review) return res.redirect(`/error?type=404:ReviewNotFound=/detail/${id}`); 
 	res.render("edit-review", { gameId, review });
 };
 
@@ -62,8 +62,10 @@ export const postEditReview = async (req, res) => {
 
 	try {
 		await service.updateReview(gameId, reviewId, { author, comment, rating });
-		res.redirect(`/detail/${gameId}`);
+		res.redirect(`/confirm?msg=${"Review edited successfully"}&id=${gameId}`);
+
 	} catch (err) {
+		console.error(err);
 		res.redirect(`/error?type=500:ErrorPostingReviews&back=/detail/${id}`);
 	}
 };
@@ -72,7 +74,8 @@ export const deleteReview = async (req, res) => {
 	const { gameId, reviewId } = req.params;
 	try {
 		await service.deleteReview(gameId, reviewId);
-		res.redirect(`/detail/${gameId}?msg=Review deleted successfully`);//use confirm
+		res.redirect(`/confirm?msg=${"Review deleted successfully"}&id=${gameId}`);
+
 	} catch (err) {
 		console.error(err);
 		res.redirect(`/error?type=500:ErrorDeletingReviews&back=/detail/${id}`);
