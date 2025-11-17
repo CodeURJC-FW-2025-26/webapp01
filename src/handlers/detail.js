@@ -72,7 +72,6 @@ export const postEditReview = async (req, res) => {
 
 export const deleteReview = async (req, res) => {
     const { gameId, reviewId } = req.params;
-
     try {
         await service.deleteReview(gameId, reviewId);
         res.redirect(`/detail/${gameId}?msg=Review deleted successfully`);

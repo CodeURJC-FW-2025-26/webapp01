@@ -134,7 +134,7 @@
 						</div>
 						<div>
 							<a href="/detail/{{id}}/reviews/{{_id}}/edit" class="btn btn-primary">Edit</a>
-
+							<form method="post" action ="/detail/{{id}}/reviews/{{_id}}/delete">
 							<button
 								type="submit"
 								class="btn btn-danger"
@@ -142,6 +142,7 @@
 							>
 								Delete
 							</button>
+							</form>
 						</div>
 					</div>
 					{{/reviews}}
