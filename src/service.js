@@ -46,7 +46,7 @@ export async function addReview(gameId, review) {
 
 export async function deleteReview(gameId, reviewId) {
 	return await Game.updateOne(
-		{ _id: gameId }, //filter
+		{ _id: toObjectId(gameId) }, //filter
 		{ $pull: { reviews: { _id: toObjectId(reviewId) } } }, //update
 		{ returnDocument: "after" } 
 	);

@@ -40,4 +40,6 @@ router.get("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.getEditRe
 
 router.post("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.postEditReview);
 
+router.post("/detail/:gameId/reviews/:reviewId/delete", gameDetailHandler.deleteReview);
+
 export default router;
