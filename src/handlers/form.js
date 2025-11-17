@@ -1,5 +1,5 @@
 import { GENRES, PEGI, PLATFORMS } from "../load_data.js";
-import { addGame, getGame } from "../service.js";
+import { addGame, editGame, getGame } from "../service.js";
 
 
 export const insertGame = async (req, res) => {
@@ -14,7 +14,7 @@ export const insertGame = async (req, res) => {
 	};
 
 	// FIXME(Sa4dUs): use Monkito's error handling instead
-	const msg = "Generic error";
+	const msg = "error adding games";
 	for (let key in game) {
 		if (typeof game[key] === "string") {
 			game[key] = game[key].trim();
@@ -40,18 +40,24 @@ export const insertGame = async (req, res) => {
 
 	try {
 		const gameObject = await addGame(game);
-		const msg= "The game has been succesfully created";
+		const msg = "The game has been succesfully created";
 		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
 	} catch {
 		return res.redirect(`/error?type=${msg}&back=/form`);
 	}
 };
 
-export const editGame = async (req, res) =>{
-	const id = req.body.id;
-	console.log(id);
-	res.redirect("/");
-	//I need a method in the 
+export const editFormGame = async (req, res) => {
+	const msg = "error editing games";
+	try {
+		const id = req.body.id;
+		await editGame(id, req.body, req.file);
+		const msg = "The game has been edited";
+		return res.redirect(`/confirm?msg=${msg}&id=${id}`);
+	} catch {
+		return res.redirect(`/error?type=${msg}&back=/`);
+	}
+
 };
 
 const formatOptions = (allOptions, selectedOptions = []) => {
@@ -61,13 +67,20 @@ const formatOptions = (allOptions, selectedOptions = []) => {
 	}));
 };
 
+const formatSelectOptions = (allOptions, selectedValue = "") => {
+	return allOptions.map(option => ({
+		value: option,
+		selected: option === selectedValue
+	}));
+};
+
 
 export const getNewGameForm = (req, res) => {
-	    const emptyGame = {
+	const emptyGame = {
 		title: "",
 		description: "",
-		genres:[],
-		platforms:[],
+		genres: [],
+		platforms: [],
 		release_date: "",
 		developer: "",
 		pegi_rating: "",
@@ -75,11 +88,11 @@ export const getNewGameForm = (req, res) => {
 	};
 
 	res.render("new-game-form", {
-		game:emptyGame,
-		action : "/game",
+		game: emptyGame,
+		action: "/game",
 		GENRES: formatOptions(GENRES, emptyGame.genres),
 		PLATFORMS: formatOptions(PLATFORMS, emptyGame.platforms),
-		PEGI
+		PEGI: formatSelectOptions(PEGI, emptyGame.pegi_rating)
 	});
 };
 
@@ -97,7 +110,7 @@ export const getEditGameForm = async (req, res) => {
 		game,
 		GENRES: formatOptions(GENRES, game.genres),
 		PLATFORMS: formatOptions(PLATFORMS, game.platforms),
-		PEGI
+		PEGI: formatSelectOptions(PEGI, game.pegi_rating)
 	});
 };
 

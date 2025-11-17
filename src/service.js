@@ -36,6 +36,29 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 	return Game.paginate(filter, { page, pageSize, ...options });
 }
 
+export async function editGame(id, data, file = null) {
+	const _id = toObjectId(id);
+	const updateData = {
+		title: data.title,
+		description: data.description,
+		genres: Array.isArray(data.genres) ? data.genres : [data.genres],
+		platforms: Array.isArray(data.platforms) ? data.platforms : [data.platforms],
+		release_date: new Date(data.release_date),
+		developer: data.developer,
+		pegi_rating: data.pegi_rating
+	};
+
+	if (file) {
+		updateData.cover_image = `uploads/${file.filename}`;
+	}
+
+	return await Game.updateOne(
+		{ _id },
+		{ $set: updateData },
+		{ returnDocument: "after" }
+	);
+}
+
 export async function addReview(gameId, review) {
 	return await Game.updateOne(
 		{ _id: toObjectId(gameId) },

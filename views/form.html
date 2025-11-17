@@ -1,5 +1,8 @@
-<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" action="/game" method="POST"
+<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" {{#game.id}}action="/edit-game"{{/game.id}}{{^game.id}}action="/game"{{/game.id}} method="POST"
     enctype="multipart/form-data">
+    {{#game.id}}
+    <input type="hidden" value="{{game.id}}" name ="id">
+    {{/game.id}}
     <div>
         <label for="inputTitle" class="form-label">Title</label>
         <input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong" name="title"
@@ -59,18 +62,17 @@
 
     <div>
         <label for="PEGISelector" class="form-label">PEGI Rating</label>
-        <select class="form-select" id="PEGISelector" required name="pegi_rating">
-            <option >Select a rating</option>
-            {{#PEGI}}
-            <option {{#selected}}selected{{/selected}}>{{.}}</option>
-            {{/PEGI}}
-        </select>
+<select class="form-select" id="PEGISelector" required name="pegi_rating">
+    {{#PEGI}}
+    <option value="{{value}}" {{#selected}}selected{{/selected}}>{{value}}</option>
+    {{/PEGI}}
+</select>
     </div>
 
     <div>
         {{#game.cover_image}}
         <div class="col-md-4 col-12 mb-3 mb-md-0">
-            <img src="/{{game.cover_image}}" alt="Cover of {{title}}" class="img-fluid rounded shadow" />
+            <img src="{{game.cover_image}}" alt="Cover of {{title}}" class="img-fluid rounded shadow" />
         </div>
         {{/game.cover_image}}
 
