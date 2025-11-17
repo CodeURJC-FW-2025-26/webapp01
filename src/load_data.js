@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import * as service from "./service.js";
+import { toObjectId } from "./lib/monkito.js";
 
 const UPLOADS_FOLDER = "./uploads";
 const DATA_FOLDER = "./data";
@@ -26,7 +27,8 @@ export async function loadInitialData() {
 	const games = JSON.parse(dataString).map((g) => {
 		return {
 			...g,
-			release_date: new Date(g.release_date),
+			release_date: new Date(g.release_date), 
+			reviews: g.reviews.map(review=>new Object({...review, _id: toObjectId()}))
 		};
 	});
 

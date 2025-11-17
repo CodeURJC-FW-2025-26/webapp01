@@ -70,8 +70,7 @@ function isObject(x) {
 	return x && typeof x === "object" && !Array.isArray(x);
 }
 
-export function toObjectId(id) {
-	if (!id) return null;
+export function toObjectId(id=new ObjectId()) {
 	if (id instanceof ObjectId) return id;
 	try {
 		return new ObjectId(id);
