@@ -182,12 +182,23 @@ class Model {
 		return { valid: true };
 	}
 
+	async _validateUpdate(filter, update) {
+		const existing = await this.collection().findOne(filter);
+		if (!existing) throw new Error("Document not found for update");
+
+		const docToValidate = { ...existing, ...(update.$set || {}) };
+
+		const v = await this._validate(docToValidate);
+		if (!v.valid) throw new ValidationError(v.errors);
+
+		return docToValidate;
+	}
+
 	async create(doc, opts = {}) {
 		await this._runHooks("pre", "create", doc);
 		const d = this._prepareDocument(doc, { isNew: true });
 		const v = await this._validate(d);
-		if (!v.valid)
-			throw new ValidationError(v.errors);
+		if (!v.valid) throw new ValidationError(v.errors);
 
 		const res = await this.collection().insertOne(d, opts);
 		const out = { _id: res.insertedId, ...d };
@@ -245,6 +256,11 @@ class Model {
 		for (const k of Object.keys(apply)) {
 			if (Object.keys(apply[k]).length) finalUpdate[k] = apply[k];
 		}
+
+		if (this.schema || this.validateFn) {
+			await this._validateUpdate(filter, finalUpdate);
+		}
+
 		const res = await this.collection().findOneAndUpdate(
 			filter,
 			finalUpdate,

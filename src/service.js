@@ -28,7 +28,10 @@ const Game = Monkito.model("Game", {
 		}
 
 		for (const key of ["genres", "platforms"]) {
-			if (!Array.isArray(doc[key]) || doc[key].length === 0) {
+			if (
+				(Array.isArray(doc[key]) && doc[key].length === 0) ||
+				(!Array.isArray(doc[key]) && !doc[key])
+			) {
 				errors.push(`${key} must be a non-empty array`);
 			}
 		}
@@ -42,6 +45,20 @@ const Game = Monkito.model("Game", {
 
 		if (!doc.cover_image) {
 			errors.push("cover_image file is required");
+		}
+
+		let duplicated = await Game.findOne({ title: doc.title });
+		
+		if (duplicated && !duplicated._id.equals(doc._id)) {
+			errors.push("title must be unique");
+		}
+
+		if (doc.title[0] !== doc.title[0].toUpperCase()) {
+			errors.push("title must start with uppercase");
+		}
+
+		if (1 > doc.description.length || 400 < doc.description.length) {
+			errors.push("description must be between 1 and 400 chars");
 		}
 
 		if (errors.length) return { valid: false, errors };
