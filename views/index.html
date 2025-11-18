@@ -319,11 +319,14 @@
 									>Back</a
 								>
 							</li>
-							<!-- Current page display -->
-							<li class="page-item mx-2 disabled">
-							<span class="btn btn-warning">
-								Page {{page}}
-							</span>
+							<!--Total Pages display-->
+							{{#pages}}
+							<li class="page-item {{#isCurrentPage}} active {{/isCurrentPage}}">
+								<a class="page-link" href="/?{{base}}&page={{num}}"
+									>{{num}}</a
+								>
+							</li>
+							{{/pages}}
 							<!--Next button-->
 							<li
 								class="page-item {{#isLastPage}} disabled {{/isLastPage}}"
