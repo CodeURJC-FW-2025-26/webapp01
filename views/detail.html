@@ -87,7 +87,7 @@
 							<div
 								class="d-flex justify-content-center gap-3 my-4 flex-wrap"
 							>
-							<form action = "/edit-game-form" method="post">
+							<form class="nostyle" action = "/edit-game-form" method="post">
 								<input type ="hidden" value="{{id}}" name="id">
 								<button
 									type="submit"
@@ -97,7 +97,7 @@
 									Edit
 								</button>
 							</form>
-								<form action="/delete-game" method="post">
+								<form class="nostyle" action="/delete-game" method="post">
 								<input type ="hidden" value="{{id}}" name="id">
 								<button
 									type="submit"
@@ -132,9 +132,9 @@
 						>
 							<strong>Rating:</strong> {{rating}}
 						</div>
-						<div>
+						<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
 							<a href="/detail/{{id}}/reviews/{{_id}}/edit" class="btn btn-primary">Edit</a>
-							<form method="post" action ="/detail/{{id}}/reviews/{{_id}}/delete">
+							<form class="nostyle" method="post" action ="/detail/{{id}}/reviews/{{_id}}/delete">
 							<button
 								type="submit"
 								class="btn btn-danger"
