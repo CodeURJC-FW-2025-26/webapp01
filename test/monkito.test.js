@@ -39,17 +39,12 @@ describe("Monkito ORM", () => {
 				deletedAt: { type: "date" },
 			},
 			timestamps: true,
-			softDelete: true,
 			validate: (doc) => {
 				if (doc.age && doc.age < 0)
 					return { valid: false, errors: ["age must be positive"] };
 				return { valid: true };
 			},
 		});
-
-		Monkito.withTransaction = async (fn) => {
-			return fn();
-		};
 	});
 
 	it("should connect and return a db instance", async () => {
@@ -93,13 +88,6 @@ describe("Monkito ORM", () => {
 		expect(updated.name).toBe("Dany");
 	});
 
-	it("should soft delete documents", async () => {
-		const user = await User.create({ name: "Eve" }, { softDelete: true });
-		await User.deleteMany({ _id: user._id });
-		const found = await User.findOne({ _id: user._id });
-		expect(found).toBeNull();
-	});
-
 	it("should paginate correctly", async () => {
 		for (let i = 0; i < 25; i++) {
 			await User.create({ name: "User" + i });
@@ -110,23 +98,6 @@ describe("Monkito ORM", () => {
 		expect(page1.totalPages).toBe(3);
 	});
 
-	it("should aggregate", async () => {
-		await User.insertMany([
-			{ name: "A", age: 20 },
-			{ name: "B", age: 30 },
-		]);
-		const result = await User.aggregate([
-			{ $group: { _id: null, avgAge: { $avg: "$age" } } },
-		]);
-		expect(result[0].avgAge).toBe(25);
-	});
-
-	it("should count documents", async () => {
-		await User.insertMany([{ name: "X" }, { name: "Y" }]);
-		const count = await User.count();
-		expect(count).toBe(2);
-	});
-
 	it("should run hooks", async () => {
 		const preCreate = vi.fn();
 		const postCreate = vi.fn();
@@ -135,24 +106,6 @@ describe("Monkito ORM", () => {
 		await User.create({ name: "Hooked" });
 		expect(preCreate).toHaveBeenCalled();
 		expect(postCreate).toHaveBeenCalled();
-	});
-
-	it("should support populate", async () => {
-		const Post = Monkito.model("Post", {});
-		const user = await User.create({ name: "Frank" });
-		const post = await Post.create({ title: "Hello", author: user._id });
-
-		const populated = await Post.populate(post, "author", { model: User });
-		expect(populated.author.name).toBe("Frank");
-	});
-
-	it("should support transactions", async () => {
-		await Monkito.withTransaction(async (session) => {
-			const col = db.collection("txn");
-			await col.insertOne({ a: 1 }, { session });
-			const count = await col.countDocuments({}, { session });
-			expect(count).toBe(1);
-		});
 	});
 
 	it("should apply validation function", async () => {

@@ -2,15 +2,15 @@ import * as service from "../service.js";
 import { toObjectId } from "../lib/monkito.js";
 
 export const formatDateDDMMYYYY = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    if (isNaN(date)) return "";
+	if (!dateString) return "";
+	const date = new Date(dateString);
+	if (isNaN(date)) return "";
 
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
+	const day = String(date.getDate()).padStart(2, "0");
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const year = date.getFullYear();
 
-    return `${day}/${month}/${year}`;
+	return `${day}/${month}/${year}`;
 };
 
 export const getGameDetail = async (req, res) => {
@@ -19,9 +19,6 @@ export const getGameDetail = async (req, res) => {
 	game = {
 		...game,
 		release_date: formatDateDDMMYYYY(game.release_date),
-		average_rating:
-            game.reviews.reduce((acc, e) => e.rating + acc, 0) /
-            game.reviews.length,
 		id: id,
 	};
 	if (!game) return res.redirect(`/error?type=${"404 error to get games"}&back=/detail/${id}`); 
@@ -90,6 +87,8 @@ export const deleteReview = async (req, res) => {
 
 	} catch (err) {
 		console.error(err);
-		res.redirect(`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${id}`);
+		res.redirect(
+			`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${gameId}`
+		);
 	}
 };

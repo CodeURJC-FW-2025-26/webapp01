@@ -47,23 +47,6 @@ class Monkito {
 		Monkito._db = null;
 		Monkito.models.clear();
 	}
-
-	static async withTransaction(f, options = {}) {
-		const client = Monkito.client();
-		const session = client.startSession();
-
-		try {
-			let result;
-			await session.withTransaction(async () => {
-				result = await f(session);
-			}, options);
-			await session.endSession();
-			return result;
-		} catch (err) {
-			await session.endSession();
-			throw err;
-		}
-	}
 }
 
 function isObject(x) {
@@ -84,8 +67,6 @@ class QueryBuilder {
 		this._collection = collection;
 		this._filter = {};
 		this._opts = {};
-		this._pipeline = null;
-		this._populate = [];
 	}
 
 	where(filter) {
@@ -112,47 +93,6 @@ class QueryBuilder {
 		this._opts.projection = p;
 		return this;
 	}
-
-	hint(h) {
-		this._opts.hint = h;
-		return this;
-	}
-
-	aggregate(pipeline) {
-		this._pipeline = pipeline;
-		return this;
-	}
-
-	populate(field, options = {}) {
-		this._populate.push({ field, options });
-		return this;
-	}
-
-	async toArray() {
-		if (this._pipeline) {
-			return this._collection
-				.aggregate(this._pipeline, this._opts)
-				.toArray();
-		}
-		const docs = await this._collection
-			.find(this._filter, this._opts)
-			.toArray();
-		return docs;
-	}
-
-	async first() {
-		if (this._pipeline) {
-			const arr = await this._collection
-				.aggregate(this._pipeline, this._opts)
-				.limit(1)
-				.toArray();
-			return arr[0] || null;
-		}
-	}
-
-	async count() {
-		return this._collection.countDocuments(this._filter, this._opts);
-	}
 }
 
 class Model {
@@ -161,8 +101,6 @@ class Model {
 		this.collectionName = options.collection || name.toLowerCase() + "s";
 		this.schema = options.schema || null;
 		this.timestamps = options.timestamps ?? true;
-		this.softDelete = options.softDelete ?? false;
-		this.versionKey = options.versionKey ?? "__v";
 		this.validateFn = options.validate || null;
 		this.hooks = {
 			pre: { create: [], update: [], delete: [], find: [] },
@@ -244,43 +182,32 @@ class Model {
 		return { valid: true };
 	}
 
+	async _validateUpdate(filter, update) {
+		const existing = await this.collection().findOne(filter);
+		if (!existing) throw new Error("Document not found for update");
+
+		const docToValidate = { ...existing, ...(update.$set || {}) };
+
+		const v = await this._validate(docToValidate);
+		if (!v.valid) throw new ValidationError(v.errors);
+
+		return docToValidate;
+	}
+
 	async create(doc, opts = {}) {
 		await this._runHooks("pre", "create", doc);
 		const d = this._prepareDocument(doc, { isNew: true });
 		const v = await this._validate(d);
-		if (!v.valid)
-			throw new Error("Validation failed: " + JSON.stringify(v.errors));
+		if (!v.valid) throw new ValidationError(v.errors);
 
-		if (this.versionKey) d[this.versionKey] = 0;
 		const res = await this.collection().insertOne(d, opts);
 		const out = { _id: res.insertedId, ...d };
 		await this._runHooks("post", "create", out);
 		return out;
 	}
 
-	async insertMany(docs, opts = {}) {
-		const prepared = docs.map((d) =>
-			this._prepareDocument(d, { isNew: true })
-		);
-
-		for (const p of prepared) {
-			const v = await this._validate(p);
-			if (!v.valid)
-				throw new Error(
-					"Validation failed: " + JSON.stringify(v.errors)
-				);
-			if (this.versionKey) p[this.versionKey] = 0;
-			const res = await this.collection().insertMany(prepared, opts);
-			return {
-				insertedCount: res.insertedCount,
-				insertedIds: res.insertedIds,
-			};
-		}
-	}
-
 	find(filter = {}, opts = {}) {
 		const qb = new QueryBuilder(this.collection());
-		if (this.softDelete) filter = { ...filter, deleted: { $ne: true } };
 		qb.where(filter);
 		if (opts.projection) qb.project(opts.projection);
 		if (opts.sort) qb.sort(opts.sort);
@@ -290,7 +217,6 @@ class Model {
 	}
 
 	async findOne(filter = {}, opts = {}) {
-		if (this.softDelete) filter = { ...filter, deleted: { $ne: true } };
 		await this._runHooks("pre", "find", filter);
 		const doc = await this.collection().findOne(filter, opts);
 		await this._runHooks("post", "find", doc);
@@ -330,6 +256,11 @@ class Model {
 		for (const k of Object.keys(apply)) {
 			if (Object.keys(apply[k]).length) finalUpdate[k] = apply[k];
 		}
+
+		if (this.schema || this.validateFn) {
+			await this._validateUpdate(filter, finalUpdate);
+		}
+
 		const res = await this.collection().findOneAndUpdate(
 			filter,
 			finalUpdate,
@@ -369,14 +300,6 @@ class Model {
 	}
 
 	async deleteMany(filter, opts = {}) {
-		if (this.softDelete) {
-			const res = await this.collection().updateMany(
-				filter,
-				{ $set: { deleted: true, deletedAt: new Date() } },
-				opts
-			);
-			return res;
-		}
 		return this.collection().deleteMany(filter, opts);
 	}
 
@@ -385,21 +308,10 @@ class Model {
 		return this.collection().deleteOne({ _id }, opts);
 	}
 
-	async aggregate(pipeline = [], opts = {}) {
-		return this.collection().aggregate(pipeline, opts).toArray();
-	}
-
-	async count(filter = {}) {
-		if (this.softDelete) filter = { ...filter, deleted: { $ne: true } };
-		return this.collection().countDocuments(filter);
-	}
-
 	async paginate(
 		filter = {},
 		{ page = 1, pageSize = 20, sort = null, projection = null } = {}
 	) {
-		if (this.softDelete) filter = { ...filter, deleted: { $ne: true } };
-
 		page = Math.max(1, parseInt(page));
 		pageSize = Math.max(1, parseInt(pageSize));
 
@@ -425,45 +337,18 @@ class Model {
 		return this.collection().createIndexes(indexes);
 	}
 
-	async populate(docs, field, options = {}) {
-		if (!docs) return docs;
-
-		const many = Array.isArray(docs);
-		const arr = many ? docs : [docs];
-		const ids = new Set();
-
-		for (const d of arr) {
-			const val = d[field];
-			if (Array.isArray(val)) val.forEach((v) => ids.add(String(v)));
-			else if (val) ids.add(String(val));
-		}
-
-		if (!ids.size) return docs;
-		const idsArr = Array.from(ids).map((x) => toObjectId(x));
-
-		const foreign = options.model;
-		if (!foreign) throw new Error("populate requires options.model");
-
-		const found = await foreign
-			.collection()
-			.find({ _id: { $in: idsArr } })
-			.toArray();
-
-		const map = new Map(found.map((f) => [String(f._id), f]));
-
-		for (const d of arr) {
-			const val = d[field];
-			if (Array.isArray(val))
-				d[field] = val.map((v) => map.get(String(v)) || null);
-			else if (val) d[field] = map.get(String(val)) || null;
-		}
-
-		return many ? arr : arr[0];
-	}
-
 	query() {
 		return this.find();
 	}
 }
+
+class ValidationError extends Error {
+	constructor(errors) {
+		super("Validation failed");
+		this.name = "ValidationError";
+		this.errors = errors;
+	}
+}
+
 
 export { Monkito, Model };

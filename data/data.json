@@ -11,13 +11,13 @@
 		"reviews": [
 			{
 				"author": "GameSpot",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Damn near perfect. Builds on BOTW in every way possible.",
 				"created_at": 1684195200
 			},
 			{
 				"author": "IGN",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Creative freedom off the charts. Pure magic.",
 				"created_at": 1684281600
 			}
@@ -35,13 +35,13 @@
 		"reviews": [
 			{
 				"author": "Eurogamer",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Brutal, beautiful, and massive. You'll love the pain.",
 				"created_at": 1645747200
 			},
 			{
 				"author": "Reddit User",
-				"rating": 9,
+				"rating": 90,
 				"comment": "I threw my controller and still had the time of my life.",
 				"created_at": 1645833600
 			}
@@ -59,13 +59,13 @@
 		"reviews": [
 			{
 				"author": "PC Gamer",
-				"rating": 8,
+				"rating": 80,
 				"comment": "Took a while, but now it's the game we were promised.",
 				"created_at": 1704067200
 			},
 			{
 				"author": "Steam User",
-				"rating": 9,
+				"rating": 90,
 				"comment": "Started buggy, ended badass. V rules.",
 				"created_at": 1704153600
 			}
@@ -83,13 +83,13 @@
 		"reviews": [
 			{
 				"author": "IGN",
-				"rating": 10,
+				"rating": 100,
 				"comment": "A masterpiece of storytelling and player freedom.",
 				"created_at": 1691452800
 			},
 			{
 				"author": "User_Valen",
-				"rating": 9,
+				"rating": 90,
 				"comment": "Too many dice, but still god-tier RPG.",
 				"created_at": 1691539200
 			}
@@ -99,7 +99,7 @@
 		"title": "Minecraft",
 		"description": "Build, mine, survive. Infinite worlds, infinite creativity, and creepers that ruin your day.",
 		"genres": ["Sandbox", "Survival", "Adventure"],
-		"platforms": ["PC", "PlayStation", "Xbox", "Switch", "Mobile"],
+		"platforms": ["PC", "PlayStation 4", "Xbox", "Nintendo Switch", "Mobile"],
 		"release_date": "2011-11-18",
 		"developer": "Mojang Studios",
 		"cover_image": "/7cd58073a2d38b997d76f4deff3d1b5c",
@@ -107,13 +107,13 @@
 		"reviews": [
 			{
 				"author": "PC Gamer",
-				"rating": 9,
+				"rating": 90,
 				"comment": "Endless creativity. Still unbeatable.",
 				"created_at": 1609459200
 			},
 			{
 				"author": "IGN",
-				"rating": 10,
+				"rating": 100,
 				"comment": "A timeless sandbox for all ages.",
 				"created_at": 1609545600
 			}
@@ -131,13 +131,13 @@
 		"reviews": [
 			{
 				"author": "Game Informer",
-				"rating": 9,
+				"rating": 90,
 				"comment": "Still one of the best open-world sandboxes ever made.",
 				"created_at": 1383264000
 			},
 			{
 				"author": "PlayerOne",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Online chaos never gets old.",
 				"created_at": 1383350400
 			}
@@ -155,13 +155,13 @@
 		"reviews": [
 			{
 				"author": "IGN",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Epic in every sense. Storytelling and combat perfection.",
 				"created_at": 1667952000
 			},
 			{
 				"author": "Reddit User",
-				"rating": 9,
+				"rating": 90,
 				"comment": "I cried, I screamed, I threw axes. Loved it.",
 				"created_at": 1668038400
 			}
@@ -171,7 +171,7 @@
 		"title": "Hollow Knight",
 		"description": "Dark, atmospheric metroidvania with tough fights and a haunting world. Cute bugs, deadly vibes.",
 		"genres": ["Action", "Adventure", "Platformer"],
-		"platforms": ["PC", "Switch", "PlayStation", "Xbox"],
+		"platforms": ["PC", "Nintendo Switch", "PlayStation 4", "Xbox"],
 		"release_date": "2017-02-24",
 		"developer": "Team Cherry",
 		"cover_image": "/fd77acee4ee8fd2a8bcf1751c376848e",
@@ -179,13 +179,13 @@
 		"reviews": [
 			{
 				"author": "GameSpot",
-				"rating": 9,
+				"rating": 90,
 				"comment": "Challenging and beautiful. The definition of indie greatness.",
 				"created_at": 1497916800
 			},
 			{
 				"author": "Steam User",
-				"rating": 10,
+				"rating": 100,
 				"comment": "I got lost for 30 hours and loved every second.",
 				"created_at": 1498003200
 			}
@@ -203,13 +203,13 @@
 		"reviews": [
 			{
 				"author": "GameSpot",
-				"rating": 10,
+				"rating": 100,
 				"comment": "Unbelievable detail and storytelling. Peak Rockstar.",
 				"created_at": 1540684800
 			},
 			{
 				"author": "Player_X",
-				"rating": 9,
+				"rating": 90,
 				"comment": "So realistic it's scary. I brushed my horse more than myself.",
 				"created_at": 1540771200
 			}
@@ -227,13 +227,13 @@
 		"reviews": [
 			{
 				"author": "IGN",
-				"rating": 10,
+				"rating": 100,
 				"comment": "A joyful explosion of creativity. The best Mario since Galaxy.",
 				"created_at": 1509062400
 			},
 			{
 				"author": "Kotaku",
-				"rating": 9,
+				"rating": 90,
 				"comment": "It's impossible not to smile while playing.",
 				"created_at": 1509148800
 			}
