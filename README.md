@@ -122,7 +122,7 @@ I created the main page section, found and added the images, and fixed minor iss
 
 ### Daniel Bonachela Martínez
 
-I made the pagination, the reviews backend (except delete), the connections to use Monkito.js in service.js and the confirmation/error handlers and pages. 
+I made the pagination, the reviews backend (except delete), the connections to use Monkito.js in service.js and the confirmation/error handlers and html's. 
 
 **Main commits:**
 -
