@@ -137,9 +137,42 @@ export async function createHook(doc) {
 	doc.average_rating = averageRating(doc.reviews);
 }
 
-export async function updateHook({ update }) {
-	if (!update.reviews) return;
-	update = averageRating(update.reviews);
+export async function updateHook({ update, filter }) {
+	if (
+		!update.$set?.reviews &&
+		!Object.keys(update.$set || {}).some((k) =>
+			k.startsWith("reviews.$")
+		) &&
+		!update.$push?.reviews &&
+		!update.$pull?.reviews
+	)
+		return;
+
+	const game = await Game.findOne({ _id: filter._id });
+	let reviews = game?.reviews || [];
+
+	if (update.$push?.reviews) reviews.push(update.$push.reviews);
+	if (update.$pull?.reviews) {
+		const pull = update.$pull.reviews;
+		reviews = reviews.filter(
+			(r) => !Object.keys(pull).every((k) => r[k].equals(pull[k]))
+		);
+	}
+
+	for (const key of Object.keys(update.$set || {})) {
+		if (key.startsWith("reviews.$")) {
+			const field = key.replace("reviews.$.", "");
+			const reviewId = filter["reviews._id"];
+			reviews = reviews.map((r) =>
+				r._id.equals(reviewId) ? { ...r, [field]: update.$set[key] } : r
+			);
+		}
+	}
+
+	update.$set = {
+		...(update.$set || {}),
+		average_rating: averageRating(reviews),
+	};
 }
 
 export function averageRating(reviews) {

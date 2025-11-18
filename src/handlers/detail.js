@@ -87,6 +87,8 @@ export const deleteReview = async (req, res) => {
 
 	} catch (err) {
 		console.error(err);
-		res.redirect(`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${id}`);
+		res.redirect(
+			`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${gameId}`
+		);
 	}
 };
