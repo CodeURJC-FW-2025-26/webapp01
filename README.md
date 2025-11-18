@@ -115,7 +115,51 @@ I created the main page section, found and added the images, and fixed minor iss
 -   `src/pages/detail.html`
 
 # Práctica 2
-## Instructions 
+## Getting Started
+Clone the repo:
+```bash
+git clone https://github.com/CodeURJC-FW-2025-26/webapp01
+``` 
+
+Start MongoDB:
+```bash
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod # should show active (running)
+```
+
+This webapp was developed with `npm v11.6.2`, `node v24.11.1` and `mongod v8.2.1`.
+
+Here's the detailed config.
+```bash
+$ npm --version
+11.6.2
+$ node --version
+v24.11.1
+$ mongod --version
+db version v8.2.1
+Build Info: {
+    "version": "8.2.1",
+    "gitVersion": "3312bdcf28aa65f5930005e21c2cb130f648b8c3",
+    "openSSLVersion": "OpenSSL 3.0.13 30 Jan 2024",
+    "modules": [],
+    "allocator": "tcmalloc-google",
+    "environment": {
+        "distmod": "ubuntu2404",
+        "distarch": "x86_64",
+        "target_arch": "x86_64"
+    }
+}
+```
+
+Install dependencies and start the server:
+```bash
+npm install
+npm start
+```
+
+Access the app at: `http://localhost:3000`
+
 ## Files description
 ## Video 
 ## Member Participation
