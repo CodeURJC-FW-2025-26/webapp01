@@ -131,4 +131,11 @@ I made the pagination, the reviews backend (except delete), the connections to u
 - `src\app.js`
 - `src\router.js`
 - `src\handlers\games.js`
-- `src\handlers\error.js` 
+- `src\handlers\error.js`
+- `src\handlers\detail.js`
+- `src\handlers\confirm.js`
+- `views\confirm.html`
+- `views\detail.html`
+- `views\edit-review.html`
+- `views\error.html`
+- `views\index.html`
