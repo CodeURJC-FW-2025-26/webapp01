@@ -6,14 +6,14 @@
     <div>
         <label for="inputTitle" class="form-label">Title</label>
         <input type="text" class="form-control" id="inputTitle" placeholder="e.g. Hollow Knight: Silksong" name="title"
-            value="{{game.title}}" required>
+            value="{{game.title}}" pattern="[A-ZÁÉÍÓÚ][a-záéíóúA-ZÁÉÍÓÚ\s]*" required>
         <div class="invalid-feedback">Please enter a title.</div>
     </div>
 
     <div>
         <label for="inputDescription" class="form-label">Description</label>
         <textarea class="form-control" id="inputDescription" placeholder="Briefly describe the videogame..." rows="4"
-            name="description">{{game.description}}</textarea>
+            name="description" minlength="1" maxlength="400" >{{game.description}}</textarea>
         <div class="invalid-feedback">Please add a description.</div>
     </div>
 
