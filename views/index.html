@@ -319,6 +319,14 @@
 									>Back</a
 								>
 							</li>
+							<!--Total Pages display-->
+							{{#pages}}
+							<li class="page-item {{#isCurrentPage}} active {{/isCurrentPage}}">
+								<a class="page-link" href="/?{{base}}&page={{num}}"
+									>{{num}}</a
+								>
+							</li>
+							{{/pages}}
 							<!--Next button-->
 							<li
 								class="page-item {{#isLastPage}} disabled {{/isLastPage}}"

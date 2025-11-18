@@ -70,8 +70,7 @@ function isObject(x) {
 	return x && typeof x === "object" && !Array.isArray(x);
 }
 
-function toObjectId(id) {
-	if (!id) return null;
+export function toObjectId(id=new ObjectId()) {
 	if (id instanceof ObjectId) return id;
 	try {
 		return new ObjectId(id);
@@ -314,13 +313,15 @@ class Model {
 		if (update.$inc) Object.assign(apply.$inc, update.$inc);
 		if (update.$unset) apply.$unset = update.$unset;
 		if (update.$push) apply.$push = update.$push;
+		if (update.$pull) apply.$pull = update.$pull;
 
 		if (
 			isObject(update) &&
 			!update.$set &&
 			!update.$inc &&
 			!update.$unset &&
-			!update.$push
+			!update.$push &&
+			!update.$pull
 		) {
 			Object.assign(apply.$set, update);
 		}

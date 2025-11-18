@@ -226,3 +226,50 @@ footer i:hover {
 ::-webkit-scrollbar-thumb:hover {
 	background: color-mix(in srgb, var(--color-primary) 80%, black 20%);
 }
+/* --------------------------- PAGINATION ---------------------------- */
+.pagination {
+	display: flex;
+	gap: 0.5rem;
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0;
+	justify-content: center;
+}
+
+.pagination .page-item {
+	display: inline-block;
+}
+
+.pagination .page-link {
+	display: inline-block;
+	padding: 0.5rem 0.9rem;
+	border-radius: var(--radius);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.5);
+	color: var(--color-dark);
+	text-decoration: none;
+	font-weight: 500;
+	transition: all var(--transition);
+	backdrop-filter: blur(var(--glass-blur));
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.pagination .page-item:not(.disabled) .page-link:hover {
+	background-color: var(--color-accent);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pagination .page-item.active .page-link {
+	background-color: var(--color-primary);
+	color: #fff;
+	border-color: var(--color-primary);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	transform: translateY(-1px);
+}
+
+.pagination .page-item.disabled .page-link {
+	opacity: 0.5;
+	pointer-events: none;
+	background: rgba(255, 255, 255, 0.3);
+}

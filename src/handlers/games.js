@@ -60,6 +60,11 @@ export const handler = async (req, res) => {
 	const generateCheckedMap = (all, query = []) =>
 		all.map((e) => new Object({ label: e, selected: query.includes(e) }));
 
+	const pages = Array.from({ length: totalPages }).map((_, i) => ({
+  		num: i + 1,
+  		isCurrentPage: page === i + 1
+	}));
+
 	res.render("index", {
 		games, 
 		page,
@@ -74,6 +79,7 @@ export const handler = async (req, res) => {
 		toYear,
 		fromRating,
 		toRating,
-		base: baseQuery
+		base: baseQuery,
+		pages
 	});
 };
