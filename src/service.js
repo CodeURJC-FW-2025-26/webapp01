@@ -12,9 +12,18 @@ const Game = Monkito.model("Game", {
 		developer: { type: "string", required: true },                  
 		cover_image: { type: "string", required: true },              
 		pegi_rating: { type: "string", required: true },              
-		reviews: { type: "array", required: true },                    
-  	}
+		reviews: { type: "array", required: true },      
+		average_rating: { type: "number" }
+  	},
+	options: {
+		vallidate: () => {
+			return { valid: true };
+		}
+	}
 });
+
+Game.pre("create", createHook);
+Game.pre("update", updateHook);
 
 export async function addGame(game) {
 	return await Game.create(game);
@@ -95,4 +104,18 @@ export async function updateOneGame(filter, update, opts={}){
 
 export async function getGame(id) {
 	return await Game.findById(id);
+}
+
+export async function createHook(doc) {
+	doc.average_rating = averageRating(doc.reviews);
+}
+
+export async function updateHook({ update }) {
+	if (!update.reviews) return;
+	update = averageRating(update.reviews);
+}
+
+export function averageRating(reviews) {
+	if (reviews.length === 0) return 0;
+	return reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
 }

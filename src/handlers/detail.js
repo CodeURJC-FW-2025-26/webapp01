@@ -19,9 +19,6 @@ export const getGameDetail = async (req, res) => {
 	game = {
 		...game,
 		release_date: formatDateDDMMYYYY(game.release_date),
-		average_rating:
-            game.reviews.reduce((acc, e) => e.rating + acc, 0) /
-            game.reviews.length,
 		id: id,
 	};
 	if (!game) return res.redirect(`/error?type=${"404 error to get games"}&back=/detail/${id}`); 
