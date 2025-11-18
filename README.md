@@ -113,3 +113,22 @@ I created the main page section, found and added the images, and fixed minor iss
 -   `src/pages/form.html`
 -   `src/pages/index.html`
 -   `src/pages/detail.html`
+
+# Práctica 2
+## Instructions 
+## Files description
+## Video 
+## Member Participation
+
+### Daniel Bonachela Martínez
+
+I made the pagination, the reviews backend (except delete), the connections to use Monkito.js in service.js and the confirmation/error handlers and pages. 
+
+**Main commits:**
+-
+
+**Modified files:**
+- `src\app.js`
+- `src\router.js`
+- `src\handlers\games.js`
+- `src\handlers\error.js` 
