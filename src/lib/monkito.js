@@ -187,7 +187,7 @@ class Model {
 		const d = this._prepareDocument(doc, { isNew: true });
 		const v = await this._validate(d);
 		if (!v.valid)
-			throw new Error("Validation failed: " + JSON.stringify(v.errors));
+			throw new ValidationError(v.errors);
 
 		const res = await this.collection().insertOne(d, opts);
 		const out = { _id: res.insertedId, ...d };
@@ -325,5 +325,14 @@ class Model {
 		return this.find();
 	}
 }
+
+class ValidationError extends Error {
+	constructor(errors) {
+		super("Validation failed");
+		this.name = "ValidationError";
+		this.errors = errors;
+	}
+}
+
 
 export { Monkito, Model };

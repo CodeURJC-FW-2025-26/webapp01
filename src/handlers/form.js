@@ -4,46 +4,29 @@ import { addGame, editGame, getGame } from "../service.js";
 
 export const insertGame = async (req, res) => {
 	let game = {
-		title: req.body.title,
-		description: req.body.description,
-		genres: req.body.genres,
-		platforms: req.body.platforms,
-		release_date: req.body.release_date,
-		developer: req.body.developer,
-		pegi_rating: req.body.pegi_rating
+		title: req.body?.title ?? null,
+		description: req.body?.description ?? null,
+		genres: req.body?.genres ?? [],
+		platforms: req.body?.platforms ?? [],
+		release_date: req.body?.release_date
+			? new Date(req.body.release_date)
+			: null,
+		developer: req.body?.developer ?? null,
+		cover_image: req.file ? `/${req.file.filename}` : null,
+		pegi_rating: req.body?.pegi_rating ?? null,
+		reviews: [],
 	};
-
-	// FIXME(Sa4dUs): use Monkito's error handling instead
-	const msg = "Error adding games";
-	for (let key in game) {
-		if (typeof game[key] === "string") {
-			game[key] = game[key].trim();
-		}
-
-		if (!game[key] || (Array.isArray(game[key]) && game[key].length === 0)) {
-			return res.redirect(`/error?type=${msg}&back=/form`);
-		}
-	}
-
-	if (!req.file) {
-		return res.redirect(`/error?type=${msg}&back=/form`);
-	}
-
-	const releaseDateObj = new Date(req.body.release_date);
-	if (isNaN(releaseDateObj)) {
-		return res.redirect(`/error?type=${msg}&back=/form`);
-	}
-
-	game.release_date = releaseDateObj;
-	game.reviews = [];
-	game.cover_image = `/${req.file.filename}`;
 
 	try {
 		const gameObject = await addGame(game);
 		const msg = "The game has been succesfully created";
 		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
-	} catch {
-		return res.redirect(`/error?type=${msg}&back=/form`);
+	} catch(error) {
+		if (error.errors) {
+			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
+			return res.redirect(`/error?type=${queryErrors}&back=/new-game-form`);
+		}
+		return res.redirect("/error?type=Unknown error&back=/new-game-form");
 	}
 };
 

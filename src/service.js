@@ -7,7 +7,6 @@ const Game = Monkito.model("Game", {
 		description: { type: "string", required: true },              
 		genres: { type: "array", required: true },                     
 		platforms: { type: "array", required: true },
-		//Handled in Monkito
 		release_date: { type: "date", required: true },
 		developer: { type: "string", required: true },                  
 		cover_image: { type: "string", required: true },              
@@ -15,11 +14,39 @@ const Game = Monkito.model("Game", {
 		reviews: { type: "array", required: true },      
 		average_rating: { type: "number" }
   	},
-	options: {
-		vallidate: () => {
-			return { valid: true };
+	validate: async (doc) => {
+		const errors = [];
+
+		for (const [key, value] of Object.entries(doc)) {
+			if (typeof value === "string") {
+				doc[key] = value.trim();
+			}
 		}
-	}
+
+		for (const key of ["title", "description", "developer"]) {
+			if (!doc[key]) errors.push(`${key} cannot be empty`);
+		}
+
+		for (const key of ["genres", "platforms"]) {
+			if (!Array.isArray(doc[key]) || doc[key].length === 0) {
+				errors.push(`${key} must be a non-empty array`);
+			}
+		}
+
+		if (
+			!(doc.release_date instanceof Date) ||
+			isNaN(doc.release_date.getTime())
+		) {
+			errors.push("release_date must be a valid date");
+		}
+
+		if (!doc.cover_image) {
+			errors.push("cover_image file is required");
+		}
+
+		if (errors.length) return { valid: false, errors };
+		return { valid: true };
+	},
 });
 
 Game.pre("create", createHook);
