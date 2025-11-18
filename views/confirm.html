@@ -17,11 +17,16 @@
 		{{msg}}
 	</div>
 	{{#id}}
-	<a href="detail/{{id}}">Go to detail page</a>
+	<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+	<a href="detail/{{id}}" class="btn btn-secondary" role="button">Go to detail page</a>
+	</div>
+
 	{{/id}}
 
 	{{^id}}
-	<a href="/">Go Home</a>
+	<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap"></div>
+	<a href="/" class="btn btn-secondary" role="button">Go Home</a>
+	</div>
 	{{/id}}
 
 	{{>footer}}
