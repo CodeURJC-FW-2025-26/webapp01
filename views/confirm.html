@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="container flex-column min-vh-100">
 	{{>header}}
 	<div class="text-center p-4">
-		{{msg}}
+		<h1 class="text-center mb-4">{{msg}}</h1>
 	</div>
 	{{#id}}
 	<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
@@ -24,7 +24,7 @@
 	{{/id}}
 
 	{{^id}}
-	<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap"></div>
+	<div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
 	<a href="/" class="btn btn-secondary" role="button">Go Home</a>
 	</div>
 	{{/id}}
