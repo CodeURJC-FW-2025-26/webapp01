@@ -14,7 +14,7 @@ export const insertGame = async (req, res) => {
 	};
 
 	// FIXME(Sa4dUs): use Monkito's error handling instead
-	const msg = "error adding games";
+	const msg = "Error adding games";
 	for (let key in game) {
 		if (typeof game[key] === "string") {
 			game[key] = game[key].trim();

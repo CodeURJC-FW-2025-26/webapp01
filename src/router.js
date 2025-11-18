@@ -38,7 +38,7 @@ router.post("/detail/:id/reviews", gameDetailHandler.addReviewHandler);
 
 router.get("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.getEditReviewForm);
 
-router.post("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.postEditReview);
+router.post("/detail/:gameId/reviews/:reviewId/edit", gameDetailHandler.editReview);
 
 router.post("/detail/:gameId/reviews/:reviewId/delete", gameDetailHandler.deleteReview);
 

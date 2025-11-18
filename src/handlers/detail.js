@@ -1,5 +1,5 @@
 import * as service from "../service.js";
-import { ObjectId } from "mongodb";
+import { toObjectId } from "../lib/monkito.js";
 
 export const getGameDetail = async (req, res) => {
 	const id = req.params.id ?? 0;
@@ -11,8 +11,7 @@ export const getGameDetail = async (req, res) => {
             game.reviews.length,
 		id: id,
 	};
-
-	if (!game) return res.redirect(`/error?type=Error404&back=/detail/${id}`); 
+	if (!game) return res.redirect(`/error?type=${"404 error to get games"}&back=/detail/${id}`); 
 	res.render("detail", game);
 };
 
@@ -23,7 +22,7 @@ export const deleteDetailGame= async(req,res) =>{
 		return res.redirect(`/confirm?msg=${msg}`);
 	}
 	catch {
-		return res.redirect(`/error?type=CantDelete&back=/detail/${id}`);
+		return res.redirect(`/error?type=${"Can't delete the game"}&back=/detail/${id}`);
 	}
 };
 /*--REVIEWS--*/
@@ -32,7 +31,7 @@ export const addReviewHandler = async (req,res) => {
 		const gameId = req.params.id;
 		const { author, comment, rating } = req.body;
 		const review = {
-			_id: new ObjectId(),
+			_id: toObjectId(),
 			author,
 			comment,
 			rating: Number(rating),
@@ -43,20 +42,20 @@ export const addReviewHandler = async (req,res) => {
 		res.redirect(`/confirm?msg=${"Review added successfully"}&id=${gameId}`);
 	} catch (err) {
 		console.error(err);
-		res.redirect(`/error?type=500:ErrorUpdatingReviews&back=/detail/${id}`);
+		res.redirect(`/error?type=${"500: Internal Error, Error Updating Reviews"}&back=/detail/${id}`);
 	}
 };
 
 export const getEditReviewForm = async (req, res) => {
 	const { gameId, reviewId } = req.params;
 	const game = await service.getGame(gameId);
-	const review = game.reviews.find(r => String(r._id) === reviewId); //find the review id in the array of reviews
+	const review = game.reviews.find(r =>r._id.toString() === reviewId); //find the review id in the array of reviews
 
-	if (!review) return res.redirect(`/error?type=404:ReviewNotFound=/detail/${id}`); 
+	if (!review) return res.redirect(`/error?type=${"404:Review Not Found"}&back=/detail/${id}`); 
 	res.render("edit-review", { gameId, review });
 };
 
-export const postEditReview = async (req, res) => {
+export const editReview = async (req, res) => {
 	const { gameId, reviewId } = req.params;
 	const { author, comment, rating } = req.body;
 
@@ -66,7 +65,7 @@ export const postEditReview = async (req, res) => {
 
 	} catch (err) {
 		console.error(err);
-		res.redirect(`/error?type=500:ErrorPostingReviews&back=/detail/${id}`);
+		res.redirect(`/error?type=${"Internal Error: 500 Error Posting Reviews"}&back=/detail/${id}`);
 	}
 };
 
@@ -78,6 +77,6 @@ export const deleteReview = async (req, res) => {
 
 	} catch (err) {
 		console.error(err);
-		res.redirect(`/error?type=500:ErrorDeletingReviews&back=/detail/${id}`);
+		res.redirect(`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${id}`);
 	}
 };
