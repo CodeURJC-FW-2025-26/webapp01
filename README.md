@@ -117,6 +117,50 @@ I created the main page section, found and added the images, and fixed minor iss
 # Práctica 2
 ## Instructions 
 ## Files description
+### app.js
+Configures and starts the web server, connects to the DB, and loads initial data.
+### load_data.js
+Reads the example data, such as games, reviews... Also resets the uploads folder and copies the initial images. 
+### router.js
+Defines and handles all web routes.
+### service.js
+Wrappers that handle the interactions with Monkito, so that no other part of the app can access the database (directly).
+### monkito.js
+Consists of generic classes for structured and safe MongoDB access with models, queries, and CRUD operations.
+### monkito.test.js
+Tests that ensure that monkito works correctly.
+### confirm.js
+Confirmation message.
+### detail.js
+The detail page manages the display of game's information and the reviews, allowing to interact with all of it.
+### error.js
+Error message.
+### form.js
+Checks that the form contains all required fields and handles creating and editing games.
+### games.js
+Returns the filtered games and sets up pagination and filter states for index.html.
+### styles.css
+The different styles the web uses
+### confirm.html
+A page that allows to return to /detail or / (depending of the id)
+### detail.html
+The page that display the detail page issues, from the game's description to the reviews it has
+### edit-game-form.html
+Has a button to edit videogames in detail page
+### edit-review.html
+The html that is shown when the user wants to edit a review
+### error.html
+A page that shows what kind of error has occured
+### footer.html
+A html with the footer links, it is used by the rest of .html
+### form.html
+The page that allows to introduce a new game to the web
+### header.html
+A html with the header, that has the logotype, it is used by the rest of .html
+### index.html
+The main page html, it shows the search bars, filters, the games and the pagination 
+### new-game-form.html
+The html that links with the one that has the form to add new games
 ## Video 
 ## Member Participation
 
@@ -125,7 +169,7 @@ I created the main page section, found and added the images, and fixed minor iss
 I made the pagination, the reviews backend (except delete), the connections to use Monkito.js in service.js and the confirmation/error handlers and html's. 
 
 **Main commits:**
--
+- Waiting for merges
 
 **Modified files:**
 - `src\app.js`
