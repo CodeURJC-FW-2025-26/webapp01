@@ -49,7 +49,7 @@ export async function editGame(id, data, file = null) {
 	};
 
 	if (file) {
-		updateData.cover_image = `uploads/${file.filename}`;
+		updateData.cover_image = `/${file.filename}`;
 	}
 
 	return await Game.updateOne(

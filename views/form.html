@@ -76,13 +76,11 @@
         </div>
         {{/game.cover_image}}
 
-        {{^game.cover_image}}
         <label for="inputImage" class="form-label">Upload Cover Image</label>
         <input class="form-control" type="file" id="inputImage" name="cover_image" accept="image/*"
             value="{{game.cover_image}}" required>
         <div class="form-text">Accepted formats: JPG, PNG, WEBP, etc.</div>
         <div class="invalid-feedback">Please select a cover image.</div>
-        {{/game.cover_image}}
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
