@@ -216,7 +216,11 @@ https://youtu.be/J8Z8GILYRMQ
 I made the pagination, the reviews backend (except delete), the connections to use Monkito.js in service.js and the confirmation/error handlers and html's. 
 
 **Main commits:**
-- Waiting for merges
+- [Reviews](https://github.com/CodeURJC-FW-2025-26/webapp01/pull/27/commits/be3e044a1f684ebb1dab253e92fbc4c7372a4589)
+- [Update Reviews](https://github.com/CodeURJC-FW-2025-26/webapp01/pull/27/commits/5a8128ca267ce18d15638f2de2c69a9102ce1bff)
+- [Delete Review](https://github.com/CodeURJC-FW-2025-26/webapp01/pull/27/commits/be8ff8448e4e40bf81c0a052ab0565de7719f702)
+- [Pages](https://github.com/CodeURJC-FW-2025-26/webapp01/pull/27/commits/2af92515b5c176264177cbab8d1ea718c031ec78)
+- [Update Service](https://github.com/CodeURJC-FW-2025-26/webapp01/pull/27/commits/908338604f7b1bd0149e9917b210c929b8f19fa3)
 
 **Modified files:**
 - `src\app.js`
