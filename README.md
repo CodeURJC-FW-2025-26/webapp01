@@ -231,6 +231,23 @@ I made the pagination, the reviews backend (except delete), the connections to u
 - `views\error.html`
 - `views\index.html`
 
+### Marcelo Atanasio Domínguez Mateo
+
+I developed a simple MongoDB ORM, Monkito, to encapsulate all the logic and make api development easier, faster, and more reliable, having only once source of errors.
+Also, implemented search and filter features, moved validation logic to Monkito and contributed to several bug fixes.
+
+**Main commits:**
+- [Setup Monkito entrypoint](https://github.com/CodeURJC-FW-2025-26/webapp01/commits/a007350)
+- [Add basic model implementation](https://github.com/CodeURJC-FW-2025-26/webapp01/commits/323847c)
+- [Enforce schemas and improve data validation](https://github.com/CodeURJC-FW-2025-26/webapp01/commits/a4f0c0c)
+- [Add search feature to main page](https://github.com/CodeURJC-FW-2025-26/webapp01/commits/d2a81c4)
+- [Filter from lazy loaded unique field values](https://github.com/CodeURJC-FW-2025-26/webapp01/commits/57f3a61)
+
+**Modified files:**
+- `src/lib/monkito.js`
+- `src/service.js`
+- `src/handlers/games.js`
+
 ### Alejandro García Prada
 
 I have worked on the main entity form (for editing and creating games) and on deleting reviews and games. I have also been responsible for moving part of the HTML from Practice 1 to Mustache partials and fixing styles.
