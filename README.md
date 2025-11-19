@@ -230,3 +230,34 @@ I made the pagination, the reviews backend (except delete), the connections to u
 - `views\edit-review.html`
 - `views\error.html`
 - `views\index.html`
+
+### Alejandro García Prada
+
+I have worked on the main entity form (for editing and creating games) and on deleting reviews and games. I have also been responsible for moving part of the HTML from Practice 1 to Mustache partials and fixing styles.
+
+**Main commits:**
+
+- [Game Edition](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/930d84a32bdbf382f5242e50c6e99ebc087fbf0f)
+- [Generic Form](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/ff17775019f4381d80296502400792d29f84b913)
+- [Adding forms to db](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/6212fbb15751c5917669ac005203d419af4a37ba)
+- [First Version](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/4c2cd9c04c2eecfab216c49c58608a1bffa25708)
+- [added confirm for delete](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/af38e2f9f1f44b531dcf69d01f9cafd9663484bb)
+
+**Modified files:**
+
+- `src\public\css\style.css`
+- `src\router.js`
+- `src\service.js`
+- `src\handlers\form.js`
+- `src\handlers\error.js`
+- `src\handlers\detail.js`
+- `src\handlers\confirm.js`
+- `views\confirm.html`
+- `views\detail.html`
+- `views\edit-review.html`
+- `views\error.html`
+- `views\form.html`
+- `views\new-game-form.html`
+- `views\edit-game-form.html`
+- `views\header.html`
+- `views\footer.html`
