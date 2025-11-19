@@ -205,7 +205,10 @@ A html with the header, that has the logotype, it is used by the rest of .html
 The main page html, it shows the search bars, filters, the games and the pagination 
 ### new-game-form.html
 The html that links with the one that has the form to add new games
-## Video 
+## Video
+
+https://youtu.be/J8Z8GILYRMQ
+
 ## Member Participation
 
 ### Daniel Bonachela Martínez
