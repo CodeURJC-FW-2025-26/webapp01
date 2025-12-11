@@ -2,15 +2,11 @@ import * as service from "../service.js";
 import { PAGE_SIZE } from "../router.js";
 import { GENRES, PEGI, PLATFORMS } from "../load_data.js";
 
-export const handler = async (req, res) => {
-	const parsed = parseInt(req.query.page);
-	const page = Number.isNaN(parsed) ? 1 : Math.max(parseInt(req.query.page), 1);
-	
-	// Build filter
-	const search = req?.query?.search ?? "";
-	const { genres, platforms, pegi, fromYear, toYear, fromRating, toRating } = req.query;
+function buildFilter(query){
+	const search = query?.search ?? "";
+	const { genres, platforms, pegi, fromYear, toYear, fromRating, toRating } = query;
 
-	const filter = {
+	return {
 		title: { $regex: search, $options: "i" },
 		...(genres && { genres: { $in: Array.isArray(genres) ? genres : [genres] } }),
 		...(platforms && { platforms: { $in: Array.isArray(platforms) ? platforms : [platforms] } }),
@@ -41,14 +37,18 @@ export const handler = async (req, res) => {
 			: {})
 	};
 
-	// Pagination
+}
+
+export const handler = async (req, res) => {
+	const parsed = parseInt(req.query.page); //maybe refactor
+	const page = Number.isNaN(parsed) ? 1 : Math.max(parseInt(req.query.page), 1);
+	
+	// Build filter
+	const filter = buildFilter(req.query);
+	const { genres, platforms, pegi, fromYear, toYear, fromRating, toRating } = req.query; //here for res.render
+
+	//the first page
 	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, PAGE_SIZE, filter); 
-
-  	const prevPage = Math.max(page - 1, 1);
-  	const nextPage = Math.min(page + 1, totalPages);
-
-  	const isFirstPage = page === 1;
-  	const isLastPage = page === totalPages;
 
 	// Rebuild query string
 	const currentFilters = { ...req.query };
@@ -68,10 +68,6 @@ export const handler = async (req, res) => {
 	res.render("index", {
 		games, 
 		page,
-		prevPage,
-		nextPage,
-		isFirstPage,
-		isLastPage,
 		genres: generateCheckedMap(GENRES, genres),
 		platforms: generateCheckedMap(PLATFORMS, platforms),
 		pegi: generateCheckedMap(PEGI, pegi),
@@ -81,5 +77,18 @@ export const handler = async (req, res) => {
 		toRating,
 		base: baseQuery,
 		pages
+	});
+};
+export const scrollHandler = async (req, res) => {
+	const parsed = parseInt(req.query.page);
+	const page = Number.isNaN(parsed) ? 1 : Math.max(parsed, 1);
+
+	const filter = buildFilter(req.query);
+
+	const { docs: games = [], totalPages = 1 } = await service.getGamesPaginated(page, PAGE_SIZE, filter);
+
+	res.json({
+		games,
+		hasMore: page < totalPages
 	});
 };
