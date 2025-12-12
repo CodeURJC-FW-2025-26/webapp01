@@ -1,5 +1,5 @@
-<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" {{#game.id}}action="/edit-game"{{/game.id}}{{^game.id}}action="/game"{{/game.id}} method="POST"
-    enctype="multipart/form-data">
+
+<form class="d-flex flex-column row-gap-3 w-75 mx-auto needs-validation" onsubmit="gameForm(event,'{{game.id}}')">
     {{#game.id}}
     <input type="hidden" value="{{game.id}}" name ="id">
     {{/game.id}}
