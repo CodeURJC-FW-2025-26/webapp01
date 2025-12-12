@@ -1,10 +1,18 @@
 
 let currentPage = 1; 
 let hasMoreGames = true;
-
+/**
+ * window.innerHeight->your height in that moment
+ * window.scrollY->the lenght of the page
+ * document.body.scrollHeight->total height of the page (from header to footer)
+ * window.location.search->the URL behind the "?". Why?=>because if not it erases the filters
+ */
 async function scrollPagination() {
 	if (window.innerHeight + window.scrollY >= document.body.scrollHeight && hasMoreGames) {
-		const response = await fetch(`/newGames?page=${currentPage + 1}`);
+		const params = new URLSearchParams(window.location.search);
+		params.set("page", currentPage + 1);
+
+		const response = await fetch(`/newGames?${params}`);
 		const data = await response.json();
 
 		hasMoreGames = data.hasMore;
