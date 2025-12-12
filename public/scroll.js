@@ -1,6 +1,7 @@
 
 let currentPage = 1; 
 let hasMoreGames = true;
+let isLoading = false;
 /**
  * window.innerHeight->your height in that moment
  * window.scrollY->the lenght of the page
@@ -8,7 +9,8 @@ let hasMoreGames = true;
  * window.location.search->the URL behind the "?". Why?=>because if not it erases the filters
  */
 async function scrollPagination() {
-	if (window.innerHeight + window.scrollY >= document.body.scrollHeight && hasMoreGames) {
+	if (window.innerHeight + window.scrollY + 1 >= document.body.scrollHeight && hasMoreGames &&!isLoading) {
+		isLoading=true;
 		const params = new URLSearchParams(window.location.search);
 		params.set("page", currentPage + 1);
 
@@ -16,7 +18,6 @@ async function scrollPagination() {
 		const data = await response.json();
 
 		hasMoreGames = data.hasMore;
-
 		const container = document.getElementById("games-container");
 		container.innerHTML += data.games.map(game => 
 			`<div class="col-12 col-sm-6 col-lg-4 text-center">
@@ -29,7 +30,8 @@ async function scrollPagination() {
             </div>`
 		).join("");
 
-		currentPage++; 
+		currentPage++;
+		isLoading=false; 
 	}
 }
 
