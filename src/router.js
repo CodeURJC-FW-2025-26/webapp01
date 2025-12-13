@@ -18,6 +18,8 @@ const upload = multer({ dest: "uploads/" });
 
 router.get("/", gameHandler.handler);
 
+router.get("/newGames", gameHandler.scrollHandler);
+
 router.get("/detail/:id", gameDetailHandler.getGameDetail);
 
 router.get("/new-game-form", formHandler.getNewGameForm);

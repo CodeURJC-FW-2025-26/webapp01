@@ -17,7 +17,7 @@ app.use(express.static("./uploads"));
 app.set("view engine", "html");
 app.engine("html", mustacheExpress(), ".html");
 app.set("views", "./views");
-
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", router);
