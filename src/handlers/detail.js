@@ -29,7 +29,7 @@ export const getGameDetail = async (req, res) => {
 export const deleteDetailGame= async(req,res) =>{
 	try{
 		service.deleteGame(req.body.id);
-		return res.redirect(`/?msg=Game%20deleted%20successfully`);
+		return res.redirect("/?msg=Game%20deleted%20successfully");
 	}
 	catch {
 		return res.redirect(`/error?type=${"Can't delete the game"}&back=/detail/${id}`);
@@ -87,7 +87,7 @@ export const deleteReview = async (req, res) => {
 	try {
 
 		await service.deleteReview(id, reviewId);
-		res.redirect(`/detail/${iid}?msg=Review%20deleted%20successfully`);
+		res.redirect(`/detail/${id}?msg=Review%20deleted%20successfully`);
 
 
 	} catch (err) {

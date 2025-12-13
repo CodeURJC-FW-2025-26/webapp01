@@ -1,6 +1,6 @@
 function showPopup(msg) {
-    const modalWrapper = document.createElement('div');
-    modalWrapper.innerHTML = `
+	const modalWrapper = document.createElement("div");
+	modalWrapper.innerHTML = `
         <div id="confirmationModal" class="modal show">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -16,9 +16,9 @@ function showPopup(msg) {
         </div>
     `;
 
-    document.body.appendChild(modalWrapper);
+	document.body.appendChild(modalWrapper);
 
-    document.getElementById('closePopupBtn').addEventListener('click', () => {
-        modalWrapper.remove();
-    });
+	document.getElementById("closePopupBtn").addEventListener("click", () => {
+		modalWrapper.remove();
+	});
 }
