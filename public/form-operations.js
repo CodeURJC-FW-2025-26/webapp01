@@ -72,8 +72,10 @@ async function reviewForm(event, gameId, reviewId) {
 
 
 	if (response.ok) {
+		const url = new URL(response.url);
+		const destId = url.searchParams.get("id");
 		alert("The review has been saved!");
-		window.location = `/detail/${gameId}`;
+		window.location = `/detail/${destId}`;
 	} else {
 		alert("Failed to create review. Please try again.");
 	}
