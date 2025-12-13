@@ -1,3 +1,5 @@
+
+
 async function gameForm(event, id) {
 	event.preventDefault();
 
@@ -40,7 +42,7 @@ async function gameForm(event, id) {
 	if (response.ok) {
 		const url = new URL(response.url);
 		const destId = url.searchParams.get("id");
-		alert("The Game has been saved!");
+		showPopup("The review has been saved!");
 		window.location = `/detail/${destId}`;
 	} else {
 		alert("Failed to create game. Please try again.");
@@ -57,7 +59,6 @@ async function reviewForm(event, gameId, reviewId) {
 		return;
 	}
 	const route = reviewId ? `/detail/${gameId}/reviews/${reviewId}/edit` : `/detail/${gameId}/reviews`;
-	console.log(route);
 
 	//here we don't have files
 	const data = Object.fromEntries(new FormData(form));
@@ -72,11 +73,132 @@ async function reviewForm(event, gameId, reviewId) {
 
 
 	if (response.ok) {
-		const url = new URL(response.url);
-		const destId = url.searchParams.get("id");
-		alert("The review has been saved!");
-		window.location = `/detail/${destId}`;
+		const review = await response.json();
+		if (!reviewId) {
+			addReview(review);
+			form.reset();
+
+		}
+		else {
+			updateReviewInHTML(review); 
+		}
+		showPopup("The review has been saved!");
 	} else {
 		alert("Failed to create review. Please try again.");
 	}
 }
+
+
+function addReview(review) {
+	const reviewsContainer = document.querySelector("#reviews .container");
+
+	const div = document.createElement("div");
+	div.classList.add("my-3");
+
+	div.innerHTML = `
+		<h3>${review.author}</h3>
+		<div class="border rounded p-3 bg-light text-dark">
+			${review.comment}
+		</div>
+		<div class="alert alert-success p-2 flex-fill text-center mb-2">
+			<strong>Rating:</strong> ${review.rating}
+		</div>
+		<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+			<a href="/detail/${review.gameId}/reviews/${review._id}/edit" class="btn btn-primary">Edit</a>
+			<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">
+				Delete
+			</button>
+		</div>
+	`;
+
+	reviewsContainer.appendChild(div);
+}
+
+function editReviewInPlace(gameId, reviewId) {
+	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
+
+	const author = reviewDiv.querySelector("h3").textContent.trim();
+	const comment = reviewDiv.querySelector(".border").textContent.trim();
+	const rating = reviewDiv.querySelector(".alert").textContent.replace("Rating:", "").trim();
+
+	reviewDiv.innerHTML = `
+		<form novalidate onsubmit="reviewForm(event,'${gameId}','${reviewId}')">
+			<div class="mb-2">
+				<label>Author</label>
+				<input type="text" name="author" class="form-control" value="${author}" required>
+				<div class="invalid-feedback">Please write your name.</div>
+			</div>
+			<div class="mb-2">
+				<label>Comment</label>
+				<textarea name="comment" class="form-control" required>${comment}</textarea>
+				<div class="invalid-feedback">Please write your review.</div>
+			</div>
+			<div class="mb-2">
+				<label>Rating</label>
+				<input type="number" name="rating" class="form-control" value="${rating}" min="0" max="100" required>
+				            <div class="invalid-feedback">
+                Please enter a valid rating between 0
+                and 100.
+            </div>
+			</div>
+			<button type="submit" class="btn btn-success">Save</button>
+			<button type="button" class="btn btn-secondary" onclick="cancelEdit('${reviewId}')">Cancel</button>
+		</form>
+	`;
+}
+
+function cancelEdit(reviewId) {
+	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
+	const form = reviewDiv.querySelector("form");
+
+	if (!form) return;
+
+	const author = form.querySelector("input[name='author']").value.trim();
+	const comment = form.querySelector("textarea[name='comment']").value.trim();
+	const rating = form.querySelector("input[name='rating']").value.trim();
+
+	reviewDiv.innerHTML = `
+		<h3>${author}</h3>
+		<div class="border rounded p-3 bg-light text-dark">
+			${comment}
+		</div>
+		<div class="alert alert-success p-2 flex-fill text-center mb-2">
+			<strong>Rating:</strong> ${rating}
+		</div>
+		<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+			<button class="btn btn-primary" onclick="editReviewInPlace('${reviewId}')">Edit</button>
+			<button class="btn btn-danger" onclick="deleteReview('${reviewId}', '${reviewDiv.dataset.gameId}', this)">Delete</button>
+		</div>
+	`;
+}
+
+
+function updateReviewInHTML(review) {
+	const reviewDivs = document.querySelectorAll("#reviews .my-3");
+
+	reviewDivs.forEach(div => {
+		const editBtn = div.querySelector(`button[onclick*="${review._id}"]`);
+		if (editBtn) {
+			div.innerHTML = `
+				<h3>${review.author}</h3>
+				<div class="border rounded p-3 bg-light text-dark">
+					${review.comment}
+				</div>
+				<div class="alert alert-success p-2 flex-fill text-center mb-2">
+					<strong>Rating:</strong> ${review.rating}
+				</div>
+				<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+					<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
+					<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">Delete</button>
+				</div>
+			`;
+		}
+	});
+}
+
+function deleteReview(){
+	const reviewDiv = button.closest(".my-3");
+	if (reviewDiv) reviewDiv.remove();
+}
+
+

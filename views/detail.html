@@ -1,173 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Gueim: Game Details</title>
 
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="/css/style.css" />
-	</head>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Gueim: Game Details</title>
 
-	<body class="container d-flex flex-column min-vh-100">
-		
-		{{>header}}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
 
-		<main class="row flex-fill">
-			<section id="game-detail" class="col-12 p-3">
-				<div class="container my-4">
-					<div class="row align-items-center">
-						<div class="col-md-4 col-12 mb-3 mb-md-0">
-							<img
-								src="{{cover_image}}"
-								alt="Cover of {{title}}"
-								class="img-fluid rounded shadow"
-							/>
+<body class="container d-flex flex-column min-vh-100">
+
+	{{>header}}
+
+	<main class="row flex-fill">
+		<section id="game-detail" class="col-12 p-3">
+			<div class="container my-4">
+				<div class="row align-items-center">
+					<div class="col-md-4 col-12 mb-3 mb-md-0">
+						<img src="{{cover_image}}" alt="Cover of {{title}}" class="img-fluid rounded shadow" />
+					</div>
+
+					<div class="col-md-8 col-12">
+						<h1 class="mb-3">{{title}}</h1>
+						<p><strong>Description:</strong> {{description}}</p>
+
+						<p>
+							<strong>Genres:</strong>
+							{{#genres}}
+							<span class="badge bg-primary me-1">{{.}}</span>
+							{{/genres}}
+						</p>
+
+						<div class="d-flex gap-3 my-3 flex-wrap">
+							<div class="alert alert-info p-2 flex-fill text-center mb-2">
+								<i class="bi bi-calendar-event-fill"></i>
+								<strong>Release Date:</strong>
+								{{release_date}}
+							</div>
+							<div class="alert alert-success p-2 flex-fill text-center mb-2">
+								<i class="bi bi-star-fill"></i>
+								<strong>Average Rating:</strong>
+								{{average_rating}}
+							</div>
 						</div>
 
-						<div class="col-md-8 col-12">
-							<h1 class="mb-3">{{title}}</h1>
-							<p><strong>Description:</strong> {{description}}</p>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item list-group-item-action">
+								<i class="bi bi-pc-display"></i>
+								<strong>Platforms:</strong> {{#platforms}}
+								{{.}}{{^last}}, {{/last}} {{/platforms}}
+							</li>
+							<li class="list-group-item list-group-item-action">
+								<i class="bi bi-person-fill"></i>
+								<strong>Developer:</strong> {{developer}}
+							</li>
+							<li class="list-group-item list-group-item-action">
+								<i class="bi bi-shield-fill-check"></i>
+								<strong>PEGI Rating:</strong>
+								{{pegi_rating}}
+							</li>
+						</ul>
 
-							<p>
-								<strong>Genres:</strong>
-								{{#genres}}
-								<span class="badge bg-primary me-1">{{.}}</span>
-								{{/genres}}
-							</p>
-
-							<div class="d-flex gap-3 my-3 flex-wrap">
-								<div
-									class="alert alert-info p-2 flex-fill text-center mb-2"
-								>
-									<i class="bi bi-calendar-event-fill"></i>
-									<strong>Release Date:</strong>
-									{{release_date}}
-								</div>
-								<div
-									class="alert alert-success p-2 flex-fill text-center mb-2"
-								>
-									<i class="bi bi-star-fill"></i>
-									<strong>Average Rating:</strong>
-									{{average_rating}}
-								</div>
-							</div>
-
-							<ul class="list-group list-group-flush">
-								<li
-									class="list-group-item list-group-item-action"
-								>
-									<i class="bi bi-pc-display"></i>
-									<strong>Platforms:</strong> {{#platforms}}
-									{{.}}{{^last}}, {{/last}} {{/platforms}}
-								</li>
-								<li
-									class="list-group-item list-group-item-action"
-								>
-									<i class="bi bi-person-fill"></i>
-									<strong>Developer:</strong> {{developer}}
-								</li>
-								<li
-									class="list-group-item list-group-item-action"
-								>
-									<i class="bi bi-shield-fill-check"></i>
-									<strong>PEGI Rating:</strong>
-									{{pegi_rating}}
-								</li>
-							</ul>
-
-							<div
-								class="d-flex justify-content-center gap-3 my-4 flex-wrap"
-							>
-							<form class="nostyle" action = "/edit-game-form" method="post">
-								<input type ="hidden" value="{{id}}" name="id">
-								<button
-									type="submit"
-									class="btn btn-warning"
-									aria-label="Edit game information"
-								>
+						<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+							<form class="nostyle" action="/edit-game-form" method="post">
+								<input type="hidden" value="{{id}}" name="id">
+								<button type="submit" class="btn btn-warning" aria-label="Edit game information">
 									Edit
 								</button>
 							</form>
-								<form class="nostyle" action="/delete-game" method="post">
-								<input type ="hidden" value="{{id}}" name="id">
-								<button
-									type="submit"
-									class="btn btn-danger"
-									aria-label="Delete this game"
-								> Delete 
+							<form class="nostyle" action="/delete-game" method="post">
+								<input type="hidden" value="{{id}}" name="id">
+								<button type="submit" class="btn btn-danger" aria-label="Delete this game"> Delete
 								</button>
-								</form>
-								<a
-									href="/"
-									class="btn btn-secondary"
-									role="button"
-									>Return</a
-								>
-							</div>
+							</form>
+							<a href="/" class="btn btn-secondary" role="button">Return</a>
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+		</section>
 
-			<section id="reviews" class="col-12 p-3">
-				<div class="container my-4">
-					<h1>Reviews</h1>
-					{{#reviews}}
-					<div class="my-3">
-						<h3>{{author}}</h3>
-						<div class="border rounded p-3 bg-light text-dark">
-							{{comment}}
-						</div>
-						<div
-							class="alert alert-success p-2 flex-fill text-center mb-2"
-						>
-							<strong>Rating:</strong> {{rating}}
-						</div>
-						<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-							<a href="/detail/{{id}}/reviews/{{_id}}/edit" class="btn btn-primary">Edit</a>
-							<form class="nostyle" method="post" action ="/detail/{{id}}/reviews/{{_id}}/delete">
-							<button
-								type="submit"
-								class="btn btn-danger"
-								aria-label="Delete review by {{author}}"
-							>
+		<section id="reviews" class="col-12 p-3">
+			<div class="container my-4">
+				<h1>Reviews</h1>
+				{{#reviews}}
+				<div class="my-3">
+					<h3>{{author}}</h3>
+					<div class="border rounded p-3 bg-light text-dark">
+						{{comment}}
+					</div>
+					<div class="alert alert-success p-2 flex-fill text-center mb-2">
+						<strong>Rating:</strong> {{rating}}
+					</div>
+					<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+						<button class="btn btn-primary" onclick="editReviewInPlace('{{id}}','{{_id}}')">
+							Edit
+						</button>
+						<form class="nostyle" method="post" action="/detail/{{id}}/reviews/{{_id}}/delete">
+							<button type="submit" class="btn btn-danger" aria-label="Delete review by {{author}}">
 								Delete
 							</button>
-							</form>
-						</div>
+						</form>
 					</div>
-					{{/reviews}}
 				</div>
-			</section>
+				{{/reviews}}
+			</div>
+		</section>
 
-			<section id="add-review" class="col-12 p-3">
-				<div class="container my-4">
-					<h2 class="mb-4">Add a New Review</h2>
-					<fieldset>
-						<legend class="h2 mb-4">Review Details</legend>
-						{{>review-form}}
-					</fieldset>
-				</div>
-			</section>
-		</main>
+		<section id="add-review" class="col-12 p-3">
+			<div class="container my-4">
+				<h2 class="mb-4">Add a New Review</h2>
+				<fieldset>
+					<legend class="h2 mb-4">Review Details</legend>
+					{{>review-form}}
+				</fieldset>
+			</div>
+		</section>
+	</main>
 
-		{{>footer}}
-{{#msg}}
-<script>
-    showPopup('{{msg}}');
-</script>
-{{/msg}}
-		<script src="/popUp.js"></script>
+	{{>footer}}
+	{{#msg}}
+	<script>
+		showPopup('{{msg}}');
+	</script>
+	{{/msg}}
+	<script src="/popUp.js"></script>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="../form-operations.js"></script>
-	</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../form-operations.js"></script>
+</body>
+
 </html>
