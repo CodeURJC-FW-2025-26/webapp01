@@ -30,20 +30,6 @@ export const insertGame = async (req, res) => {
 	}
 };
 
-export const editFormGame = async (req, res) => {
-	try {
-		const id = req.body.id;
-		await editGame(id, req.body, req.file);
-		const msg = "The game has been edited";
-		return res.redirect(`/confirm?msg=${msg}&id=${id}`);
-	} catch(error) {
-		if (error.errors) {
-			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/error?type=${queryErrors}&back=/`);
-		}
-		return res.redirect("/error?type=Unknown error&back=/");
-	}
-};
 
 const formatOptions = (allOptions, selectedOptions = []) => {
 	return allOptions.map(option => ({
