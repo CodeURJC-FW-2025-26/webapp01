@@ -38,7 +38,7 @@ export const deleteDetailGame= async(req,res) =>{
 /*--REVIEWS--*/
 export const addReviewHandler = async (req,res) => {
 	try {
-		const gameId = req.params.id;
+		const id = req.params.id;
 		const { author, comment, rating } = req.body;
 		const review = {
 			_id: toObjectId(),
@@ -48,8 +48,8 @@ export const addReviewHandler = async (req,res) => {
 			createdAt: new Date(),
 		};
 
-		await service.addReview(gameId, review);
-		res.redirect(`/confirm?msg=${"Review added successfully"}&id=${gameId}`);
+		await service.addReview(id, review);
+		res.redirect(`/confirm?msg=${"Review added successfully"}&id=${id}`);
 	} catch (err) {
 		console.error(err);
 		res.redirect(`/error?type=${"500: Internal Error, Error Updating Reviews"}&back=/detail/${id}`);
@@ -57,21 +57,21 @@ export const addReviewHandler = async (req,res) => {
 };
 
 export const getEditReviewForm = async (req, res) => {
-	const { gameId, reviewId } = req.params;
-	const game = await service.getGame(gameId);
+	const { id, reviewId } = req.params;
+	const game = await service.getGame(id);
 	const review = game.reviews.find(r =>r._id.toString() === reviewId); //find the review id in the array of reviews
 
 	if (!review) return res.redirect(`/error?type=${"404:Review Not Found"}&back=/detail/${id}`); 
-	res.render("edit-review", { gameId, review });
+	res.render("edit-review", { id, review });
 };
 
 export const editReview = async (req, res) => {
-	const { gameId, reviewId } = req.params;
+	const { id, reviewId } = req.params;
 	const { author, comment, rating } = req.body;
 
 	try {
-		await service.updateReview(gameId, reviewId, { author, comment, rating });
-		res.redirect(`/confirm?msg=${"Review edited successfully"}&id=${gameId}`);
+		await service.updateReview(id, reviewId, { author, comment, rating });
+		res.redirect(`/confirm?msg=${"Review edited successfully"}&id=${id}`);
 
 	} catch (err) {
 		console.error(err);
@@ -80,15 +80,15 @@ export const editReview = async (req, res) => {
 };
 
 export const deleteReview = async (req, res) => {
-	const { gameId, reviewId } = req.params;
+	const { id, reviewId } = req.params;
 	try {
-		await service.deleteReview(gameId, reviewId);
-		res.redirect(`/confirm?msg=${"Review deleted successfully"}&id=${gameId}`);
+		await service.deleteReview(id, reviewId);
+		res.redirect(`/confirm?msg=${"Review deleted successfully"}&id=${id}`);
 
 	} catch (err) {
 		console.error(err);
 		res.redirect(
-			`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${gameId}`
+			`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${id}`
 		);
 	}
 };
