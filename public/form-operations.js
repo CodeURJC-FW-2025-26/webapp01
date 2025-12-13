@@ -1,24 +1,48 @@
-
-async function gameForm(event,id) {
+async function gameForm(event, id) {
     event.preventDefault();
 
-    console.log(event)
-    let route ='/game';
-    if  (id)  {
-        route='/edit-game';
+    const form = event.target;
+    const genres = form.querySelectorAll('input[name="genres"]:checked');
+    const platforms = form.querySelectorAll('input[name="platforms"]:checked');
+
+    const genreError = document.getElementById("genreError");
+    const platformError = document.getElementById("platformError");
+
+    let valid = true;
+
+    if (genres.length === 0) {
+        genreError.classList.add("d-block");
+        valid = false;
+    } else {
+        genreError.classList.remove("d-block");
     }
-    const formData = new FormData(event.target);
+
+    if (platforms.length === 0) {
+        platformError.classList.add("d-block");
+        valid = false;
+    } else {
+        platformError.classList.remove("d-block");
+    }
+
+    if (!form.checkValidity() || !valid) {
+        form.classList.add('was-validated');
+        return;
+    }
+
+    const route = id ? '/edit-game' : '/game';
+    const formData = new FormData(form);
+
     const response = await fetch(route, {
         method: "POST",
         body: formData,
     });
-    const url = new URL(response.url);
-    const destId = url.searchParams.get('id');
 
     if (response.ok) {
+        const url = new URL(response.url);
+        const destId = url.searchParams.get('id');
         alert("The Game has been saved!");
-        window.location=`/detail/${destId}`;
+        window.location = `/detail/${destId}`;
     } else {
-        alert("Failed to create post. Please try again.");
+        alert("Failed to create game. Please try again.");
     }
 }
