@@ -5,7 +5,6 @@ import * as gameHandler from "./handlers/games.js";
 import * as gameDetailHandler from "./handlers/detail.js";
 import * as formHandler from "./handlers/form.js";
 import * as errorHandler from "./handlers/error.js";
-import * as confirmHandler from "./handlers/confirm.js";
 
 
 
@@ -25,8 +24,6 @@ router.get("/detail/:id", gameDetailHandler.getGameDetail);
 router.get("/new-game-form", formHandler.getNewGameForm);
 
 router.get("/error", errorHandler.getError);
-
-router.get("/confirm", confirmHandler.getConfirmation);
 
 router.post("/edit-game-form",formHandler.getEditGameForm);
 

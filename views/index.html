@@ -311,8 +311,19 @@
 				</div>
 			</section>
 		</main>
-		{{>footer}}
-		<!--New pagination-->
+
+{{>footer}}
+
+{{#msg}}
+<script src="/popUp.js"></script>
+<script>
+    showPopup('{{msg}}');
+</script>
+{{/msg}}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
   		<script src="/scroll.js"></script>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

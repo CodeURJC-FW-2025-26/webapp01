@@ -64,9 +64,10 @@ export const handler = async (req, res) => {
   		num: i + 1,
   		isCurrentPage: page === i + 1
 	}));
-
+	const msg = req.query.msg || null;
 	res.render("index", {
 		games, 
+		msg,
 		page,
 		genres: generateCheckedMap(GENRES, genres),
 		platforms: generateCheckedMap(PLATFORMS, platforms),
