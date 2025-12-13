@@ -1,0 +1,38 @@
+<form class="d-flex flex-column needs-validation" novalidate onsubmit="reviewForm(event,'{{id}}','{{review._id}}')">
+    <div class="row align-items-center gap-3">
+        <div>
+            <label for="inputAuthor" class="form-label">Author</label>
+            <input type="text" class="form-control" id="inputAuthor" value="{{review.author}}" name="author" required />
+            <div class="invalid-feedback">
+                Please write your name.
+            </div>
+        </div>
+
+
+        <div>
+            <label for="inputDescription" class="form-label">Comment</label>
+            <textarea class="form-control" id="inputDescription" name="comment" rows="5" required>{{review.comment}}</textarea>
+            <div class="invalid-feedback">
+                Please write your review.
+            </div>
+        </div>
+
+        <div>
+            <label for="inputRating" class="form-label">Rating (0-100)</label>
+            <input type="number" class="form-control" id="inputRating" name="rating" value="{{review.rating}}" min="0" max="100" required />
+            <div class="invalid-feedback">
+                Please enter a valid rating between 0
+                and 100.
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">
+                Submit Review
+            </button>
+            {{#review}}
+            <a href="/detail/{{id}}" class="btn btn-secondary" role="button">Cancel</a>
+            {{/review}}
+        </div>
+    </div>
+</form>

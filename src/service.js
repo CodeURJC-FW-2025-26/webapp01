@@ -112,25 +112,25 @@ export async function editGame(id, data, file = null) {
 	);
 }
 
-export async function addReview(gameId, review) {
+export async function addReview(id, review) {
 	return await Game.updateOne(
-		{ _id: toObjectId(gameId) },
+		{ _id: toObjectId(id) },
 		{ $push: { reviews: review } }, //update
 		{ returnDocument: "after" }
 	);
 }
 
-export async function deleteReview(gameId, reviewId) {
+export async function deleteReview(id, reviewId) {
 	return await Game.updateOne(
-		{ _id: toObjectId(gameId) }, //filter
+		{ _id: toObjectId(id) }, //filter
 		{ $pull: { reviews: { _id: toObjectId(reviewId) } } }, //update
 		{ returnDocument: "after" } 
 	);
 }
 
-export async function updateReview(gameId, reviewId, updatedData) {
+export async function updateReview(id, reviewId, updatedData) {
 	return await Game.updateOne(
-		{ _id: toObjectId(gameId), "reviews._id": toObjectId(reviewId) },
+		{ _id: toObjectId(id), "reviews._id": toObjectId(reviewId) },
 		{
 			$set: {
 				"reviews.$.author": updatedData.author,
