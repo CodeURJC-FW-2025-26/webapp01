@@ -76,6 +76,8 @@ function showFormErrors(errors) {
 	});
 }
 
+
+// eslint-disable-next-line
 async function gameForm(event, id) {
 	event.preventDefault();
 	const form = event.target;
@@ -131,8 +133,7 @@ async function gameForm(event, id) {
 	}
 }
 
-
-
+// eslint-disable-next-line
 async function reviewForm(event, gameId, reviewId) {
 	event.preventDefault();
 
@@ -205,6 +206,7 @@ function addReview(review) {
 	reviewsContainer.appendChild(div);
 }
 
+// eslint-disable-next-line
 function editReviewInPlace(gameId, reviewId) {
 	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
 
@@ -240,6 +242,7 @@ function editReviewInPlace(gameId, reviewId) {
 	`;
 }
 
+// eslint-disable-next-line
 function cancelEdit() {
 	const reviewDiv = document
 		.querySelector("#reviews .my-3 form")
@@ -275,6 +278,7 @@ function updateReviewInHTML(review) {
 	});
 }
 
+// eslint-disable-next-line
 async function deleteReview(e, gameId, reviewId) {
 	e.preventDefault();
 	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
