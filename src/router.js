@@ -4,7 +4,6 @@ import multer from "multer";
 import * as gameHandler from "./handlers/games.js";
 import * as gameDetailHandler from "./handlers/detail.js";
 import * as formHandler from "./handlers/form.js";
-import * as errorHandler from "./handlers/error.js";
 
 
 
@@ -22,8 +21,6 @@ router.get("/newGames", gameHandler.scrollHandler);
 router.get("/detail/:id", gameDetailHandler.getGameDetail);
 
 router.get("/new-game-form", formHandler.getNewGameForm);
-
-router.get("/error", errorHandler.getError);
 
 router.post("/edit-game-form",formHandler.getEditGameForm);
 

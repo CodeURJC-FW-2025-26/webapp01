@@ -122,11 +122,20 @@
 	</main>
 
 	{{>footer}}
+	
 	{{#msg}}
 	<script>
-		showPopup('{{msg}}');
+		showPopup({ message: '{{msg}}', type: 'good' });
 	</script>
 	{{/msg}}
+
+
+	{{#errorMsg}}
+	<script>
+		showPopup({ message: '{{errorMsg}}', type: 'bad' });
+	</script>
+	{{/errorMsg}}
+
 	<script src="/popUp.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

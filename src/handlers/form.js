@@ -24,9 +24,9 @@ export const insertGame = async (req, res) => {
 	} catch(error) {
 		if (error.errors) {
 			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/error?type=${queryErrors}&back=/new-game-form`);
+			return res.redirect(`/?errorMsg=${queryErrors}&back=/new-game-form`);
 		}
-		return res.redirect("/error?type=Unknown error&back=/new-game-form");
+		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/new-game-form`);
 	}
 };
 
@@ -40,9 +40,9 @@ export const editFormGame = async (req, res) => {
 	} catch(error) {
 		if (error.errors) {
 			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/error?type=${queryErrors}&back=/`);
+			return res.redirect(`/?errorMsg=${queryErrors}&back=/`);
 		}
-		return res.redirect("/error?type=Unknown error&back=/");
+		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/`);
 	}
 };
 
