@@ -117,6 +117,8 @@ function addReview(review) {
 function editReviewInPlace(gameId, reviewId) {
 	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
 
+	reviewDiv.dataset.originalHtml = reviewDiv.innerHTML;
+
 	const author = reviewDiv.querySelector("h3").textContent.trim();
 	const comment = reviewDiv.querySelector(".border").textContent.trim();
 	const rating = reviewDiv.querySelector(".alert").textContent.replace("Rating:", "").trim();
@@ -148,28 +150,14 @@ function editReviewInPlace(gameId, reviewId) {
 }
 
 function cancelEdit(reviewId) {
-	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
-	const form = reviewDiv.querySelector("form");
+	const reviewDiv = document
+		.querySelector("#reviews .my-3 form")
+		.closest(".my-3");
 
-	if (!form) return;
-
-	const author = form.querySelector("input[name='author']").value.trim();
-	const comment = form.querySelector("textarea[name='comment']").value.trim();
-	const rating = form.querySelector("input[name='rating']").value.trim();
-
-	reviewDiv.innerHTML = `
-		<h3>${author}</h3>
-		<div class="border rounded p-3 bg-light text-dark">
-			${comment}
-		</div>
-		<div class="alert alert-success p-2 flex-fill text-center mb-2">
-			<strong>Rating:</strong> ${rating}
-		</div>
-		<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-			<button class="btn btn-primary" onclick="editReviewInPlace('${reviewId}')">Edit</button>
-			<button class="btn btn-danger" onclick="deleteReview('${reviewId}', '${reviewDiv.dataset.gameId}', this)">Delete</button>
-		</div>
-	`;
+	if (reviewDiv.dataset.originalHtml) {
+		reviewDiv.innerHTML = reviewDiv.dataset.originalHtml;
+		delete reviewDiv.dataset.originalHtml;
+	}
 }
 
 

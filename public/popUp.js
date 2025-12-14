@@ -1,8 +1,8 @@
 function showPopup({message, type}) {
-    const opts={
-        good:"Operation Successful",
-        bad: "Ooops, something wrong happened",
-    }
+	const opts={
+		good:"Operation Successful",
+		bad: "Ooops, something wrong happened",
+	};
 	const popUp = document.createElement("div");
 	popUp.innerHTML = `
         <div id="confirmationModal" class="modal show">
