@@ -275,9 +275,8 @@ function updateReviewInHTML(review) {
 	});
 }
 
-async function deleteReview(event, gameId, reviewId) {
-	event.preventDefault();
-
+async function deleteReview(e, gameId, reviewId) {
+	e.preventDefault();
 	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
 		method: "POST",
 		headers: {
