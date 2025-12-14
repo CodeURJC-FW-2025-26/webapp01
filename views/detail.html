@@ -71,7 +71,6 @@
 									Edit
 								</button>
 							</form>
-							<!--Now this has confirmation step => no action-->
 							<form class="nostyle" id="deleteForm"> 
 								<input type="hidden" value="{{id}}" name="id" id="gameId">
 								<button type="submit" class="btn btn-danger" id="deleteBtn"> Delete
@@ -101,7 +100,7 @@
 						<button class="btn btn-primary" onclick="editReviewInPlace('{{id}}','{{_id}}')">
 							Edit
 						</button>
-						<form class="nostyle" method="post" action="/detail/{{id}}/reviews/{{_id}}/delete">
+						<form class="nostyle" onsubmit="deleteReview('{{id}}','{{_id}}')">
 							<button type="submit" class="btn btn-danger" aria-label="Delete review by {{author}}">
 								Delete
 							</button>
