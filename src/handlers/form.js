@@ -20,13 +20,13 @@ export const insertGame = async (req, res) => {
 	try {
 		const gameObject = await addGame(game);
 		const msg = "The game has been succesfully created";
-		return res.redirect(`/confirm?msg=${msg}&id=${gameObject._id}`);
+		return res.redirect(`/?msg=${msg}&id=${gameObject._id}`);
 	} catch(error) {
 		if (error.errors) {
 			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/error?type=${queryErrors}&back=/new-game-form`);
+			return res.redirect(`/?errorMsg=${queryErrors}&back=/new-game-form`);
 		}
-		return res.redirect("/error?type=Unknown error&back=/new-game-form");
+		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/new-game-form`);
 	}
 };
 
@@ -35,13 +35,14 @@ export const editFormGame = async (req, res) => {
 		const id = req.body.id;
 		await editGame(id, req.body, req.file);
 		const msg = "The game has been edited";
-		return res.redirect(`/confirm?msg=${msg}&id=${id}`);
+		return res.redirect(`/?msg=${msg}&id=${id}`);
+
 	} catch(error) {
 		if (error.errors) {
 			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/error?type=${queryErrors}&back=/`);
+			return res.redirect(`/?errorMsg=${queryErrors}&back=/`);
 		}
-		return res.redirect("/error?type=Unknown error&back=/");
+		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/`);
 	}
 };
 

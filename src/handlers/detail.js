@@ -21,22 +21,24 @@ export const getGameDetail = async (req, res) => {
 		release_date: formatDateDDMMYYYY(game.release_date),
 		id: id,
 	};
-	if (!game) return res.redirect(`/error?type=${"404 error to get games"}&back=/detail/${id}`); 
-	res.render("detail", game);
+	if (!game) {
+		return res.redirect(`/?errorMsg=${"404 error to get games"}&back=/detail/${id}`);
+	}
+	const msg = req.query.msg || null;
+	const errorMsg = req.query.errorMsg || null;
+	res.render("detail", { ...game, msg, errorMsg });
 };
 
-export const deleteDetailGame= async(req,res) =>{
-	try{
-		service.deleteGame(req.body.id);
-		const msg= "The game has been succesfully deleted";
-		return res.redirect(`/confirm?msg=${msg}`);
-	}
-	catch {
-		return res.redirect(`/error?type=${"Can't delete the game"}&back=/detail/${id}`);
+export const deleteDetailGame = async (req, res) => {
+	try {
+		await service.deleteGame(req.body.id);
+		return res.json({ message: "Game deleted successfully", type: "good" });
+	} catch {
+		return res.json({ message: "Can't delete the game", type: "bad" });
 	}
 };
 /*--REVIEWS--*/
-export const addReviewHandler = async (req,res) => {
+export const addReviewHandler = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const { author, comment, rating } = req.body;
@@ -48,21 +50,16 @@ export const addReviewHandler = async (req,res) => {
 			createdAt: new Date(),
 		};
 
+
 		await service.addReview(id, review);
-		res.redirect(`/confirm?msg=${"Review added successfully"}&id=${id}`);
+
+		res.status(200).json({
+			...review,
+			gameId: id
+		});
 	} catch (err) {
-		console.error(err);
-		res.redirect(`/error?type=${"500: Internal Error, Error Updating Reviews"}&back=/detail/${id}`);
+		res.status(500).json({ err });
 	}
-};
-
-export const getEditReviewForm = async (req, res) => {
-	const { id, reviewId } = req.params;
-	const game = await service.getGame(id);
-	const review = game.reviews.find(r =>r._id.toString() === reviewId); //find the review id in the array of reviews
-
-	if (!review) return res.redirect(`/error?type=${"404:Review Not Found"}&back=/detail/${id}`); 
-	res.render("edit-review", { id, review });
 };
 
 export const editReview = async (req, res) => {
@@ -70,25 +67,37 @@ export const editReview = async (req, res) => {
 	const { author, comment, rating } = req.body;
 
 	try {
+
 		await service.updateReview(id, reviewId, { author, comment, rating });
-		res.redirect(`/confirm?msg=${"Review edited successfully"}&id=${id}`);
+
+		const review = {
+			_id: reviewId,
+			author,
+			comment,
+			rating: Number(rating),
+			createdAt: new Date(),
+		};
+
+		res.status(200).json({
+			...review,
+			gameId: id
+		});
+
 
 	} catch (err) {
-		console.error(err);
-		res.redirect(`/error?type=${"Internal Error: 500 Error Posting Reviews"}&back=/detail/${id}`);
+		res.status(500).json({err});
 	}
 };
 
 export const deleteReview = async (req, res) => {
 	const { id, reviewId } = req.params;
 	try {
+
 		await service.deleteReview(id, reviewId);
-		res.redirect(`/confirm?msg=${"Review deleted successfully"}&id=${id}`);
+		res.status(200).json({});
+
 
 	} catch (err) {
-		console.error(err);
-		res.redirect(
-			`/error?type=${"Internal Error: 500 Error Deleting Reviews"}&back=/detail/${id}`
-		);
+		res.status(500).json({err});
 	}
 };
