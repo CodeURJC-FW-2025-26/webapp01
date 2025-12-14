@@ -80,7 +80,7 @@ async function reviewForm(event, gameId, reviewId) {
 
 		}
 		else {
-			updateReviewInHTML(review); 
+			updateReviewInHTML(review);
 		}
 		showPopup("The review has been saved!");
 	} else {
@@ -149,7 +149,7 @@ function editReviewInPlace(gameId, reviewId) {
 	`;
 }
 
-function cancelEdit(reviewId) {
+function cancelEdit() {
 	const reviewDiv = document
 		.querySelector("#reviews .my-3 form")
 		.closest(".my-3");
@@ -184,9 +184,23 @@ function updateReviewInHTML(review) {
 	});
 }
 
-function deleteReview(){
-	const reviewDiv = button.closest(".my-3");
-	if (reviewDiv) reviewDiv.remove();
+async function deleteReview(gameId, reviewId) {
+	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ gameId, reviewId })
+	});
+
+	if (response.ok) {
+		const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
+
+		reviewDiv.remove()
+		return;
+	}
+	//fuihfuiewn here the error popup
+
 }
 
 

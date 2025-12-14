@@ -32,8 +32,6 @@ router.post("/edit-game",upload.single("cover_image"),formHandler.editFormGame);
 
 router.post("/detail/:id/reviews", gameDetailHandler.addReviewHandler);
 
-router.get("/detail/:id/reviews/:reviewId/edit", gameDetailHandler.getEditReviewForm);
-
 router.post("/detail/:id/reviews/:reviewId/edit", gameDetailHandler.editReview);
 
 router.post("/detail/:id/reviews/:reviewId/delete", gameDetailHandler.deleteReview);
