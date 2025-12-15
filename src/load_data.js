@@ -27,8 +27,8 @@ export async function loadInitialData() {
 	const games = JSON.parse(dataString).map((g) => {
 		return {
 			...g,
-			release_date: new Date(g.release_date), 
-			reviews: g.reviews.map(review=>new Object({...review, _id: toObjectId()}))
+			release_date: new Date(g.release_date),
+			reviews: g.reviews.map(review => new Object({ ...review, _id: toObjectId() }))
 		};
 	});
 

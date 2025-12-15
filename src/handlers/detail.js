@@ -23,7 +23,6 @@ export const getGameDetail = async (req, res) => {
 	};
 	if (!game) {
 		return res.status(404).json({
-			ok: false,
 			message: "404 error: game not found",
 			gameId: id
    		});
