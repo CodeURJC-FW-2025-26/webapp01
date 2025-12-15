@@ -200,7 +200,7 @@ async function deleteReview(gameId, reviewId) {
 	if (response.ok) {
 		const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
 
-		reviewDiv.remove()
+		reviewDiv.remove();
 		return;
 	}
 	//fuihfuiewn here the error popup
