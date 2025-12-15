@@ -83,7 +83,7 @@ async function reviewForm(event, gameId, reviewId) {
 		}
 		showPopup({
 			message: "The review has been saved!",
-			type: "good"
+			type: true
 		});
 
 	} else {
