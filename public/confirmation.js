@@ -31,13 +31,19 @@ document.getElementById("deleteForm").addEventListener("submit", async (e) => {
 	document.getElementById("confirmDelete").addEventListener("click", async () => {
 		confirmPopup.remove();
 		//only used if you want to delete
-		await fetch("/delete-game", {
+		const res = await fetch("/delete-game", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ id: gameId }),
 		});
 
-		window.location =`/?msg=${"The game has been deleted!"}`;
+		showPopup({
+			message: "The game has been deleted succesfully",
+			type: res.type,
+			onClose: () => {
+				if (res.type) window.location.href = "/";
+			},
+		});
 
 	});
 });
