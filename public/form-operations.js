@@ -1,6 +1,4 @@
 const errorFormGame = new Map([
-
-	["Cannot read properties of undefined (reading 'toUpperCase')", { attribute: "title", userMessage: "Please enter a title for your game." }],
 	["title cannot be empty", { attribute: "title", userMessage: "Please enter a title for your game." }],
 	["title must be unique", { attribute: "title", userMessage: "This title is already used. Please choose a different one." }],
 	["title must start with uppercase", { attribute: "title", userMessage: "The title should start with a capital letter." }],
