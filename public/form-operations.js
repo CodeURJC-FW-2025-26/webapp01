@@ -40,11 +40,21 @@ async function gameForm(event, id) {
 	});
 
 	if (response.ok) {
-		const url = new URL(response.url);
-		const destId = url.searchParams.get("id");
-		window.location =`/?msg=${"The game has been saved!"}&back=/detail/${destId}`;
+		const result = await response.json();
+
+		showPopup({
+			message: "The game has been saved!",
+			type: true,
+			onClose: () => {
+				window.location.href = `/detail/${result.gameId}`;
+			}
+		});
+
 	} else {
-		window.location=`/errorMsg=${"Failed to create game. Please try again."}`;
+		showPopup({
+			message: "Failed to save game",
+			type: false
+		});
 	}
 }
 
@@ -87,8 +97,13 @@ async function reviewForm(event, gameId, reviewId) {
 		});
 
 	} else {
-		window.location=`/errorMsg=${"Failed to create game. Please try again."}&back=/detail/${gameId}`;
-
+		showPopup({
+			message: "Failed to create game. Please try again.",
+			type: false,
+			onClose: () => {
+				window.location.href = `/detail/${gameId}`; 	
+			}
+		});
 	}
 }
 

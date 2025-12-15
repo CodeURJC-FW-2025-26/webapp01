@@ -1,4 +1,4 @@
-function showPopup({message, type}) {
+function showPopup({message, type, onClose}) {
 	const opts = type
 		? "Operation Successful"
 		: "Ooops, something wrong happened";
@@ -24,5 +24,6 @@ function showPopup({message, type}) {
 
 	document.getElementById("closePopupBtn").addEventListener("click", () => {
 		popUp.remove();
+        if (onClose) onClose(); 
 	});
 }
