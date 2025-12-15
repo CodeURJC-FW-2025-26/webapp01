@@ -85,7 +85,10 @@
 
         <label for="inputImage" class="form-label">Upload Cover Image</label>
         <input class="form-control" type="file" id="inputImage" name="cover_image" accept="image/*"
-            value="{{game.cover_image}}" {{^game.cover_image}} required {{/game.cover_image}} onchange="handleImageOnChange(event, 'coverPreview')">
+            value="{{game.cover_image}}" {{^game.cover_image}} required {{/game.cover_image}} onchange="handleImageOnChange(event, 'coverPreview', 'removeCover')">
+        {{^game.cover_image}}
+        <button type="button" class="btn btn-danger mt-2" id="removeCover" onclick="removeCoverImage('inputImage', 'coverPreview')" disabled>Remove Image</button>
+        {{/game.cover_image}}
         <div class="form-text">Accepted formats: JPG, PNG, WEBP, etc.</div>
         <div class="invalid-feedback">Please select a cover image.</div>
     </div>

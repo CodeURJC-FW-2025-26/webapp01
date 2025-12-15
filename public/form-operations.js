@@ -306,13 +306,18 @@ async function deleteReview(e, gameId, reviewId) {
 }
 
 // eslint-disable-next-line
-async function handleImageOnChange(e, preview) {
+async function handleImageOnChange(e, preview, remove) {
 	let fileInput = e.target;
 	let previewImage = document.getElementById(preview);
+	let removeCoverButton = document.getElementById(remove);
 
 	if (!(fileInput && previewImage)) return;
 
 	let newImage = fileInput.files[0];
+	
+	if (removeCoverButton) {
+		removeCoverButton.disabled = !Boolean(newImage);
+	}
 
 	if (!newImage) {
 		const originalSrc = previewImage.dataset.original;
@@ -332,5 +337,18 @@ async function handleImageOnChange(e, preview) {
 		previewImage.classList.remove("d-none");
 	};
 	reader.readAsDataURL(newImage);
+}
+
+// eslint-disable-next-line
+function removeCoverImage(inputId, previewId) {
+	const fileInput = document.getElementById(inputId);
+	const previewImage = document.getElementById(previewId);
+
+	if (!fileInput || !previewImage) return;
+
+	fileInput.value = "";
+
+	const event = new Event("change", { bubbles: true });
+	fileInput.dispatchEvent(event);
 }
 
