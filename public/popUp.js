@@ -24,6 +24,6 @@ function showPopup({message, type, onClose}) {
 
 	document.getElementById("closePopupBtn").addEventListener("click", () => {
 		popUp.remove();
-        if (onClose) onClose(); 
+		if (onClose) onClose(); 
 	});
 }
