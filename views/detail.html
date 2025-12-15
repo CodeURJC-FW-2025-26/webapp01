@@ -100,7 +100,7 @@
 						<button class="btn btn-primary" onclick="editReviewInPlace('{{id}}','{{_id}}')">
 							Edit
 						</button>
-						<form class="nostyle" onsubmit="deleteReview('{{id}}','{{_id}}')">
+						<form class="nostyle" onsubmit="deleteReview(event, '{{id}}','{{_id}}')">
 							<button type="submit" class="btn btn-danger" aria-label="Delete review by {{author}}">
 								Delete
 							</button>

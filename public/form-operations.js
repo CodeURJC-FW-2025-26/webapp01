@@ -98,7 +98,7 @@ async function reviewForm(event, gameId, reviewId) {
 
 	} else {
 		showPopup({
-			message: "Failed to create game. Please try again.",
+			message: "Failed to create the review. Please try again.",
 			type: false,
 			onClose: () => {
 				window.location.href = `/detail/${gameId}`; 	
@@ -203,23 +203,34 @@ function updateReviewInHTML(review) {
 	});
 }
 
-async function deleteReview(gameId, reviewId) {
+async function deleteReview(event, gameId, reviewId) {
+	event.preventDefault();
+
 	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ gameId, reviewId })
+		body: JSON.stringify({ id: gameId, reviewId })
 	});
 
 	if (response.ok) {
 		const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
-
+		showPopup({
+			message: "The review has been removed!",
+			type: true
+		});
 		reviewDiv.remove();
 		return;
+	} else {
+		showPopup({
+			message: "Error while deleting the review",
+			type: false,
+			onClose: () => {
+				window.location.href = `/detail/${gameId}`; 	
+			}
+		});
 	}
-	//fuihfuiewn here the error popup
-
 }
 
 

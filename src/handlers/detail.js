@@ -95,7 +95,7 @@ export const editReview = async (req, res) => {
 };
 
 export const deleteReview = async (req, res) => {
-	const { id, reviewId } = req.params;
+	const { id, reviewId } = req.body; 
 	try {
 
 		await service.deleteReview(id, reviewId);
