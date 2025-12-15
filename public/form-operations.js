@@ -42,13 +42,9 @@ async function gameForm(event, id) {
 	if (response.ok) {
 		const url = new URL(response.url);
 		const destId = url.searchParams.get("id");
-		showPopup({
-		message: "The review has been saved!",
-		type: "good"
-		});
-		window.location = `/detail/${destId}`;
+		window.location =`/?msg=${"The game has been saved!"}&back=/detail/${destId}`;
 	} else {
-		alert("Failed to create game. Please try again.");
+		window.location=`/errorMsg=${"Failed to create game. Please try again."}`;
 	}
 }
 
@@ -91,7 +87,8 @@ async function reviewForm(event, gameId, reviewId) {
 		});
 
 	} else {
-		alert("Failed to create review. Please try again.");
+		window.location=`/errorMsg=${"Failed to create game. Please try again."}&back=/detail/${gameId}`;
+
 	}
 }
 
