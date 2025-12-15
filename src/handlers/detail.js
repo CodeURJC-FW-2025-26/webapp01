@@ -22,7 +22,12 @@ export const getGameDetail = async (req, res) => {
 		id: id,
 	};
 	if (!game) {
-		return res.redirect(`/?errorMsg=${"404 error to get games"}&back=/detail/${id}`);
+		return res.status(404).json({
+			ok: false,
+			message: "404 error: game not found",
+			gameId: id
+   		});
+
 	}
 	const msg = req.query.msg || null;
 	const errorMsg = req.query.errorMsg || null;
