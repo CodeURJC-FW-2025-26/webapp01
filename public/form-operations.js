@@ -305,4 +305,32 @@ async function deleteReview(e, gameId, reviewId) {
 	}
 }
 
+// eslint-disable-next-line
+async function handleImageOnChange(e, preview) {
+	let fileInput = e.target;
+	let previewImage = document.getElementById(preview);
+
+	if (!(fileInput && previewImage)) return;
+
+	let newImage = fileInput.files[0];
+
+	if (!newImage) {
+		const originalSrc = previewImage.dataset.original;
+		if (originalSrc) {
+			previewImage.src = originalSrc;
+			previewImage.classList.remove("d-none");
+		} else {
+			previewImage.src = "";
+			previewImage.classList.add("d-none");
+		}
+		return;
+	}
+
+	const reader = new FileReader();
+	reader.onload = function (ev) {
+		previewImage.src = ev.target.result;
+		previewImage.classList.remove("d-none");
+	};
+	reader.readAsDataURL(newImage);
+}
 
