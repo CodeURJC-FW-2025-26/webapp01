@@ -320,14 +320,8 @@ async function handleImageOnChange(e, preview, remove) {
 	}
 
 	if (!newImage) {
-		const originalSrc = previewImage.dataset.original;
-		if (originalSrc) {
-			previewImage.src = originalSrc;
-			previewImage.classList.remove("d-none");
-		} else {
-			previewImage.src = "";
-			previewImage.classList.add("d-none");
-		}
+		previewImage.src = "";
+		previewImage.classList.add("d-none");
 		return;
 	}
 

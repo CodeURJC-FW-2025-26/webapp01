@@ -76,7 +76,7 @@
     <div>
         <div class="col-md-4 col-12 mb-3 mb-md-0" id="coverPreviewWrapper">
             {{#game.cover_image}}
-            <img id="coverPreview" src="{{game.cover_image}}" alt="Cover of {{title}}" class="img-fluid rounded shadow" data-original="{{game.cover_image}}"/>
+            <img id="coverPreview" src="{{game.cover_image}}" alt="Cover of {{title}}" class="img-fluid rounded shadow"/>
             {{/game.cover_image}}
             {{^game.cover_image}}
             <img id="coverPreview" src="" alt="Cover preview" class="img-fluid rounded shadow d-none" />
@@ -86,9 +86,7 @@
         <label for="inputImage" class="form-label">Upload Cover Image</label>
         <input class="form-control" type="file" id="inputImage" name="cover_image" accept="image/*"
             value="{{game.cover_image}}" {{^game.cover_image}} required {{/game.cover_image}} onchange="handleImageOnChange(event, 'coverPreview', 'removeCover')">
-        {{^game.cover_image}}
-        <button type="button" class="btn btn-danger mt-2" id="removeCover" onclick="removeCoverImage('inputImage', 'coverPreview')" disabled>Remove Image</button>
-        {{/game.cover_image}}
+        <button type="button" class="btn btn-danger mt-2" id="removeCover" onclick="removeCoverImage('inputImage', 'coverPreview')" {{^game.cover_image}}disabled{{/game.cover_image}}>Remove Image</button>
         <div class="form-text">Accepted formats: JPG, PNG, WEBP, etc.</div>
         <div class="invalid-feedback">Please select a cover image.</div>
     </div>

@@ -98,12 +98,9 @@ export async function editGame(id, data, file = null) {
 		platforms: Array.isArray(data.platforms) ? data.platforms : [data.platforms],
 		release_date: new Date(data.release_date),
 		developer: data.developer,
-		pegi_rating: data.pegi_rating
+		pegi_rating: data.pegi_rating,
+		cover_image: file ? `/${file.filename}` : "/img/placeholder.jpg",
 	};
-
-	if (file) {
-		updateData.cover_image = `/${file.filename}`;
-	}
 
 	return await Game.updateOne(
 		{ _id },
