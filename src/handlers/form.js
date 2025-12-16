@@ -2,7 +2,17 @@ import { GENRES, PEGI, PLATFORMS } from "../load_data.js";
 import { addGame, editGame, getGame } from "../service.js";
 
 
+import fs from "node:fs";
+
 export const insertGame = async (req, res) => {
+	let cover_image = null;
+	if (req.file) {
+		const sourcePath = req.file.path;
+		const targetPath = `./public/uploads/${req.file.filename}`;
+		fs.renameSync(sourcePath, targetPath);
+		cover_image = `/uploads/${req.file.filename}`;
+	}
+
 	let game = {
 		title: req.body?.title ?? null,
 		description: req.body?.description ?? null,
@@ -12,7 +22,7 @@ export const insertGame = async (req, res) => {
 			? new Date(req.body.release_date)
 			: null,
 		developer: req.body?.developer ?? null,
-		cover_image: req.file ? `/${req.file.filename}` : null,
+		cover_image: cover_image,
 		pegi_rating: req.body?.pegi_rating ?? null,
 		reviews: [],
 	};
@@ -35,7 +45,7 @@ export const editFormGame = async (req, res) => {
 		await editGame(id, req.body, req.file);
 
 		res.status(200).json({
-			gameId: id
+			id,
 		});
 
 	} catch(error) {

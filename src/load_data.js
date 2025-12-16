@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import * as service from "./service.js";
 import { toObjectId } from "./lib/monkito.js";
 
-const UPLOADS_FOLDER = "./uploads";
+const UPLOADS_FOLDER = "./public/uploads";
 const DATA_FOLDER = "./data";
 
 export const GENRES = JSON.parse(
@@ -28,7 +28,8 @@ export async function loadInitialData() {
 		return {
 			...g,
 			release_date: new Date(g.release_date),
-			reviews: g.reviews.map(review => new Object({ ...review, _id: toObjectId() }))
+			reviews: g.reviews.map(review => new Object({ ...review, _id: toObjectId() })),
+			cover_image: "/uploads" + g.cover_image
 		};
 	});
 
@@ -39,7 +40,7 @@ export async function loadInitialData() {
 
 
 	await fs.rm(UPLOADS_FOLDER, { recursive: true, force: true });
-	await fs.mkdir(UPLOADS_FOLDER);
+	await fs.mkdir(UPLOADS_FOLDER, { recursive: true });
 	await fs.cp(DATA_FOLDER + "/images", UPLOADS_FOLDER, { recursive: true });
 
 	console.log("Demo data loaded");

@@ -326,3 +326,35 @@ footer i:hover {
 .modal-footer .btn {
     width: 100px;
 }
+
+/* ----------------------------- SPINNER ----------------------------- */
+.spinner {
+	width: 30px;
+	height: 30px;
+	border: 3px solid var(--color-accent);
+	border-top: 3px solid var(--color-primary);
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin: 10px auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#drop-zone {
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#drop-zone.dragover {
+    background-color: var(--color-light);
+    border-color: var(--color-primary) !important;
+}

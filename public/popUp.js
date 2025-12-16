@@ -1,8 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 function showPopup({message, type, onClose}) {
 	const opts = type
 		? "Operation Successful"
 		: "Ooops, something wrong happened";
-
 	const popUp = document.createElement("div");
 	popUp.innerHTML = `
         <div id="confirmationModal" class="modal show">

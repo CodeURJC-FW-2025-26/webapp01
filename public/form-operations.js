@@ -8,10 +8,57 @@ const errorFormGame = new Map([
 	["genres must be a non-empty array", { attribute: "genres", userMessage: "Please select at least one genre for your game." }],
 	["platforms must be a non-empty array", { attribute: "platforms", userMessage: "Please select at least one platform where the game can be played." }],
 	["release_date must be a valid date", { attribute: "release_date", userMessage: "Please enter a valid release date for your game." }],
-	["cover_image file is required", { attribute: "cover_image", userMessage: "Please upload a cover image for your game." }]
 ]);
 
+/* ----------------------------- Average Rating ----------------------------- */
+const withElementById = (id) => (fn) => {
+	const el = document.getElementById(id);
+	if (!el) return undefined;
+	return fn(el);
+};
+
+const getProp = (prop) => (el) => el[prop];
+const setProp = (prop) => (value) => (el) => {
+	el[prop] = value;
+	return value;
+};
+
+const makeGetter = (id, prop) => () => withElementById(id)(getProp(prop));
+
+const makeSetter = (id, prop) => (value) =>
+	withElementById(id)(setProp(prop)(value));
+
+const getAverageRating = makeGetter("averageRating", "textContent");
+const setAverageRating = makeSetter("averageRating", "textContent");
+
+const getReviewCount = makeGetter("reviewCount", "value");
+const setReviewCount = makeSetter("reviewCount", "value");
+
+const toNumber = (value) => Number(value) || 0;
+const round = (value) => Math.round(value);
+
+function recalcAverage({ deltaRating, deltaCount }) {
+	const currentAvg = toNumber(getAverageRating());
+	const currentCount = toNumber(getReviewCount());
+
+	const newCount = currentCount + deltaCount;
+
+	if (newCount <= 0) {
+		setAverageRating(0);
+		setReviewCount(0);
+		return;
+	}
+
+	const total = currentAvg * currentCount + deltaRating;
+	setAverageRating(round(total / newCount));
+	setReviewCount(newCount);
+}
+
 function showFormErrors(errors) {
+	showPopup({
+		message: `Invalid game data.\n${errors.join("\n")}`,
+		type: false,
+	});
 	const invalidElements = document.querySelectorAll(".is-invalid");
 	invalidElements.forEach(el => el.classList.remove("is-invalid"));
 
@@ -34,7 +81,7 @@ function showFormErrors(errors) {
 		let inputElement = null;
 		let feedbackElement = null;
 
-		switch(attribute) {
+		switch (attribute) {
 		case "title":
 			inputElement = document.getElementById("inputTitle");
 			feedbackElement = inputElement.nextElementSibling;
@@ -76,6 +123,8 @@ function showFormErrors(errors) {
 	});
 }
 
+
+// eslint-disable-next-line
 async function gameForm(event, id) {
 	event.preventDefault();
 	const form = event.target;
@@ -109,30 +158,43 @@ async function gameForm(event, id) {
 	const route = id ? "/edit-game" : "/game";
 	const formData = new FormData(form);
 
-	const response = await fetch(route, {
-		method: "POST",
-		body: formData,
-	});
-	const data = await response.json();
 
-	if (response.ok) {
-		const result = await response.json();
+	const fileInput = document.getElementById("inputImage");
+	const newVal = fileInput?.hasAttribute("keep");
+	formData.append("cover_keep", newVal || false);
 
-		showPopup({
-			message: "The game has been saved!",
-			type: true,
-			onClose: () => {
-				window.location.href = `/detail/${result.gameId}`;
-			}
+	const submitBtn = form.querySelector("button[type=\"submit\"]");
+	submitBtn.disabled = true;
+	Spinner.show(submitBtn.parentNode);
+
+	try {
+		const response = await fetch(route, {
+			method: "POST",
+			body: formData,
 		});
-		window.location = `/detail/${data.id}`;
-	} else {
-		showFormErrors(data.errors);
+		const data = await response.json();
+
+		if (response.ok) {
+			showPopup({
+				message: "The game has been saved!",
+				type: true,
+				onClose: () => {
+					window.location.href = `/detail/${data.id}`;
+				}
+			});
+		} else {
+			showFormErrors(data.errors);
+		}
+	} catch (error) {
+		console.error("Error submitting game form:", error);
+		showPopup({ message: "An error occurred.", type: false });
+	} finally {
+		Spinner.hide(submitBtn.parentNode);
+		submitBtn.disabled = false;
 	}
 }
 
-
-
+// eslint-disable-next-line
 async function reviewForm(event, gameId, reviewId) {
 	event.preventDefault();
 
@@ -147,35 +209,54 @@ async function reviewForm(event, gameId, reviewId) {
 	//here we don't have files
 	const data = Object.fromEntries(new FormData(form));
 
-	response = await fetch(route, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	});
+	const submitBtn = form.querySelector("button[type=\"submit\"]");
+	submitBtn.disabled = true;
+	Spinner.show(submitBtn.parentNode);
 
-
-	if (response.ok) {
-		const review = await response.json();
-		if (!reviewId) {
-			addReview(review);
-			form.reset();
-
-		}
-		else {
-			updateReviewInHTML(review);
-		}
-		showPopup({
-			message: "The review has been saved!",
-			type: true
+	try {
+		const response = await fetch(route, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
 		});
 
-	} else {
-		showPopup({
-			message: "Failed to create the review. Please try again.",
-			type: false
-		});
+
+		if (response.ok) {
+			const review = await response.json();
+			if (!reviewId) {
+				addReview(review);
+
+				recalcAverage({
+					deltaRating: review.rating,
+					deltaCount: 1,
+				});
+
+				form.reset();
+			}
+			else {
+				updateReviewInHTML(review);
+			}
+			showPopup({
+				message: "The review has been saved!",
+				type: true
+			});
+
+		} else {
+			const data = await response.json();
+			const { err } = data;
+			showPopup({
+				message: `Failed to create the review.\n${err?.join("\n")}`,
+				type: false
+			});
+		}
+	} catch (error) {
+		console.error("Error submitting review:", error);
+		showPopup({ message: "An error occurred.", type: false });
+	} finally {
+		Spinner.hide(submitBtn.parentNode);
+		submitBtn.disabled = false;
 	}
 }
 
@@ -195,8 +276,8 @@ function addReview(review) {
 			<strong>Rating:</strong> ${review.rating}
 		</div>
 		<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-			<a href="/detail/${review.gameId}/reviews/${review._id}/edit" class="btn btn-primary">Edit</a>
-			<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">
+			<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
+			<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">
 				Delete
 			</button>
 		</div>
@@ -205,17 +286,25 @@ function addReview(review) {
 	reviewsContainer.appendChild(div);
 }
 
+// eslint-disable-next-line
 function editReviewInPlace(gameId, reviewId) {
 	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
 
+	const score = Number(
+		reviewDiv
+			.querySelector(".alert")
+			.textContent.replace("Rating:", "")
+			.trim()
+	);
 	reviewDiv.dataset.originalHtml = reviewDiv.innerHTML;
+	reviewDiv.dataset.originalRating = score;
 
 	const author = reviewDiv.querySelector("h3").textContent.trim();
 	const comment = reviewDiv.querySelector(".border").textContent.trim();
 	const rating = reviewDiv.querySelector(".alert").textContent.replace("Rating:", "").trim();
 
 	reviewDiv.innerHTML = `
-		<form novalidate onsubmit="reviewForm(event,'${gameId}','${reviewId}')">
+		<form novalidate onsubmit="reviewForm(event,'${gameId}','${reviewId}')" rid=${reviewId}>
 			<div class="mb-2">
 				<label>Author</label>
 				<input type="text" name="author" class="form-control" value="${author}" required>
@@ -240,10 +329,9 @@ function editReviewInPlace(gameId, reviewId) {
 	`;
 }
 
-function cancelEdit() {
-	const reviewDiv = document
-		.querySelector("#reviews .my-3 form")
-		.closest(".my-3");
+// eslint-disable-next-line
+function cancelEdit(reviewId) {
+	const reviewDiv = document.querySelector(`[rid="${reviewId}"]`).closest(".my-3");
 
 	if (reviewDiv.dataset.originalHtml) {
 		reviewDiv.innerHTML = reviewDiv.dataset.originalHtml;
@@ -255,29 +343,39 @@ function cancelEdit() {
 function updateReviewInHTML(review) {
 	const reviewDivs = document.querySelectorAll("#reviews .my-3");
 
-	reviewDivs.forEach(div => {
-		const editBtn = div.querySelector(`button[onclick*="${review._id}"]`);
-		if (editBtn) {
-			div.innerHTML = `
-				<h3>${review.author}</h3>
-				<div class="border rounded p-3 bg-light text-dark">
-					${review.comment}
-				</div>
-				<div class="alert alert-success p-2 flex-fill text-center mb-2">
-					<strong>Rating:</strong> ${review.rating}
-				</div>
-				<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-					<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
-					<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">Delete</button>
-				</div>
-			`;
-		}
+	reviewDivs.forEach((div) => {
+		const form = div.querySelector(`[rid="${review._id}"]`);
+		if (!form) return;
+
+		const oldRating = Number(div.dataset.originalRating);
+		const newRating = Number(review.rating);
+
+		recalcAverage({
+			deltaRating: newRating - oldRating,
+			deltaCount: 0,
+		});
+
+		delete div.dataset.originalRating;
+
+		div.innerHTML = `
+			<h3>${review.author}</h3>
+			<div class="border rounded p-3 bg-light text-dark">
+				${review.comment}
+			</div>
+			<div class="alert alert-success p-2 flex-fill text-center mb-2">
+				<strong>Rating:</strong> ${review.rating}
+			</div>
+			<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+				<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
+				<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">Delete</button>
+			</div>
+		`;
 	});
 }
 
-async function deleteReview(event, gameId, reviewId) {
-	event.preventDefault();
-
+// eslint-disable-next-line
+async function deleteReview(e, gameId, reviewId) {
+	e.preventDefault();
 	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
 		method: "POST",
 		headers: {
@@ -292,6 +390,19 @@ async function deleteReview(event, gameId, reviewId) {
 			message: "The review has been removed!",
 			type: true
 		});
+
+		const rating = Number(
+			reviewDiv
+				.querySelector(".alert")
+				.textContent.replace("Rating:", "")
+				.trim()
+		);
+
+		recalcAverage({
+			deltaRating: -rating,
+			deltaCount: -1,
+		});
+
 		reviewDiv.remove();
 		return;
 	} else {
@@ -302,4 +413,101 @@ async function deleteReview(event, gameId, reviewId) {
 	}
 }
 
+// eslint-disable-next-line
+async function handleImageOnChange(e, preview, remove) {
+	let fileInput = e.target;
+	let previewImage = document.getElementById(preview);
+	let removeCoverButton = document.getElementById(remove);
 
+	if (!(fileInput && previewImage)) return;
+
+	let newImage = fileInput.files[0];
+
+	if (removeCoverButton) {
+		removeCoverButton.disabled = !Boolean(newImage);
+	}
+
+	if (!newImage) {
+		fileInput.removeAttribute("keep", "");
+		previewImage.src = "";
+		previewImage.classList.add("d-none");
+		return;
+	}
+
+	fileInput.removeAttribute("keep", false);
+
+	const reader = new FileReader();
+	reader.onload = function (ev) {
+		previewImage.src = ev.target.result;
+		previewImage.classList.remove("d-none");
+	};
+	reader.readAsDataURL(newImage);
+}
+
+// eslint-disable-next-line
+function removeCoverImage(inputId, previewId) {
+	const fileInput = document.getElementById(inputId);
+	const previewImage = document.getElementById(previewId);
+
+	if (!fileInput || !previewImage) return;
+
+	fileInput.value = "";
+	fileInput.removeAttribute("keep");
+
+	const event = new Event("change", { bubbles: true });
+	fileInput.dispatchEvent(event);
+}
+
+function setupDragAndDrop() {
+	const dropZone = document.getElementById("drop-zone");
+	const fileInput = document.getElementById("inputImage");
+
+	if (!dropZone || !fileInput) return;
+
+	["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+		dropZone.addEventListener(eventName, preventDefaults, false);
+		document.body.addEventListener(eventName, preventDefaults, false);
+	});
+
+	["dragenter", "dragover"].forEach(eventName => {
+		dropZone.addEventListener(eventName, highlight, false);
+	});
+
+	["dragleave", "drop"].forEach(eventName => {
+		dropZone.addEventListener(eventName, unhighlight, false);
+	});
+
+	dropZone.addEventListener("drop", handleDrop, false);
+
+	dropZone.addEventListener("click", (e) => {
+		if (e.target !== fileInput && e.target.tagName !== "BUTTON") {
+			fileInput.click();
+		}
+	});
+
+	function preventDefaults(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
+	function highlight() {
+		dropZone.classList.add("dragover");
+	}
+
+	function unhighlight() {
+		dropZone.classList.remove("dragover");
+	}
+
+	function handleDrop(e) {
+		const dt = e.dataTransfer;
+		const files = dt.files;
+
+		if (files.length > 0) {
+			fileInput.files = files;
+			const event = new Event("change", { bubbles: true });
+			fileInput.dispatchEvent(event);
+		}
+	}
+}
+
+document.addEventListener("DOMContentLoaded", setupDragAndDrop);
