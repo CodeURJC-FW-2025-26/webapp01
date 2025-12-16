@@ -490,11 +490,11 @@ function setupDragAndDrop() {
 		e.stopPropagation();
 	}
 
-	function highlight(e) {
+	function highlight() {
 		dropZone.classList.add("dragover");
 	}
 
-	function unhighlight(e) {
+	function unhighlight() {
 		dropZone.classList.remove("dragover");
 	}
 
