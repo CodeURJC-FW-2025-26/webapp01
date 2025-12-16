@@ -87,7 +87,7 @@
         <div id="drop-zone" class="p-4 text-center border rounded mb-2" style="border-style: dashed; cursor: pointer;">
             <p class="mb-2">Drag & Drop your image here or click to select</p>
             <input class="form-control d-none" type="file" id="inputImage" name="cover_image" accept="image/*"
-                value="{{game.cover_image}}" {{^game.cover_image}} required {{/game.cover_image}} onchange="handleImageOnChange(event, 'coverPreview', 'removeCover')" {{#game.cover_image}} keep {{/game.cover_image}}>
+                value="{{game.cover_image}}" onchange="handleImageOnChange(event, 'coverPreview', 'removeCover')" {{#game.cover_image}} keep {{/game.cover_image}}>
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('inputImage').click()">Select File</button>
         </div>
         <button type="button" class="btn btn-danger mt-2" id="removeCover" onclick="removeCoverImage('inputImage', 'coverPreview')" {{^game.cover_image}}disabled{{/game.cover_image}}>Remove Image</button>

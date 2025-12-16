@@ -9,7 +9,7 @@ const Game = Monkito.model("Game", {
 		platforms: { type: "array", required: true },
 		release_date: { type: "date", required: true },
 		developer: { type: "string", required: true },                  
-		cover_image: { type: "string", required: true },              
+		cover_image: { type: "string"},              
 		pegi_rating: { type: "string", required: true },              
 		reviews: { type: "array", required: true },      
 		average_rating: { type: "number" }
@@ -44,7 +44,7 @@ const Game = Monkito.model("Game", {
 		}
 
 		if (!doc.cover_image) {
-			errors.push("cover_image file is required");
+			doc.cover_image = "/img/placeholder.jpg";
 		}
 
 		let duplicated = await Game.findOne({ title: doc.title });

@@ -8,7 +8,6 @@ const errorFormGame = new Map([
 	["genres must be a non-empty array", { attribute: "genres", userMessage: "Please select at least one genre for your game." }],
 	["platforms must be a non-empty array", { attribute: "platforms", userMessage: "Please select at least one platform where the game can be played." }],
 	["release_date must be a valid date", { attribute: "release_date", userMessage: "Please enter a valid release date for your game." }],
-	["cover_image file is required", { attribute: "cover_image", userMessage: "Please upload a cover image for your game." }]
 ]);
 
 /* ----------------------------- Average Rating ----------------------------- */
@@ -82,7 +81,7 @@ function showFormErrors(errors) {
 		let inputElement = null;
 		let feedbackElement = null;
 
-		switch(attribute) {
+		switch (attribute) {
 		case "title":
 			inputElement = document.getElementById("inputTitle");
 			feedbackElement = inputElement.nextElementSibling;
@@ -158,6 +157,7 @@ async function gameForm(event, id) {
 
 	const route = id ? "/edit-game" : "/game";
 	const formData = new FormData(form);
+
 
 	const fileInput = document.getElementById("inputImage");
 	const newVal = fileInput?.hasAttribute("keep");
@@ -422,7 +422,7 @@ async function handleImageOnChange(e, preview, remove) {
 	if (!(fileInput && previewImage)) return;
 
 	let newImage = fileInput.files[0];
-	
+
 	if (removeCoverButton) {
 		removeCoverButton.disabled = !Boolean(newImage);
 	}
@@ -452,7 +452,7 @@ function removeCoverImage(inputId, previewId) {
 	if (!fileInput || !previewImage) return;
 
 	fileInput.value = "";
-	fileInput.removeAttribute("keep");	
+	fileInput.removeAttribute("keep");
 
 	const event = new Event("change", { bubbles: true });
 	fileInput.dispatchEvent(event);
