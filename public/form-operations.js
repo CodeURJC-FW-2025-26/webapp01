@@ -99,10 +99,7 @@ async function reviewForm(event, gameId, reviewId) {
 	} else {
 		showPopup({
 			message: "Failed to create the review. Please try again.",
-			type: false,
-			onClose: () => {
-				window.location.href = `/detail/${gameId}`; 	
-			}
+			type: false
 		});
 	}
 }
@@ -225,10 +222,7 @@ async function deleteReview(event, gameId, reviewId) {
 	} else {
 		showPopup({
 			message: "Error while deleting the review",
-			type: false,
-			onClose: () => {
-				window.location.href = `/detail/${gameId}`; 	
-			}
+			type: false
 		});
 	}
 }
