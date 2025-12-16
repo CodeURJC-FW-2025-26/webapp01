@@ -349,3 +349,12 @@ footer i:hover {
 		transform: rotate(360deg);
 	}
 }
+
+#drop-zone {
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#drop-zone.dragover {
+    background-color: var(--color-light);
+    border-color: var(--color-primary) !important;
+}

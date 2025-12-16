@@ -458,3 +458,56 @@ function removeCoverImage(inputId, previewId) {
 	fileInput.dispatchEvent(event);
 }
 
+function setupDragAndDrop() {
+	const dropZone = document.getElementById("drop-zone");
+	const fileInput = document.getElementById("inputImage");
+
+	if (!dropZone || !fileInput) return;
+
+	["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+		dropZone.addEventListener(eventName, preventDefaults, false);
+		document.body.addEventListener(eventName, preventDefaults, false);
+	});
+
+	["dragenter", "dragover"].forEach(eventName => {
+		dropZone.addEventListener(eventName, highlight, false);
+	});
+
+	["dragleave", "drop"].forEach(eventName => {
+		dropZone.addEventListener(eventName, unhighlight, false);
+	});
+
+	dropZone.addEventListener("drop", handleDrop, false);
+
+	dropZone.addEventListener("click", (e) => {
+		if (e.target !== fileInput && e.target.tagName !== "BUTTON") {
+			fileInput.click();
+		}
+	});
+
+	function preventDefaults(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
+	function highlight(e) {
+		dropZone.classList.add("dragover");
+	}
+
+	function unhighlight(e) {
+		dropZone.classList.remove("dragover");
+	}
+
+	function handleDrop(e) {
+		const dt = e.dataTransfer;
+		const files = dt.files;
+
+		if (files.length > 0) {
+			fileInput.files = files;
+			const event = new Event("change", { bubbles: true });
+			fileInput.dispatchEvent(event);
+		}
+	}
+}
+
+document.addEventListener("DOMContentLoaded", setupDragAndDrop);
