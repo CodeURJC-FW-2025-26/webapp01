@@ -33,9 +33,22 @@ export const getGameDetail = async (req, res) => {
 	res.render("detail", { ...game, reviewCount: game?.reviews?.length || 0, msg, errorMsg });
 };
 
+import fs from "node:fs";
+import path from "node:path";
+
 export const deleteDetailGame = async (req, res) => {
 	try {
-		await service.deleteGame(req.body.id);
+		const game = await service.deleteGame(req.body.id);
+		if (game && game.cover_image && game.cover_image.startsWith("/uploads/")) {
+			const imagePath = path.join("./public", game.cover_image);
+			try {
+				if (fs.existsSync(imagePath)) {
+					fs.unlinkSync(imagePath);
+				}
+			} catch (err) {
+				console.error("Error deleting image:", err);
+			}
+		}
 		return res.json({ message: "Game deleted successfully", type: true });
 	} catch {
 		return res.json({ message: "Can't delete the game", type: false });

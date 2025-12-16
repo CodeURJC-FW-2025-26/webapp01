@@ -89,6 +89,9 @@ export async function getGamesPaginated(page = 1, pageSize = 6, filter = {}, opt
 	return Game.paginate(filter, { page, pageSize, ...options });
 }
 
+import fs from "node:fs";
+import path from "node:path";
+
 export async function editGame(id, data, file = null) {
 	const _id = toObjectId(id);
 	const updateData = {
@@ -102,7 +105,26 @@ export async function editGame(id, data, file = null) {
 	};
 
 	if (data.cover_keep === "false") {
-		updateData.cover_image = file ? `/${file.filename}` : "/img/placeholder.jpg";
+		const existingGame = await Game.findById(_id);
+		if (existingGame && existingGame.cover_image && existingGame.cover_image.startsWith("/uploads/")) {
+			const oldImagePath = path.join("./public", existingGame.cover_image);
+			try {
+				if (fs.existsSync(oldImagePath)) {
+					fs.unlinkSync(oldImagePath);
+				}
+			} catch (err) {
+				console.error("Error deleting old image:", err);
+			}
+		}
+
+		if (file) {
+			const sourcePath = file.path;
+			const targetPath = `./public/uploads/${file.filename}`;
+			fs.renameSync(sourcePath, targetPath);
+			updateData.cover_image = `/uploads/${file.filename}`;
+		} else {
+			updateData.cover_image = "/img/placeholder.jpg";
+		}
 	}
 
 	return await Game.updateOne(
