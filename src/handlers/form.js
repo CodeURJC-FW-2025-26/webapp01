@@ -19,12 +19,13 @@ export const insertGame = async (req, res) => {
 
 	try {
 		const gameObject = await addGame(game);
-		res.json({ ok: true, gameId: gameObject._id });
+		res.status(200).json({id: gameObject._id});
 	} catch(error) {
-		res.status(400).json({
-			ok: false,
-			message: error.errors?.join("<br>") ?? "Unknown error"
-		});
+		if (error.errors) {
+			console.log({ errors: error.errors});
+			return res.status(400).json({ errors: error.errors});
+		}
+		return res.status(500).json({});
 	}
 };
 
@@ -33,15 +34,13 @@ export const editFormGame = async (req, res) => {
 		const id = req.body.id;
 		await editGame(id, req.body, req.file);
 
-		res.json({
-			ok: true,
+		res.status(200).json({
 			gameId: id
 		});
 
 	} catch(error) {
 		res.status(400).json({
-			ok: false,
-			message: error.errors?.join("<br>") ?? "Unknown error"
+			errors: error.errors
 		});
 	}
 };

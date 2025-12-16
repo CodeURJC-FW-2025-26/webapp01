@@ -1,8 +1,83 @@
+const errorFormGame = new Map([
+	["title cannot be empty", { attribute: "title", userMessage: "Please enter a title for your game." }],
+	["title must be unique", { attribute: "title", userMessage: "This title is already used. Please choose a different one." }],
+	["title must start with uppercase", { attribute: "title", userMessage: "The title should start with a capital letter." }],
+	["description cannot be empty", { attribute: "description", userMessage: "Please provide a description for your game." }],
+	["description must be between 1 and 400 chars", { attribute: "description", userMessage: "The description should be between 1 and 400 characters long." }],
+	["developer cannot be empty", { attribute: "developer", userMessage: "Please enter the name of the developer." }],
+	["genres must be a non-empty array", { attribute: "genres", userMessage: "Please select at least one genre for your game." }],
+	["platforms must be a non-empty array", { attribute: "platforms", userMessage: "Please select at least one platform where the game can be played." }],
+	["release_date must be a valid date", { attribute: "release_date", userMessage: "Please enter a valid release date for your game." }],
+	["cover_image file is required", { attribute: "cover_image", userMessage: "Please upload a cover image for your game." }]
+]);
 
+function showFormErrors(errors) {
+	const invalidElements = document.querySelectorAll(".is-invalid");
+	invalidElements.forEach(el => el.classList.remove("is-invalid"));
+
+	const feedbackElements = document.querySelectorAll(".invalid-feedback");
+	feedbackElements.forEach(el => {
+		el.textContent = el.dataset.default || el.textContent;
+	});
+
+	const messages = new Map();
+
+	errors.forEach(err => {
+		if (errorFormGame.has(err)) {
+			const { attribute, userMessage } = errorFormGame.get(err);
+			if (!messages.has(attribute)) messages.set(attribute, []);
+			messages.get(attribute).push(userMessage);
+		}
+	});
+
+	messages.forEach((msgs, attribute) => {
+		let inputElement = null;
+		let feedbackElement = null;
+
+		switch(attribute) {
+		case "title":
+			inputElement = document.getElementById("inputTitle");
+			feedbackElement = inputElement.nextElementSibling;
+			break;
+		case "description":
+			inputElement = document.getElementById("inputDescription");
+			feedbackElement = inputElement.nextElementSibling;
+			break;
+		case "developer":
+			inputElement = document.getElementById("inputDeveloper");
+			feedbackElement = inputElement.nextElementSibling;
+			break;
+		case "release_date":
+			inputElement = document.getElementById("inputDate");
+			feedbackElement = inputElement.nextElementSibling;
+			break;
+		case "genres":
+			feedbackElement = document.getElementById("genreError");
+			break;
+		case "platforms":
+			feedbackElement = document.getElementById("platformError");
+			break;
+		case "cover_image":
+			inputElement = document.getElementById("inputImage");
+			feedbackElement = inputElement.nextElementSibling.nextElementSibling;
+			break;
+		}
+
+		if (inputElement) {
+			inputElement.classList.remove("is-valid");
+			inputElement.classList.add("is-invalid");
+		}
+
+		if (feedbackElement && !feedbackElement.dataset.default) {
+			feedbackElement.dataset.default = feedbackElement.textContent;
+		}
+
+		if (feedbackElement) feedbackElement.textContent = msgs.join(" ");
+	});
+}
 
 async function gameForm(event, id) {
 	event.preventDefault();
-
 	const form = event.target;
 	const genres = form.querySelectorAll("input[name=\"genres\"]:checked");
 	const platforms = form.querySelectorAll("input[name=\"platforms\"]:checked");
@@ -38,6 +113,7 @@ async function gameForm(event, id) {
 		method: "POST",
 		body: formData,
 	});
+	const data = await response.json();
 
 	if (response.ok) {
 		const result = await response.json();
@@ -49,14 +125,13 @@ async function gameForm(event, id) {
 				window.location.href = `/detail/${result.gameId}`;
 			}
 		});
-
+		window.location = `/detail/${data.id}`;
 	} else {
-		showPopup({
-			message: "Failed to save game",
-			type: false
-		});
+		showFormErrors(data.errors);
 	}
 }
+
+
 
 async function reviewForm(event, gameId, reviewId) {
 	event.preventDefault();

@@ -36,9 +36,9 @@ const Game = Monkito.model("Game", {
 			}
 		}
 
-		if (
-			!(doc.release_date instanceof Date) ||
-			isNaN(doc.release_date.getTime())
+		if ( doc.release_date &&
+			(!(doc.release_date instanceof Date) ||
+			isNaN(doc.release_date.getTime()))
 		) {
 			errors.push("release_date must be a valid date");
 		}
@@ -53,7 +53,7 @@ const Game = Monkito.model("Game", {
 			errors.push("title must be unique");
 		}
 
-		if (doc.title[0] !== doc.title[0].toUpperCase()) {
+		if ( doc.title && doc.title[0] !== doc.title[0].toUpperCase()) {
 			errors.push("title must start with uppercase");
 		}
 
