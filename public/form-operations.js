@@ -199,8 +199,8 @@ function addReview(review) {
 			<strong>Rating:</strong> ${review.rating}
 		</div>
 		<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-			<a href="/detail/${review.gameId}/reviews/${review._id}/edit" class="btn btn-primary">Edit</a>
-			<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">
+			<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
+			<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">
 				Delete
 			</button>
 		</div>
@@ -220,7 +220,7 @@ function editReviewInPlace(gameId, reviewId) {
 	const rating = reviewDiv.querySelector(".alert").textContent.replace("Rating:", "").trim();
 
 	reviewDiv.innerHTML = `
-		<form novalidate onsubmit="reviewForm(event,'${gameId}','${reviewId}')">
+		<form novalidate onsubmit="reviewForm(event,'${gameId}','${reviewId}')" rid=${reviewId}>
 			<div class="mb-2">
 				<label>Author</label>
 				<input type="text" name="author" class="form-control" value="${author}" required>
@@ -246,10 +246,8 @@ function editReviewInPlace(gameId, reviewId) {
 }
 
 // eslint-disable-next-line
-function cancelEdit() {
-	const reviewDiv = document
-		.querySelector("#reviews .my-3 form")
-		.closest(".my-3");
+function cancelEdit(reviewId) {
+	const reviewDiv = document.querySelector(`[rid="${reviewId}"]`).closest(".my-3");
 
 	if (reviewDiv.dataset.originalHtml) {
 		reviewDiv.innerHTML = reviewDiv.dataset.originalHtml;
@@ -274,7 +272,7 @@ function updateReviewInHTML(review) {
 				</div>
 				<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
 					<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
-					<button class="btn btn-danger" onclick="deleteReview('${review._id}', '${review.gameId}', this)">Delete</button>
+					<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">Delete</button>
 				</div>
 			`;
 		}
