@@ -386,8 +386,18 @@ pez
 I solve bugs all around the code. Centering in the javascript part. I solved error such as the visualization of the image when introducing a new game.
 
 **Main commits**
+- [Add spinner for async operations](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/htt16e7c2c)
+- [Update average rating without needing to refresh](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/htteaf05da)
+- [Setup drag&drop](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/htt488db64)
+- [Store images in proper folder and remove unused ones](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/htt5886fca)
+- [Show preview on  cover image change](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/htt1d3ca44) 
 
 **Changed files**
+- `public/form-operations.js`
+- `public/scroll.js`
+- `src/handlers/detail.js`
+- `views/form.html`
+- `public/js/spinner.js`
 
 ### Alejandro García Prada
 
