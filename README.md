@@ -383,6 +383,46 @@ pez
 
 ### Marcelo Atanasio Domínguez Mateo
 
+I solve bugs all around the code. Centering in the javascript part. I solved error such as the visualization of the image when introducing a new game.
+
+**Main commits**
+
+**Changed files**
+
 ### Alejandro García Prada
 
+I have made the validations of the formularies. Also I addpated the HTML for the new requirements.
+
+**Main commits**
+
+**Changed files**
+
+
 ### Daniel Bonachela Martínez 
+
+For this part of the project I made the modal's notifications and the infinite scroll. Also I helped changing the HTML.
+
+**Main commits**
+
+- [AJAX Stuff](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/3b907f8aeb2a26320470d757d5ae706a1d293a82)
+- [Modal for confirmation.js](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/f420c537d4065410e9840ca6a5255bb50b2bdf2d)
+- [confirmation PopUp](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/1bf68f8d7b771c6c29e332c5e967a3b1af2b96b1)
+- [errorPopUp](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/5181d9d252608941cdf45dc401c5e56f916ea6de)
+- [Confirm popUp](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/e8a19b9ea19bbb2e7f020a33d2e384f98cdf9989)
+- [First Version of Scroll](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bbdc38afb5947f5eacc373aa685a754e39ec60ea)
+
+**Changed files**
+
+- `src\public\css\style.css`
+- `views\new-game-form.html`
+- `views\index.html`
+- `views\detail.html`
+- `public\confirmation.js`
+- `public\form-operations.js`
+- `public\popUp.js`
+- `public\scroll.js`
+- `src\handlers\detail.js`
+- `src\handlers\form.js`
+- `src\handlers\games.js`
+- `src\router.js`
+
