@@ -282,3 +282,107 @@ I have worked on the main entity form (for editing and creating games) and on de
 - `views\edit-game-form.html`
 - `views\header.html`
 - `views\footer.html`
+
+
+# Práctica 3
+## Getting Started
+Clone the repo:
+```bash
+git clone https://github.com/CodeURJC-FW-2025-26/webapp01
+``` 
+
+Start MongoDB:
+```bash
+sudo systemctl start mongod
+sudo systemctl enable mongod
+sudo systemctl status mongod # should show active (running)
+```
+
+This webapp was developed with `npm v11.6.2`, `node v24.11.1` and `mongod v8.2.1`.
+
+Here's the detailed config.
+```bash
+$ npm --version
+11.6.2
+$ node --version
+v24.11.1
+$ mongod --version
+db version v8.2.1
+Build Info: {
+    "version": "8.2.1",
+    "gitVersion": "3312bdcf28aa65f5930005e21c2cb130f648b8c3",
+    "openSSLVersion": "OpenSSL 3.0.13 30 Jan 2024",
+    "modules": [],
+    "allocator": "tcmalloc-google",
+    "environment": {
+        "distmod": "ubuntu2404",
+        "distarch": "x86_64",
+        "target_arch": "x86_64"
+    }
+}
+```
+
+Install dependencies and start the server:
+```bash
+npm install
+npm start
+```
+
+Access the app at: `http://localhost:3000`
+
+## Files description
+### app.js
+Configures and starts the web server, connects to the DB, and loads initial data.
+### load_data.js
+Reads the example data, such as games, reviews... Also resets the uploads folder and copies the initial images. 
+### router.js
+Defines and handles all web routes.
+### service.js
+Wrappers that handle the interactions with Monkito, so that no other part of the app can access the database (directly).
+### monkito.js
+Consists of generic classes for structured and safe MongoDB access with models, queries, and CRUD operations.
+### monkito.test.js
+Tests that ensure that monkito works correctly.
+### confirmation.js
+Confirmation message when you try to delete a game.
+### detail.js
+The detail page manages the display of game's information and the reviews, allowing to interact with all of it.
+### popUp.js
+Error and confirmation messages for diverse operations.
+### form.js
+Checks that the form contains all required fields and handles creating and editing games.
+### games.js
+Returns the filtered games and sets up pagination and filter states for index.html.
+### form-operations.js
+Makes the frontend part of the formularies works.
+### scroll.js
+This is intended to check when you are on the bottom of the page to load more games (if possible)
+### styles.css
+The different styles the web uses
+### detail.html
+The page that display the detail page issues, from the game's description to the reviews it has
+### edit-game-form.html
+Has a button to edit videogames in detail page
+### edit-review.html
+The html that is shown when the user wants to edit a review
+### footer.html
+A html with the footer links, it is used by the rest of .html
+### form.html
+The page that allows to introduce a new game to the web
+### header.html
+A html with the header, that has the logotype, it is used by the rest of .html
+### index.html
+The main page html, it shows the search bars, filters, the games and the pagination 
+### new-game-form.html
+The html that links with the one that has the form to add new games
+### review-form.html
+The html for the adding of reviews.
+## Video
+pez
+## Member Participation
+
+### Marcelo Atanasio Domínguez Mateo
+
+### Alejandro García Prada
+
+### Daniel Bonachela Martínez 
