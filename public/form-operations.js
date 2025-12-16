@@ -174,8 +174,10 @@ async function reviewForm(event, gameId, reviewId) {
 		});
 
 	} else {
+		const data = await response.json();
+		const { err } = data;
 		showPopup({
-			message: "Failed to create the review. Please try again.",
+			message: `Failed to create the review.\n${err?.join("\n")}`,
 			type: false
 		});
 	}

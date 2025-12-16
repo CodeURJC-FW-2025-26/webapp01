@@ -46,6 +46,15 @@ export const addReviewHandler = async (req, res) => {
 	try {
 		const id = req.params.id;
 		const { author, comment, rating } = req.body;
+
+		const errors = [];
+		if (!author) errors.push("review author is required");
+		if (!comment) errors.push("review comment is required");
+		if (!rating) errors.push("review rating is required");
+		if (rating && (rating < 0 || rating > 100))
+			errors.push("review rating must be between 0 and 100");
+		if (errors.length) res.status(400).json({ err: errors });
+
 		const review = {
 			_id: toObjectId(),
 			author,
@@ -62,13 +71,20 @@ export const addReviewHandler = async (req, res) => {
 			gameId: id
 		});
 	} catch (err) {
-		res.status(500).json({ err });
+		res.status(400).json({ err });
 	}
 };
 
 export const editReview = async (req, res) => {
 	const { id, reviewId } = req.params;
 	const { author, comment, rating } = req.body;
+
+	const errors = [];
+	if (!author) errors.push("review author is required");
+	if (!comment) errors.push("review comment is required");
+	if (!rating) errors.push("review rating is required");
+	if (rating && (rating < 0 || rating > 100)) errors.push("review rating must be between 0 and 100");
+	if (errors.length) res.status(400).json({ err: errors });
 
 	try {
 
@@ -89,7 +105,7 @@ export const editReview = async (req, res) => {
 
 
 	} catch (err) {
-		res.status(500).json({err});
+		res.status(400).json({err});
 	}
 };
 
