@@ -163,22 +163,34 @@ async function gameForm(event, id) {
 	const newVal = fileInput?.hasAttribute("keep");
 	formData.append("cover_keep", newVal || false);
 
-	const response = await fetch(route, {
-		method: "POST",
-		body: formData,
-	});
-	const data = await response.json();
+	const submitBtn = form.querySelector("button[type=\"submit\"]");
+	submitBtn.disabled = true;
+	Spinner.show(submitBtn.parentNode);
 
-	if (response.ok) {
-		showPopup({
-			message: "The game has been saved!",
-			type: true,
-			onClose: () => {
-				window.location.href = `/detail/${data.id}`;
-			}
+	try {
+		const response = await fetch(route, {
+			method: "POST",
+			body: formData,
 		});
-	} else {
-		showFormErrors(data.errors);
+		const data = await response.json();
+
+		if (response.ok) {
+			showPopup({
+				message: "The game has been saved!",
+				type: true,
+				onClose: () => {
+					window.location.href = `/detail/${data.id}`;
+				}
+			});
+		} else {
+			showFormErrors(data.errors);
+		}
+	} catch (error) {
+		console.error("Error submitting game form:", error);
+		showPopup({ message: "An error occurred.", type: false });
+	} finally {
+		Spinner.hide(submitBtn.parentNode);
+		submitBtn.disabled = false;
 	}
 }
 
@@ -197,42 +209,54 @@ async function reviewForm(event, gameId, reviewId) {
 	//here we don't have files
 	const data = Object.fromEntries(new FormData(form));
 
-	response = await fetch(route, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	});
+	const submitBtn = form.querySelector("button[type=\"submit\"]");
+	submitBtn.disabled = true;
+	Spinner.show(submitBtn.parentNode);
+
+	try {
+		const response = await fetch(route, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
 
 
-	if (response.ok) {
-		const review = await response.json();
-		if (!reviewId) {
-			addReview(review);
+		if (response.ok) {
+			const review = await response.json();
+			if (!reviewId) {
+				addReview(review);
 
-			recalcAverage({
-				deltaRating: review.rating,
-				deltaCount: 1,
+				recalcAverage({
+					deltaRating: review.rating,
+					deltaCount: 1,
+				});
+
+				form.reset();
+			}
+			else {
+				updateReviewInHTML(review);
+			}
+			showPopup({
+				message: "The review has been saved!",
+				type: true
 			});
 
-			form.reset();
+		} else {
+			const data = await response.json();
+			const { err } = data;
+			showPopup({
+				message: `Failed to create the review.\n${err?.join("\n")}`,
+				type: false
+			});
 		}
-		else {
-			updateReviewInHTML(review);
-		}
-		showPopup({
-			message: "The review has been saved!",
-			type: true
-		});
-
-	} else {
-		const data = await response.json();
-		const { err } = data;
-		showPopup({
-			message: `Failed to create the review.\n${err?.join("\n")}`,
-			type: false
-		});
+	} catch (error) {
+		console.error("Error submitting review:", error);
+		showPopup({ message: "An error occurred.", type: false });
+	} finally {
+		Spinner.hide(submitBtn.parentNode);
+		submitBtn.disabled = false;
 	}
 }
 
