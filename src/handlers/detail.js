@@ -22,7 +22,12 @@ export const getGameDetail = async (req, res) => {
 		id: id,
 	};
 	if (!game) {
-		return res.redirect(`/?errorMsg=${"404 error to get games"}&back=/detail/${id}`);
+		return res.status(404).json({
+			ok: false,
+			message: "404 error: game not found",
+			gameId: id
+   		});
+
 	}
 	const msg = req.query.msg || null;
 	const errorMsg = req.query.errorMsg || null;
@@ -32,9 +37,9 @@ export const getGameDetail = async (req, res) => {
 export const deleteDetailGame = async (req, res) => {
 	try {
 		await service.deleteGame(req.body.id);
-		return res.json({ message: "Game deleted successfully", type: "good" });
+		return res.json({ message: "Game deleted successfully", type: true });
 	} catch {
-		return res.json({ message: "Can't delete the game", type: "bad" });
+		return res.json({ message: "Can't delete the game", type: false });
 	}
 };
 /*--REVIEWS--*/
@@ -90,7 +95,7 @@ export const editReview = async (req, res) => {
 };
 
 export const deleteReview = async (req, res) => {
-	const { id, reviewId } = req.params;
+	const { id, reviewId } = req.body; 
 	try {
 
 		await service.deleteReview(id, reviewId);

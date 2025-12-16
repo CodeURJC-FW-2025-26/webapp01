@@ -19,14 +19,12 @@ export const insertGame = async (req, res) => {
 
 	try {
 		const gameObject = await addGame(game);
-		const msg = "The game has been succesfully created";
-		return res.redirect(`/?msg=${msg}&id=${gameObject._id}`);
+		res.json({ ok: true, gameId: gameObject._id });
 	} catch(error) {
-		if (error.errors) {
-			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/?errorMsg=${queryErrors}&back=/new-game-form`);
-		}
-		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/new-game-form`);
+		res.status(400).json({
+			ok: false,
+			message: error.errors?.join("<br>") ?? "Unknown error"
+		});
 	}
 };
 
@@ -34,15 +32,17 @@ export const editFormGame = async (req, res) => {
 	try {
 		const id = req.body.id;
 		await editGame(id, req.body, req.file);
-		const msg = "The game has been edited";
-		return res.redirect(`/?msg=${msg}&id=${id}`);
+
+		res.json({
+			ok: true,
+			gameId: id
+		});
 
 	} catch(error) {
-		if (error.errors) {
-			const queryErrors = encodeURIComponent(error.errors.join("</br>"));
-			return res.redirect(`/?errorMsg=${queryErrors}&back=/`);
-		}
-		return res.redirect(`/?errorMsg=${"Unknown error"}&back=/`);
+		res.status(400).json({
+			ok: false,
+			message: error.errors?.join("<br>") ?? "Unknown error"
+		});
 	}
 };
 

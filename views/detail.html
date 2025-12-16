@@ -100,7 +100,7 @@
 						<button class="btn btn-primary" onclick="editReviewInPlace('{{id}}','{{_id}}')">
 							Edit
 						</button>
-						<form class="nostyle" onsubmit="deleteReview('{{id}}','{{_id}}')">
+						<form class="nostyle" onsubmit="deleteReview(event, '{{id}}','{{_id}}')">
 							<button type="submit" class="btn btn-danger" aria-label="Delete review by {{author}}">
 								Delete
 							</button>
@@ -126,14 +126,14 @@
 	
 	{{#msg}}
 	<script>
-		showPopup({ message: '{{msg}}', type: 'good' });
+		showPopup({ message: '{{msg}}', type: true });
 	</script>
 	{{/msg}}
 
 
 	{{#errorMsg}}
 	<script>
-		showPopup({ message: '{{errorMsg}}', type: 'bad' });
+		showPopup({ message: '{{errorMsg}}', type: false });
 	</script>
 	{{/errorMsg}}
 	<script src="/confirmation.js"></script>

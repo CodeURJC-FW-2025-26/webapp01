@@ -40,15 +40,21 @@ async function gameForm(event, id) {
 	});
 
 	if (response.ok) {
-		const url = new URL(response.url);
-		const destId = url.searchParams.get("id");
+		const result = await response.json();
+
 		showPopup({
-		message: "The review has been saved!",
-		type: "good"
+			message: "The game has been saved!",
+			type: true,
+			onClose: () => {
+				window.location.href = `/detail/${result.gameId}`;
+			}
 		});
-		window.location = `/detail/${destId}`;
+
 	} else {
-		alert("Failed to create game. Please try again.");
+		showPopup({
+			message: "Failed to save game",
+			type: false
+		});
 	}
 }
 
@@ -87,11 +93,14 @@ async function reviewForm(event, gameId, reviewId) {
 		}
 		showPopup({
 			message: "The review has been saved!",
-			type: "good"
+			type: true
 		});
 
 	} else {
-		alert("Failed to create review. Please try again.");
+		showPopup({
+			message: "Failed to create the review. Please try again.",
+			type: false
+		});
 	}
 }
 
@@ -191,23 +200,31 @@ function updateReviewInHTML(review) {
 	});
 }
 
-async function deleteReview(gameId, reviewId) {
+async function deleteReview(event, gameId, reviewId) {
+	event.preventDefault();
+
 	response = await fetch(`/detail/${gameId}/reviews/${reviewId}/delete`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ gameId, reviewId })
+		body: JSON.stringify({ id: gameId, reviewId })
 	});
 
 	if (response.ok) {
 		const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
-
-		reviewDiv.remove()
+		showPopup({
+			message: "The review has been removed!",
+			type: true
+		});
+		reviewDiv.remove();
 		return;
+	} else {
+		showPopup({
+			message: "Error while deleting the review",
+			type: false
+		});
 	}
-	//fuihfuiewn here the error popup
-
 }
 
 

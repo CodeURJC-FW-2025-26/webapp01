@@ -175,14 +175,14 @@
 	<script src="/popUp.js"></script>
 
 	<script>
-		showPopup({ message: '{{msg}}', type: 'good' });
+		showPopup({ message: '{{msg}}', type: true });
 	</script>
 	{{/msg}}
 
 	{{#errorMsg}}
 	<script src="/popUp.js"></script>
 	<script>
-		showPopup({ message: '{{errorMsg}}', type: 'bad' });
+		showPopup({ message: '{{errorMsg}}', type: false });
 	</script>
 	{{/errorMsg}}
 
