@@ -99,8 +99,11 @@ export async function editGame(id, data, file = null) {
 		release_date: new Date(data.release_date),
 		developer: data.developer,
 		pegi_rating: data.pegi_rating,
-		cover_image: file ? `/${file.filename}` : "/img/placeholder.jpg",
 	};
+
+	if (data.cover_keep === "false") {
+		updateData.cover_image = file ? `/${file.filename}` : "/img/placeholder.jpg";
+	}
 
 	return await Game.updateOne(
 		{ _id },

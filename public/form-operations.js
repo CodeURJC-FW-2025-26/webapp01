@@ -111,6 +111,10 @@ async function gameForm(event, id) {
 	const route = id ? "/edit-game" : "/game";
 	const formData = new FormData(form);
 
+	const fileInput = document.getElementById("inputImage");
+	const newVal = fileInput?.hasAttribute("keep");
+	formData.append("cover_keep", newVal || false);
+
 	const response = await fetch(route, {
 		method: "POST",
 		body: formData,
@@ -317,10 +321,13 @@ async function handleImageOnChange(e, preview, remove) {
 	}
 
 	if (!newImage) {
+		fileInput.removeAttribute("keep", "");
 		previewImage.src = "";
 		previewImage.classList.add("d-none");
 		return;
 	}
+
+	fileInput.removeAttribute("keep", false);
 
 	const reader = new FileReader();
 	reader.onload = function (ev) {
@@ -338,6 +345,7 @@ function removeCoverImage(inputId, previewId) {
 	if (!fileInput || !previewImage) return;
 
 	fileInput.value = "";
+	fileInput.removeAttribute("keep");	
 
 	const event = new Event("change", { bubbles: true });
 	fileInput.dispatchEvent(event);

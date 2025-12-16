@@ -35,7 +35,7 @@ export const editFormGame = async (req, res) => {
 		await editGame(id, req.body, req.file);
 
 		res.status(200).json({
-			gameId: id
+			id,
 		});
 
 	} catch(error) {
