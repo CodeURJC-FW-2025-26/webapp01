@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function showPopup({message, type}) {
+function showPopup({message, type, onClose}) {
 	const opts = type
 		? "Operation Successful"
 		: "Ooops, something wrong happened";

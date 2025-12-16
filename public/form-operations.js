@@ -118,16 +118,13 @@ async function gameForm(event, id) {
 	const data = await response.json();
 
 	if (response.ok) {
-		const result = await response.json();
-
 		showPopup({
 			message: "The game has been saved!",
 			type: true,
 			onClose: () => {
-				window.location.href = `/detail/${result.gameId}`;
+				window.location.href = `/detail/${data.id}`;
 			}
 		});
-		window.location = `/detail/${data.id}`;
 	} else {
 		showFormErrors(data.errors);
 	}
