@@ -56,6 +56,10 @@ function recalcAverage({ deltaRating, deltaCount }) {
 }
 
 function showFormErrors(errors) {
+	showPopup({
+		message: `Invalid game data.\n${errors.join("\n")}`,
+		type: false,
+	});
 	const invalidElements = document.querySelectorAll(".is-invalid");
 	invalidElements.forEach(el => el.classList.remove("is-invalid"));
 
