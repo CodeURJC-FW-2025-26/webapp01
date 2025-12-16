@@ -30,7 +30,7 @@ export const getGameDetail = async (req, res) => {
 	}
 	const msg = req.query.msg || null;
 	const errorMsg = req.query.errorMsg || null;
-	res.render("detail", { ...game, msg, errorMsg });
+	res.render("detail", { ...game, reviewCount: game?.reviews?.length || 0, msg, errorMsg });
 };
 
 export const deleteDetailGame = async (req, res) => {

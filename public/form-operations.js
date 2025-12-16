@@ -11,6 +11,50 @@ const errorFormGame = new Map([
 	["cover_image file is required", { attribute: "cover_image", userMessage: "Please upload a cover image for your game." }]
 ]);
 
+/* ----------------------------- Average Rating ----------------------------- */
+const withElementById = (id) => (fn) => {
+	const el = document.getElementById(id);
+	if (!el) return undefined;
+	return fn(el);
+};
+
+const getProp = (prop) => (el) => el[prop];
+const setProp = (prop) => (value) => (el) => {
+	el[prop] = value;
+	return value;
+};
+
+const makeGetter = (id, prop) => () => withElementById(id)(getProp(prop));
+
+const makeSetter = (id, prop) => (value) =>
+	withElementById(id)(setProp(prop)(value));
+
+const getAverageRating = makeGetter("averageRating", "textContent");
+const setAverageRating = makeSetter("averageRating", "textContent");
+
+const getReviewCount = makeGetter("reviewCount", "value");
+const setReviewCount = makeSetter("reviewCount", "value");
+
+const toNumber = (value) => Number(value) || 0;
+const round = (value) => Math.round(value);
+
+function recalcAverage({ deltaRating, deltaCount }) {
+	const currentAvg = toNumber(getAverageRating());
+	const currentCount = toNumber(getReviewCount());
+
+	const newCount = currentCount + deltaCount;
+
+	if (newCount <= 0) {
+		setAverageRating(0);
+		setReviewCount(0);
+		return;
+	}
+
+	const total = currentAvg * currentCount + deltaRating;
+	setAverageRating(round(total / newCount));
+	setReviewCount(newCount);
+}
+
 function showFormErrors(errors) {
 	const invalidElements = document.querySelectorAll(".is-invalid");
 	invalidElements.forEach(el => el.classList.remove("is-invalid"));
@@ -162,8 +206,13 @@ async function reviewForm(event, gameId, reviewId) {
 		const review = await response.json();
 		if (!reviewId) {
 			addReview(review);
-			form.reset();
 
+			recalcAverage({
+				deltaRating: review.rating,
+				deltaCount: 1,
+			});
+
+			form.reset();
 		}
 		else {
 			updateReviewInHTML(review);
@@ -213,7 +262,14 @@ function addReview(review) {
 function editReviewInPlace(gameId, reviewId) {
 	const reviewDiv = document.querySelector(`#reviews .my-3 [onclick*="${reviewId}"]`).closest(".my-3");
 
+	const score = Number(
+		reviewDiv
+			.querySelector(".alert")
+			.textContent.replace("Rating:", "")
+			.trim()
+	);
 	reviewDiv.dataset.originalHtml = reviewDiv.innerHTML;
+	reviewDiv.dataset.originalRating = score;
 
 	const author = reviewDiv.querySelector("h3").textContent.trim();
 	const comment = reviewDiv.querySelector(".border").textContent.trim();
@@ -259,23 +315,33 @@ function cancelEdit(reviewId) {
 function updateReviewInHTML(review) {
 	const reviewDivs = document.querySelectorAll("#reviews .my-3");
 
-	reviewDivs.forEach(div => {
-		const editBtn = div.querySelector(`button[onclick*="${review._id}"]`);
-		if (editBtn) {
-			div.innerHTML = `
-				<h3>${review.author}</h3>
-				<div class="border rounded p-3 bg-light text-dark">
-					${review.comment}
-				</div>
-				<div class="alert alert-success p-2 flex-fill text-center mb-2">
-					<strong>Rating:</strong> ${review.rating}
-				</div>
-				<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
-					<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
-					<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">Delete</button>
-				</div>
-			`;
-		}
+	reviewDivs.forEach((div) => {
+		const form = div.querySelector(`[rid="${review._id}"]`);
+		if (!form) return;
+
+		const oldRating = Number(div.dataset.originalRating);
+		const newRating = Number(review.rating);
+
+		recalcAverage({
+			deltaRating: newRating - oldRating,
+			deltaCount: 0,
+		});
+
+		delete div.dataset.originalRating;
+
+		div.innerHTML = `
+			<h3>${review.author}</h3>
+			<div class="border rounded p-3 bg-light text-dark">
+				${review.comment}
+			</div>
+			<div class="alert alert-success p-2 flex-fill text-center mb-2">
+				<strong>Rating:</strong> ${review.rating}
+			</div>
+			<div class="d-flex justify-content-center gap-3 my-4 flex-wrap">
+				<button class="btn btn-primary" onclick="editReviewInPlace('${review.gameId}','${review._id}')">Edit</button>
+				<button class="btn btn-danger" onclick="deleteReview(event, '${review.gameId}', '${review._id}')">Delete</button>
+			</div>
+		`;
 	});
 }
 
@@ -296,6 +362,19 @@ async function deleteReview(e, gameId, reviewId) {
 			message: "The review has been removed!",
 			type: true
 		});
+
+		const rating = Number(
+			reviewDiv
+				.querySelector(".alert")
+				.textContent.replace("Rating:", "")
+				.trim()
+		);
+
+		recalcAverage({
+			deltaRating: -rating,
+			deltaCount: -1,
+		});
+
 		reviewDiv.remove();
 		return;
 	} else {
