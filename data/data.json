@@ -238,5 +238,125 @@
 				"created_at": 1509148800
 			}
 		]
+	},
+	{
+		"title": "DOOM",
+		"description": "Fast, brutal, no-nonsense shooter. Rip and tear through hellspawn with metal blasting in the background. Thinking is optional; violence is mandatory.",
+		"genres": ["Shooter", "Action", "FPS"],
+		"platforms": ["PC", "PlayStation 4", "Xbox One", "Nintendo Switch"],
+		"release_date": "2016-05-13",
+		"developer": "id Software",
+		"cover_image": "/c9a1d8f4b6e2a0f39b7d1c2e4a9f6d88",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 90,
+				"comment": "A glorious return to form. Fast, furious, and unapologetically violent.",
+				"created_at": 1463097600
+			},
+			{
+				"author": "PC Gamer",
+				"rating": 92,
+				"comment": "Pure FPS adrenaline. Old-school soul with modern muscle.",
+				"created_at": 1463184000
+			}
+		]
+	},
+	{
+		"title": "Tetris",
+		"description": "Timeless puzzle game where falling blocks test your spatial skills, reflexes, and sanity. Simple rules, endless addiction.",
+		"genres": ["Puzzle"],
+		"platforms": ["Game Boy", "NES", "PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+		"release_date": "1984-06-06",
+		"developer": "Alexey Pajitnov",
+		"cover_image": "/4e1a2c9b7f6d0a8e3c5f2b9a1d7e6f44",
+		"pegi_rating": "PEGI3",
+		"reviews": [
+			{
+				"author": "Edge Magazine",
+				"rating": 100,
+				"comment": "One of the purest game designs ever created.",
+				"created_at": 457747200
+			},
+			{
+				"author": "Retro Gamer",
+				"rating": 95,
+				"comment": "Proof that perfection doesn't need polygons.",
+				"created_at": 457833600
+			}
+		]
+	},
+	{
+		"title": "Terraria",
+		"description": "2D sandbox adventure where you dig, build, fight, and accidentally summon horrors beyond human comprehension. Looks cute. Is not.",
+		"genres": ["Sandbox", "Adventure", "Survival"],
+		"platforms": ["PC", "PlayStation 4", "Xbox One", "Nintendo Switch", "Mobile"],
+		"release_date": "2011-05-16",
+		"developer": "Re-Logic",
+		"cover_image": "/a83f1c9e4d7b6a2f09c4e8b1d5a6f3c2",
+		"pegi_rating": "PEGI7",
+		"reviews": [
+			{
+				"author": "PC Gamer",
+				"rating": 90,
+				"comment": "Deeper and richer than it looks. A true sandbox classic.",
+				"created_at": 1305590400
+			},
+			{
+				"author": "Steam User",
+				"rating": 80,
+				"comment": "Started building a house. Ended killing gods.",
+				"created_at": 1305676800
+			}
+		]
+	},
+	{
+		"title": "Sekiro: Shadows Die Twice",
+		"description": "Precision-focused action game where hesitation means death. Master the blade, learn the rhythm, and die. Then die again.",
+		"genres": ["Action", "Adventure"],
+		"platforms": ["PC", "PlayStation 4", "Xbox One"],
+		"release_date": "2019-03-22",
+		"developer": "FromSoftware",
+		"cover_image": "/e4b7c9d2a8f1e6c5039d7a4b2f8c1a90",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "Brutal, demanding, and incredibly rewarding.",
+				"created_at": 1553212800
+			},
+			{
+				"author": "GameSpot",
+				"rating": 100,
+				"comment": "A razor-sharp combat system that punishes and teaches in equal measure.",
+				"created_at": 1553299200
+			}
+		]
+	},
+	{
+		"title": "Fortnite",
+		"description": "Battle royale phenomenon where you shoot, build, dance, and survive in a constantly changing playground. Half game, half pop culture event.",
+		"genres": ["Battle Royale", "Shooter", "Action"],
+		"platforms": ["PC", "PlayStation 5", "PlayStation 4", "Xbox Series X/S", "Xbox One", "Nintendo Switch", "Mobile"],
+		"release_date": "2017-07-25",
+		"developer": "Epic Games",
+		"cover_image": "/9f3b7c2a4d8e1f6a5c0b9e2d7a4f1c88",
+		"pegi_rating": "PEGI12",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 10,
+				"comment": "Constantly evolving and endlessly replayable.",
+				"created_at": 1501027200
+			},
+			{
+				"author": "Game Informer",
+				"rating": 25,
+				"comment": "A social phenomenon as much as a game.",
+				"created_at": 1501113600
+			}
+		]
 	}
 ]
