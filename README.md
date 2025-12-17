@@ -378,7 +378,7 @@ The html that links with the one that has the form to add new games
 ### review-form.html
 The html for the adding of reviews.
 ## Video
-pez
+[video](https://youtu.be/RfcWAWq4kEg)
 ## Member Participation
 
 ### Marcelo Atanasio Domínguez Mateo
