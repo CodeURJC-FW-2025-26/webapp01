@@ -401,11 +401,25 @@ I solve bugs all around the code. Centering in the javascript part. I solved err
 
 ### Alejandro García Prada
 
-I have made the validations of the formularies. Also I addpated the HTML for the new requirements.
+I have worked on the new/edit game form validation managing server errors. I've also worked on the reviews add/edit/delete.
 
-**Main commits**
+**Main commits:**
 
-**Changed files**
+- [Some server validation for form games](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/52fbaba532d7a72c716e25cf17d8fe8b03ba43dc)
+- [inplace operations](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/bccc00a19ea9cc767115bfa7d630ce63957f58ae)
+- [Refactor and edit and create reviews](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/312ee96d653378bbf6e6993f46d553b2bfaea905)
+- [form validation](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/4c2cd9c04c2eecfab216c49c58608a1bffa25708)
+- [add and edit games](https://github.com/CodeURJC-FW-2025-26/webapp01/commit/e0685e24b613cae7e7bb31a2e204996effb67ec3)
+
+**Modified files:**
+
+- `src\service.js`
+- `views\detail.html`
+- `views\form.html`
+- `views\new-game-form.html`
+- `views\edit-game-form.html`
+- `public/form-operations.js`
+
 
 
 ### Daniel Bonachela Martínez 
