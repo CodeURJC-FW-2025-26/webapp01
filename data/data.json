@@ -358,5 +358,221 @@
 				"created_at": 1501113600
 			}
 		]
+	},
+	{
+		"title": "The Witcher 3: Wild Hunt",
+		"description": "Dark fantasy RPG where you hunt monsters, make morally questionable decisions, and play way too much Gwent.",
+		"genres": ["RPG", "Action", "Open World"],
+		"platforms": ["PC", "PlayStation 5", "Xbox Series X/S", "Nintendo Switch"],
+		"release_date": "2015-05-19",
+		"developer": "CD Projekt Red",
+		"cover_image": "/1a7c9e5b4f8d3e2c6a0b9d7f5e4c2a11",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "One of the greatest RPGs ever made.",
+				"created_at": 1431993600
+			},
+			{
+				"author": "PC Gamer",
+				"rating": 95,
+				"comment": "A masterclass in world-building and storytelling.",
+				"created_at": 1432080000
+			}
+		]
+	},
+	{
+		"title": "Dark Souls III",
+		"description": "Relentless action RPG where death is a learning mechanic and victory feels illegal.",
+		"genres": ["Action", "RPG"],
+		"platforms": ["PC", "PlayStation 4", "Xbox One"],
+		"release_date": "2016-04-12",
+		"developer": "FromSoftware",
+		"cover_image": "/9d4e2f7b6a1c5e8f0b3a2c7d4e9f111",
+		"pegi_rating": "PEGI16",
+		"reviews": [
+			{
+				"author": "GameSpot",
+				"rating": 90,
+				"comment": "A fitting and brutal conclusion to the trilogy.",
+				"created_at": 1460419200
+			},
+			{
+				"author": "IGN",
+				"rating": 95,
+				"comment": "Beautiful misery, expertly crafted.",
+				"created_at": 1460505600
+			}
+		]
+	},
+	{
+		"title": "Half-Life 2",
+		"description": "Legendary FPS with physics-based gameplay, unforgettable atmosphere, and a crowbar that deserves its own hall of fame.",
+		"genres": ["Shooter", "Action", "Sci-Fi"],
+		"platforms": ["PC", "Xbox"],
+		"release_date": "2004-11-16",
+		"developer": "Valve",
+		"cover_image": "/f3a9c5e7b8d2a4e1c6f9d0b7a5e2112",
+		"pegi_rating": "PEGI16",
+		"reviews": [
+			{
+				"author": "PC Gamer",
+				"rating": 100,
+				"comment": "A revolutionary FPS that still holds up.",
+				"created_at": 1100563200
+			},
+			{
+				"author": "Edge Magazine",
+				"rating": 100,
+				"comment": "Near-perfect game design.",
+				"created_at": 1100649600
+			}
+		]
+	},
+	{
+		"title": "Bloodborne",
+		"description": "Nightmarish gothic action RPG. Aggression rewarded, fear mandatory, sanity optional.",
+		"genres": ["Action", "RPG", "Horror"],
+		"platforms": ["PlayStation 4"],
+		"release_date": "2015-03-24",
+		"developer": "FromSoftware",
+		"cover_image": "/6c7d1f2b4a9e5e8d0c3f7b2a9d1113",
+		"pegi_rating": "PEGI16",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "Dark, disturbing, and unforgettable.",
+				"created_at": 1427155200
+			},
+			{
+				"author": "GameSpot",
+				"rating": 95,
+				"comment": "Combat perfection wrapped in cosmic horror.",
+				"created_at": 1427241600
+			}
+		]
+	},
+	{
+		"title": "Portal 2",
+		"description": "Brilliant puzzle game with dark humor, genius level design, and a villain who sings.",
+		"genres": ["Puzzle", "Adventure"],
+		"platforms": ["PC", "PlayStation 3", "Xbox 360"],
+		"release_date": "2011-04-19",
+		"developer": "Valve",
+		"cover_image": "/b7a5d2f4c9e6a8e1d3f0c2b711114",
+		"pegi_rating": "PEGI12",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "A perfect sequel in every way.",
+				"created_at": 1303171200
+			},
+			{
+				"author": "Eurogamer",
+				"rating": 100,
+				"comment": "Smart, funny, and endlessly inventive.",
+				"created_at": 1303257600
+			}
+		]
+	},
+	{
+		"title": "Metal Gear Solid V: The Phantom Pain",
+		"description": "Tactical stealth sandbox where freedom is absolute and the story slowly messes with your head.",
+		"genres": ["Action", "Stealth", "Open World"],
+		"platforms": ["PC", "PlayStation 4", "Xbox One"],
+		"release_date": "2015-09-01",
+		"developer": "Kojima Productions",
+		"cover_image": "/2f9c5d7a4b8e6d1f3e0c2a5b1115",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "The best stealth gameplay ever created.",
+				"created_at": 1441065600
+			},
+			{
+				"author": "Game Informer",
+				"rating": 90,
+				"comment": "Mechanically flawless, narratively strange.",
+				"created_at": 1441152000
+			}
+		]
+	},
+	{
+		"title": "Mass Effect 2",
+		"description": "Sci-fi RPG with unforgettable characters, hard choices, and a suicide mission that still hurts.",
+		"genres": ["RPG", "Action", "Sci-Fi"],
+		"platforms": ["PC", "PlayStation 3", "Xbox 360"],
+		"release_date": "2010-01-26",
+		"developer": "BioWare",
+		"cover_image": "/d4b7c1a9e5f2c8a6d3e0b9f11116",
+		"pegi_rating": "PEGI16",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "A benchmark for story-driven RPGs.",
+				"created_at": 1264464000
+			},
+			{
+				"author": "Edge Magazine",
+				"rating": 100,
+				"comment": "An all-time classic.",
+				"created_at": 1264550400
+			}
+		]
+	},
+	{
+		"title": "Resident Evil 4",
+		"description": "Action-horror classic with tight pacing, iconic moments, and villagers who really hate outsiders.",
+		"genres": ["Action", "Horror"],
+		"platforms": ["GameCube", "PlayStation 4", "Xbox", "PC"],
+		"release_date": "2005-01-11",
+		"developer": "Capcom",
+		"cover_image": "/8a5e2d1f9c4b7a3e6d0c2f11117",
+		"pegi_rating": "PEGI18",
+		"reviews": [
+			{
+				"author": "GameSpot",
+				"rating": 100,
+				"comment": "Redefined action horror.",
+				"created_at": 1105401600
+			},
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "A masterpiece that changed the genre.",
+				"created_at": 1105488000
+			}
+		]
+	},
+	{
+		"title": "Shadow of the Colossus",
+		"description": "Minimalist, emotional adventure about climbing giants and questioning everything you've done by the end.",
+		"genres": ["Adventure", "Action"],
+		"platforms": ["PlayStation 4", "PlayStation 2"],
+		"release_date": "2005-10-18",
+		"developer": "Team Ico",
+		"cover_image": "/c9e4b5a7d1f8a3e6c2d0b11118",
+		"pegi_rating": "PEGI12",
+		"reviews": [
+			{
+				"author": "IGN",
+				"rating": 100,
+				"comment": "Video games as art.",
+				"created_at": 1129593600
+			},
+			{
+				"author": "Edge Magazine",
+				"rating": 100,
+				"comment": "Haunting, powerful, unforgettable.",
+				"created_at": 1129680000
+			}
+		]
 	}
 ]
